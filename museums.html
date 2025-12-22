@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Museum Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .museums-section {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 3rem;
+        }
+
+        .museums-section:hover {
+            transform: none;
+        }
+
+        .museums-section h2 {
+            color: #FFD700;
+        }
+        
+        .museums-section p {
+            color: #F4E8D8;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #3C6E71;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #2E7D32;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            padding-left: 10px;
+            border-left: 4px solid #FF9800;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .must-see {
+            background-color: #8B0000;
+            color: white;
+        }
+        
+        .science-tech {
+            background-color: #0066CC;
+            color: white;
+        }
+        
+        .art-culture {
+            background-color: #8A2BE2;
+            color: white;
+        }
+        
+        .unique-themed {
+            background-color: #D2691E;
+            color: white;
+        }
+        
+        .regional {
+            background-color: #2E8B57;
+            color: white;
+        }
+        
+        .museum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .museum-grid p {
+            color: #333;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 3px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+        
+        .museum-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .museum-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .museum-card.must-see::before {
+            background-color: #8B0000;
+        }
+        
+        .museum-card.science-tech::before {
+            background-color: #0066CC;
+        }
+        
+        .museum-card.art-culture::before {
+            background-color: #8A2BE2;
+        }
+        
+        .museum-card.unique-themed::before {
+            background-color: #D2691E;
+        }
+        
+        .museum-card.regional::before {
+            background-color: #2E8B57;
+        }
+        
+        .museum-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .museum-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .museum-name {
+            font-weight: 700;
+            color: #2E7D32;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .museum-location {
+            color: #737373;
+            font-size: 1rem;
+        }
+
+        .museum-location i {
+            margin-right: 5px;
+        }
+        
+        .museum-features {
+            margin: 15px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .feature i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .must-see .feature i {
+            color: #8B0000;
+        }
+
+        .science-tech .feature i {
+            color: #0066CC;
+        }
+
+        .art-culture .feature i {
+            color: #8A2BE2;
+        }
+
+        .unique-themed .feature i {
+            color: #D2691E;
+        }
+
+        .regional .feature i {
+            color: #2E8B57;
+        }
+        
+        .highlight-box {
+            background: #F4E8D8;
+            border-left: 5px solid #FFD700;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            color: #333;
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        
+        /* Sorting Button Styles */
+        .sorting-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .sort-btn {
+            padding: 12px 24px;
+            margin: 0 8px 10px;
+            border: none;
+            border-radius: 30px;
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .sort-btn i {
+            margin-right: 8px;
+        }
+        
+        .sort-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .sort-btn.active {
+            background-color: #3C6E71;
+            color: white;
+        }
+        
+        .sort-btn.all.active {
+            background-color: #2c3e50;
+        }
+        
+        .sort-btn.must-see.active {
+            background-color: #8B0000;
+        }
+        
+        .sort-btn.science-tech.active {
+            background-color: #0066CC;
+        }
+        
+        .sort-btn.art-culture.active {
+            background-color: #8A2BE2;
+        }
+        
+        .sort-btn.unique-themed.active {
+            background-color: #D2691E;
+        }
+        
+        .sort-btn.regional.active {
+            background-color: #2E8B57;
+        }
+        
+        /* Museum cards filtering */
+        .museum-card.hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .museum-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .sort-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+                margin: 0 5px 8px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .museum-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/museumexplore.jpg" alt="Museum" class="header-image">
+        <div class="header-content">
+            <h1>Museums in Taiwan</h1>
+            <p>Discover Taiwan's rich cultural heritage and artistic treasures</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#museums">Museums</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Taiwan Museum Guide</h2>
+            <p>Taiwan offers a diverse array of museums showcasing everything from ancient Chinese artifacts to contemporary art and unique cultural exhibits. With world-class institutions and hidden gems across the island, there's something for every interest.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Museum Tip:</strong> Check opening hours in advance as they may vary. Many museums offer free admission on certain days or for specific groups. Audio guides and English information are available at major institutions.</p>
+            </div>
+        </section>
+
+        <section class="museums-section" id="museums">
+            <h2><i class="fas fa-landmark"></i> Taiwan Museums</h2>
+            
+            <div class="sorting-container">
+                <button class="sort-btn all active" data-filter="all">
+                    All Museums
+                </button>
+                <button class="sort-btn must-see" data-filter="must-see">
+                    Must-See
+                </button>
+                <button class="sort-btn science-tech" data-filter="science-tech">
+                    Science & Tech
+                </button>
+                <button class="sort-btn art-culture" data-filter="art-culture">
+                    Art & Culture
+                </button>
+                <button class="sort-btn unique-themed" data-filter="unique-themed">
+                    Unique & Themed
+                </button>
+                <button class="sort-btn regional" data-filter="regional">
+                    Regional
+                </button>
+            </div>
+            
+            <div class="museum-grid" id="all-museums">
+                <div class="museum-card must-see" data-category="must-see">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">National Palace Museum (臺北故宮博物院)</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Taipei</div>
+                        </div>
+                        <span class="category-badge must-see">Must-See</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/nationalpalacemuseum.jpg" alt="National Palace Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-crown"></i>
+                            <span>Imperial Chinese artifacts & artworks</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-globe"></i>
+                            <span>World-famous collection</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-history"></i>
+                            <span>Thousands of years of history</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>One of the world's most famous museums, with over hundreds of thousands of imperial Chinese artifacts and artworks.</p>
+                </div>
+                
+                <div class="museum-card must-see" data-category="must-see">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">National Taiwan Museum (國立臺灣博物館)</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Taipei</div>
+                        </div>
+                        <span class="category-badge must-see">Must-See</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/taiwanmuseum.jpg" alt="National Taiwan Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-book"></i>
+                            <span>Natural history & paleontology</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-landmark"></i>
+                            <span>Taiwan's oldest museum</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-history"></i>
+                            <span>Historic collections</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Taiwan's oldest museum featuring natural history and cultural exhibits, including paleontology and historic collections.</p>
+                </div>
+                
+                <div class="museum-card must-see" data-category="must-see">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">National Museum of History (國立歷史博物館)</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Taipei</div>
+                        </div>
+                        <span class="category-badge must-see">Must-See</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/historymuseum.jpg" alt="National Museum of History">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-book"></i>
+                            <span>Taiwanese history & culture</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <span>Indigenous to modern exhibits</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Focuses on Taiwanese history and culture from indigenous cultures to modern times.</p>
+                </div>
+                
+                <div class="museum-card must-see" data-category="must-see">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Taipei Fine Arts Museum (台北市立美術館)</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Taipei</div>
+                        </div>
+                        <span class="category-badge must-see">Must-See</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/finearts.jpg" alt="Taipei Fine Arts Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-palette"></i>
+                            <span>Contemporary art museum</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Rotating exhibitions</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-globe-asia"></i>
+                            <span>Taiwanese & international artists</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Major contemporary art museum with rotating exhibitions from Taiwanese and international artists.</p>
+                </div>
+                
+                <div class="museum-card must-see" data-category="must-see">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Museum of Contemporary Art Taipei (MOCA Taipei)</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Taipei</div>
+                        </div>
+                        <span class="category-badge must-see">Must-See</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/moca.jpg" alt="MOCA Taipei">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-brush"></i>
+                            <span>Contemporary art venue</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Innovative exhibits</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Cultural programs</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Contemporary art venue with innovative exhibits and cultural programs.</p>
+                </div>
+
+                <div class="museum-card science-tech" data-category="science-tech">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">National Science and Technology Museum</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Kaohsiung</div>
+                        </div>
+                        <span class="category-badge science-tech">Science & Tech</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/sciencetech.jpeg" alt="National Science and Technology Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-flask"></i>
+                            <span>Interactive science exhibits</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-cogs"></i>
+                            <span>Technology & natural sciences</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-arrows-alt"></i>
+                            <span>One of Asia's largest science museums</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>One of Asia's largest science museums with interactive exhibits on technology and natural sciences.</p>
+                </div>
+
+                <div class="museum-card art-culture" data-category="art-culture">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Taichung Art Museum</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Taichung</div>
+                        </div>
+                        <span class="category-badge art-culture">Art & Culture</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/taichungarts.jpg" alt="Taichung Art Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-building"></i>
+                            <span>Striking architecture</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-book-reader"></i>
+                            <span>Combines art and library experiences</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-star"></i>
+                            <span>New cultural destination</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>A new hub combining art and library experiences — a striking architectural and cultural destination.</p>
+                </div>
+                
+                <div class="museum-card art-culture" data-category="art-culture">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Chimei Museum (奇美博物館)</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Tainan</div>
+                        </div>
+                        <span class="category-badge art-culture">Art & Culture</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/chimeimuseum.jpg" alt="Chimei Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Western art collection</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-guitar"></i>
+                            <span>Musical instruments</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Armory & natural history</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Extensive collection of Western art, musical instruments, armory, and natural history exhibits.</p>
+                </div>
+                
+                <div class="museum-card art-culture" data-category="art-culture">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Juming Museum (朱銘美術館)</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>New Taipei</div>
+                        </div>
+                        <span class="category-badge art-culture">Art & Culture</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/juming.jpg" alt="Juming Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-mountain"></i>
+                            <span>Outdoor sculpture park</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-user"></i>
+                            <span>Works of sculptor Ju Ming</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tree"></i>
+                            <span>Natural setting</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Outdoor sculpture park featuring the works of sculptor Ju Ming.</p>
+                </div>
+
+                <!-- Unique & Themed Museums -->
+                <div class="museum-card unique-themed" data-category="unique-themed">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Teng Feng Fish Ball Museum</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Tamsui, Taipei</div>
+                        </div>
+                        <span class="category-badge unique-themed">Unique & Themed</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/fishball.jpg" alt="Teng Feng Fish Ball Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i>
+                            <span>Taiwanese snack culture</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-fish"></i>
+                            <span>Fish ball production</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Learn about Taiwanese snack culture and fish ball production.</p>
+                </div>
+                
+                <div class="museum-card unique-themed" data-category="unique-themed">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Suho Paper Memorial Museum</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Taipei</div>
+                        </div>
+                        <span class="category-badge unique-themed">Unique & Themed</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/paper.jpg" alt="Suho Paper Memorial Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-scroll"></i>
+                            <span>Paper craft</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-hands"></i>
+                            <span>Hands-on workshops</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Paper craft and hands-on workshops.</p>
+                </div>
+                
+                <div class="museum-card unique-themed" data-category="unique-themed">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Museum of Old Taiwan Tiles</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Chiayi</div>
+                        </div>
+                        <span class="category-badge unique-themed">Unique & Themed</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/tiles.jpg" alt="Museum of Old Taiwan Tiles">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-home"></i>
+                            <span>Decorative tiles history</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-history"></i>
+                            <span>Taiwan's architectural past</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>History of decorative tiles from Taiwan's past.</p>
+                </div>
+
+                <div class="museum-card regional" data-category="regional">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Sanyi Wood Sculpture Museum</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Miaoli</div>
+                        </div>
+                        <span class="category-badge regional">Regional</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/woodsculpture.jpg" alt="Sanyi Wood Sculpture Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-hammer"></i>
+                            <span>Wood carving art</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tree"></i>
+                            <span>Local culture</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Dedicated to Taiwan's wood carving art and culture.</p>
+                </div>
+                
+                <div class="museum-card regional" data-category="regional">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Hualien County Stone Sculptural Museum</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Hualien</div>
+                        </div>
+                        <span class="category-badge regional">Regional</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/stonesculpture.jpg" alt="Hualien Stone Sculptural Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-gem"></i>
+                            <span>Stone sculpture arts</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-map"></i>
+                            <span>Local focus</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Focuses on local stone sculpture arts.</p>
+                </div>
+                
+                <div class="museum-card regional" data-category="regional">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Chihsing Tan Katsuo Museum</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Hualien</div>
+                        </div>
+                        <span class="category-badge regional">Regional</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/katsuo.jpg" alt="Chihsing Tan Katsuo Museum">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-fish"></i>
+                            <span>Dried bonito production</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-industry"></i>
+                            <span>Production history</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Explores the history of dried bonito (katsuobushi) production.</p>
+                </div>
+                
+                <div class="museum-card regional" data-category="regional">
+                    <div class="museum-header">
+                        <div>
+                            <div class="museum-name">Muh Sheng Museum of Entomology</div>
+                            <div class="museum-location"><i class="fas fa-map-marker-alt"></i>Nantou (Puli)</div>
+                        </div>
+                        <span class="category-badge regional">Regional</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/entomology.jpg" alt="Muh Sheng Museum of Entomology">
+                    </div>
+                    <div class="museum-features">
+                        <div class="feature">
+                            <i class="fas fa-bug"></i>
+                            <span>Insect displays</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-vial"></i>
+                            <span>Thousands of specimens</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Insect displays with thousands of specimens.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortButtons = document.querySelectorAll('.sort-btn');
+            const museumCards = document.querySelectorAll('.museum-card');
+            
+            sortButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    sortButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    museumCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.classList.remove('hidden');
+                        } else {
+                            const category = card.getAttribute('data-category');
+                            if (category === filter) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        }
+                    });
+                    
+                    document.querySelector('.museums-section').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            });
+            
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

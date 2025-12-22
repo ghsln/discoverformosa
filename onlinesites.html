@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Reservation Sites for Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 0.7rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        li {
+            margin: 0.5rem;
+        }
+        
+        .site-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+        
+        .site-card {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            border-top: 4px solid #8B1E1E;
+        }
+        
+        .site-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .site-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .site-icon img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: #8B1E1E;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .site-name {
+            font-weight: 700;
+            color: #8B1E1E;
+            font-size: 1.3rem;
+        }
+        
+        .site-category {
+            display: inline-block;
+            background-color: #8B1E1E;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        .highlight-box i {
+            background-color: #FF9800;
+            color: white;
+            padding: 20px;
+            border-radius: 30px;
+        }
+        
+        .visit-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            background-color: rgba(139, 30, 30, 0.9);
+            color: white;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-right: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .visit-btn:hover {
+            background-color: #501111;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .site-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .visit-btn {
+                display: block;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .site-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="onlinereserve.jpg" alt="Hotel reservation on laptop" class="header-image">
+        <div class="header-content">
+            <h1>Online Reservation Sites for Taiwan</h1>
+            <p>Find and book the perfect accommodation for your Taiwanese adventure with these trusted platforms</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#booking-sites">Top Reservation Sites</a></li>
+                <li><a href="#tips">Booking Tips</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview" class="section">
+            <h2>Plan Your Stay in Taiwan</h2>
+            <p>Planning your Taiwanese adventure is exciting, and securing the perfect place to stay is a key part of the journey. Fortunately, Taiwan has a well-developed online travel market, making it easy to book everything from luxury hotels to cozy hostels. To ensure you find the best deals and reliable options, it's highly recommended to use the following trusted platforms for your reservations.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Tip:</strong> For the most accurate picture of a hotel's quality, especially for budget and mid-range options, try cross-referencing guest reviews on both Agoda and Booking.com. This can give you a more reliable and well-rounded set of opinions before you book.</p>
+            </div>
+        </section>
+
+        <section id="booking-sites" class="section">
+            <h2>Online Reservation Sites for Taiwan</h2>
+            <p>These trusted platforms offer comprehensive accommodation options, competitive prices, and user-friendly interfaces to help you find the perfect place to stay during your Taiwan visit.</p>
+            
+            <div class="site-grid">
+                <div class="site-card">
+                    <div class="site-header">
+                        <div class="site-icon">
+                            <img src="picture/booking.svg" alt="Booking.com">
+                        </div>
+                        <div class="site-name">Booking.com</div>
+                    </div>
+                    <span class="site-category">Accommodation</span>
+                    <p>A global leader known for its vast inventory of properties, including hotels, hostels, and vacation rentals. It's particularly user-friendly and often features free cancellation options on many rooms.</p>
+                    <a href="https://www.booking.com" target="_blank" class="visit-btn">Visit Booking.com</a>
+                </div>
+                
+                <div class="site-card">
+                    <div class="site-header">
+                        <div class="site-icon">
+                            <img src="picture/agoda.webp" alt="Agoda">
+                        </div>
+                        <div class="site-name">Agoda</div>
+                    </div>
+                    <span class="site-category">Accommodation</span>
+                    <p>Extremely popular and powerful in Asia, Agoda frequently offers competitive prices and special deals for hotels throughout Taiwan. Many travelers find it especially useful for finding discounts in major cities and tourist spots.</p>
+                    <a href="https://www.agoda.com" target="_blank" class="visit-btn">Visit Agoda</a>
+                </div>
+                
+                <div class="site-card">
+                    <div class="site-header">
+                        <div class="site-icon">
+                            <img src="picture/klook.png" alt="Klook">
+                        </div>
+                        <div class="site-name">Klook</div>
+                    </div>
+                    <span class="site-category">Activities & Accommodation</span>
+                    <p>While famous for activities and tours, Klook also has a growing selection of hotel deals. It's a great platform to check for packaged deals that might combine your accommodation with a popular local experience or airport transfer.</p>
+                    <a href="https://www.klook.com" target="_blank" class="visit-btn">Visit Klook</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="tips" class="section">
+            <h2>Booking Tips</h2>
+            <p>Maximize your chances of finding the perfect accommodation at the best price with these practical tips:</p>
+            
+            <div class="highlight-box">
+                <i class="fas fa-star"></i>
+                <h3>Cross-Reference Reviews</h3>
+                <p>Don't rely on reviews from just one platform. Check both Booking.com and Agoda to get a more balanced view of a property. Look for patterns in reviews rather than focusing on individual extreme opinions.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>Compare Prices</h3>
+                <p>Prices can vary significantly between platforms for the same property and dates. Always check multiple sites before booking. Consider using price comparison tools or opening multiple browser tabs to compare options side by side.</p>
+            </div>
+
+            <div class="highlight-box">
+                <i class="fas fa-box"></i>
+                <h3>Look for Package Deals</h3>
+                <p>Some platforms like Klook offer package deals that combine accommodation with activities or transportation. These can offer significant savings compared to booking each element separately.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

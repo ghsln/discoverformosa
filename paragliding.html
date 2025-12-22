@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Paragliding Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #1E88E5;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #0A3D62;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .paragliding-spots {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 3rem;
+        }
+
+        .paragliding-spots:hover {
+            transform: none;
+        }
+
+        .paragliding-spots h2 {
+            color: #FFD600;
+        }
+        
+        .paragliding-spots p {
+            color: #E3F2FD;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #1565C0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #2E7D32;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            padding-left: 10px;
+            border-left: 4px solid #FF9800;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .experience-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .beginner {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .intermediate {
+            background-color: #FF9800;
+            color: white;
+        }
+
+        .intermediate .spot-name {
+            color: #FF9800;
+        }
+        
+        .advanced {
+            background-color: #F44336;
+            color: white;
+        }
+
+        .advanced .spot-name {
+            color: #F44336;
+        }
+        
+        .spot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .spot-grid p {
+            color: #333;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 3px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+        
+        .spot-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .spot-card.beginner::before {
+            background-color: #4CAF50;
+        }
+        
+        .spot-card.intermediate::before {
+            background-color: #FF9800;
+        }
+        
+        .spot-card.advanced::before {
+            background-color: #F44336;
+        }
+        
+        .spot-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .spot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .spot-name {
+            font-weight: 700;
+            color: #1565C0;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .spot-location {
+            color: #737373;
+            font-size: 1rem;
+        }
+
+        .spot-location i {
+            margin-right: 5px;
+        }
+        
+        .spot-features {
+            margin: 15px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .feature i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .beginner .feature i {
+            color: #4CAF50;
+        }
+
+        .intermediate .feature i {
+            color: #FF9800;
+        }
+
+        .advanced .feature i {
+            color: #F44336;
+        }
+       
+        .highlight-box {
+            background: #E3F2FD;
+            border-left: 5px solid #42A5F5;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            color: #333;
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+
+        .tip-box {
+            background: #E8F5E9;
+            border-left: 5px solid #4CAF50;
+            padding: 1.8rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .tip-box i {
+            font-size: 1.8rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tip-box h3 {
+            color: #2E7D32;
+            margin: 0.5rem 0 1rem;
+            padding-left: 0;
+            border-left: none;
+            font-size: 1.4rem;
+        }
+
+        .tip-box p {
+            margin-bottom: 0;
+            color: #333;
+        }
+        
+        .experience-section {
+            margin-bottom: 3rem;
+        }
+        
+        .sorting-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .sort-btn {
+            padding: 12px 24px;
+            margin: 0 8px 10px;
+            border: none;
+            border-radius: 30px;
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .sort-btn i {
+            margin-right: 8px;
+        }
+        
+        .sort-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .sort-btn.active {
+            background-color: #1565C0;
+            color: white;
+        }
+        
+        .sort-btn.all.active {
+            background-color: #1565C0;
+        }
+        
+        .sort-btn.beginner.active {
+            background-color: #4CAF50;
+        }
+        
+        .sort-btn.intermediate.active {
+            background-color: #FF9800;
+        }
+        
+        .sort-btn.advanced.active {
+            background-color: #F44336;
+        }
+        
+        .spot-card.hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .spot-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .sort-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+                margin: 0 5px 8px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .spot-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/paragliding.jpeg" alt="Paragliding" class="header-image">
+        <div class="header-content">
+            <h1>Paragliding in Taiwan</h1>
+            <p>Experience the thrill of soaring above Taiwan's stunning landscapes</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#paragliding-spots">Paragliding Spots</a></li>
+                <li><a href="#experiences">Experiences</a></li>
+                <li><a href="#tips">Tips</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Taiwan Paragliding Guide</h2>
+            <p>Taiwan offers incredible paragliding experiences with stunning views of mountains, valleys, and coastlines. With various sites suitable for beginners to advanced pilots, the island is a perfect destination for aerial adventure enthusiasts.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Safety Tip:</strong> Always fly with licensed instructors, follow all safety briefings, and check weather conditions before your flight. Paragliding is weather-dependent, so flights may be cancelled due to strong winds or poor conditions.</p>
+            </div>
+        </section>
+
+        <section class="paragliding-spots" id="paragliding-spots">
+            <h2><i class="fas fa-parachute-box"></i>Top Paragliding Spots</h2>
+            
+            <div class="sorting-container">
+                <button class="sort-btn all active" data-filter="all">
+                    All Spots
+                </button>
+                <button class="sort-btn beginner" data-filter="beginner">
+                    Beginner Friendly
+                </button>
+                <button class="sort-btn intermediate" data-filter="intermediate">
+                    Intermediate
+                </button>
+                <button class="sort-btn advanced" data-filter="advanced">
+                    Advanced
+                </button>
+            </div>
+            
+            <div class="spot-grid" id="all-spots">
+                <div class="spot-card beginner" data-experience="beginner">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Soaring Paragliding, Luye, Taitung</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Luye Highlands, Taitung</div>
+                        </div>
+                        <span class="experience-badge beginner">Beginner</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/luye.jpg" alt="Luye Paragliding">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-mountain"></i>
+                            <span>Terrain: Ideal for gliding with consistent winds</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-eye"></i>
+                            <span>Views: East Rift Valley and coastal ranges</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <span>Great for: Tandem flights with experienced instructors</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>One of Taiwan's most iconic spots for paragliding, located in Luye Highlands where the terrain and winds are ideal for gliding. You'll get sweeping views of the East Rift Valley and coastal ranges.</p>
+                </div>
+                
+                <div class="spot-card beginner" data-experience="beginner">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Hutoushan Lookout & 飛台灣-FlyTaiwan</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Puli, Nantou</div>
+                        </div>
+                        <span class="experience-badge beginner">Beginner</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/hutoushan.jpeg" alt="Puli Paragliding">
+                    </div>
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Terrain: Gentle slopes, beginner-friendly</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-camera"></i>
+                            <span>Includes: Photos/videos services often available</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i>
+                            <span>Convenience: Pickup/transportation often included</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Central Taiwan's popular paragliding base with gentle slopes and options for tandem flights. The site is beginner-friendly and often includes pickup/transportation and photos/videos services.</p>
+                </div>
+
+                <div class="spot-card intermediate" data-experience="intermediate">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">外澳飛行傘基地 & 城堡飛行傘 Castle Paragliding</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Wai'ao/Toucheng, Yilan</div>
+                        </div>
+                        <span class="experience-badge intermediate">Intermediate</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/castleparagliding.jpg" alt="Yilan Paragliding">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>Views: Ocean views and dramatic coastal backdrop</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-wind"></i>
+                            <span>Conditions: Coastal breezes, ideal for experienced pilots</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-umbrella-beach"></i>
+                            <span>Location: Just above Wai'ao Beach</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>East coast paragliding just above Wai'ao Beach, offering flights with ocean views and a dramatic coastal backdrop.</p>
+                </div>
+                
+                <div class="spot-card intermediate" data-experience="intermediate">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Pingtung Saichia Paragliding Hang Gliding Field</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Sandimen, Pingtung</div>
+                        </div>
+                        <span class="experience-badge intermediate">Intermediate</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/saichia.jpeg" alt="Pingtung Paragliding">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-history"></i>
+                            <span>Significance: Classic location in Taiwan's paragliding scene</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-trophy"></i>
+                            <span>Used for: Recreational flying and competitions</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-map"></i>
+                            <span>Region: Southern Taiwan site</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>This southern site is historically significant (a classic location in Taiwan's paragliding scene) and often used for both recreational flying and competitions.</p>
+                </div>
+                
+                <div class="spot-card beginner" data-experience="beginner">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Hualien Paragliding (Multiple Operators)</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Hualien</div>
+                        </div>
+                        <span class="experience-badge beginner">Beginner</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/hualienparaglide.jpg" alt="Hualien Paragliding">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-eye"></i>
+                            <span>Views: Huadong Valley and Pacific Coast</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Includes: Safety briefings and transportation</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-user-friends"></i>
+                            <span>Offers: Guided tandem flights for beginners</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Experience flight with stunning views over Huadong Valley and the Pacific Coast. Guided tandem flights are offered for beginners and include safety briefings and transportation. (There are a few different operators around here, choose based on reviews or preferred scenery.)</p>
+                </div>
+                
+                <div class="spot-card advanced" data-experience="advanced">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">泰平山飛行傘飛行場 (Taipingshan)</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Taitung</div>
+                        </div>
+                        <span class="experience-badge advanced">Advanced</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/taipingshan.jpg" alt="Taipingshan Paragliding">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-mountain"></i>
+                            <span>Launch Point: Higher elevation for experienced pilots</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-eye"></i>
+                            <span>Views: Impressive views of forests and mountains</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-user-check"></i>
+                            <span>Audience: Often preferred by experienced pilots</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>An advanced site with higher launch points and impressive views of forests and mountains, often preferred by experienced pilots.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiences">
+            <h2>Typical Paragliding Experiences</h2>
+            <p>Taiwan offers different paragliding experiences to suit various skill levels and preferences:</p>
+            
+            <div class="tip-box">
+                <i class="fas fa-user-friends"></i>
+                <h3>Tandem Flights (with Instructor)</h3>
+                <p>Available across most sites for beginners, no experience needed. You'll be securely harnessed to a professional pilot who handles takeoff, flying, and landing.</p>
+            </div>
+            
+            <div class="tip-box">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Paragliding Courses & Training</h3>
+                <p>If you want to learn to fly solo, there are training schools in Taiwan that offer beginner to intermediate training programs.</p>
+            </div>
+        </section>
+
+        <section id="tips">
+            <h2>Tips for Paragliding in Taiwan</h2>
+            <p>Make the most of your paragliding adventure with these essential tips:</p>
+            
+            <div class="tip-box">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Best Time & Conditions</h3>
+                <p>Paragliding is weather-dependent — calm winds and clear skies are ideal. Seasons can vary by region. Luye/East Taiwan usually has consistent winds most of the year. North Coast/Yilan has coastal breezes but strong winds can cancel flights. Always check with the operator on the day of your flight.</p>
+            </div>
+            
+            <div class="tip-box">
+                <i class="fas fa-suitcase"></i>
+                <h3>What to Wear</h3>
+                <p>Wear comfortable long pants, sneakers, sunglasses, and sunscreen. Bring a light jacket as it can be cooler at higher altitudes.</p>
+            </div>
+
+            <div class="tip-box">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Safety & Health</h3>
+                <p>Go with licensed instructors and follow all safety briefings. Inform the operator of any health concerns; some weight/age limits may apply.</p>
+            </div>
+
+            <div class="tip-box">
+                <i class="fas fa-bookmark"></i>
+                <h3>Booking</h3>
+                <p>Book in advance, especially during peak travel seasons or weekends. Check operator reviews and choose based on preferred scenery and experience level.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortButtons = document.querySelectorAll('.sort-btn');
+            const spotCards = document.querySelectorAll('.spot-card');
+            
+            sortButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    sortButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    spotCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.classList.remove('hidden');
+                        } else {
+                            const experience = card.getAttribute('data-experience');
+                            if (experience === filter) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        }
+                    });
+                    
+                    document.querySelector('.paragliding-spots').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            });
+            
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
