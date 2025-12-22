@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Legal Regulations Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .legal-areas {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 3rem;
+        }
+
+        .legal-areas:hover {
+            transform: none;
+        }
+
+        .legal-areas h2 {
+            color: #feb54f;
+        }
+        
+        .legal-areas p {
+            color: #F4E8D8;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #2E7D32;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            padding-left: 10px;
+            border-left: 4px solid #FF9800;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .fine-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .fine-low {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .fine-medium {
+            background-color: #FF9800;
+            color: white;
+        }
+
+        .fine-medium .law-name {
+            color: #FF9800;
+        }
+        
+        .fine-high {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .fine-high .law-name {
+            color: #f44336;
+        }
+        
+        .law-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .law-grid p {
+            color: #333;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 3px;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        
+        .law-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .law-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .law-card.fine-low::before {
+            background-color: #4CAF50;
+        }
+        
+        .law-card.fine-medium::before {
+            background-color: #FF9800;
+        }
+        
+        .law-card.fine-high::before {
+            background-color: #f44336;
+        }
+        
+        .law-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .law-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .law-name {
+            font-weight: 700;
+            color: #2E7D32;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .law-category {
+            color: #737373;
+            font-size: 1rem;
+        }
+
+        .law-category i {
+            margin-right: 5px;
+        }
+        
+        .law-details {
+            margin: 15px 0;
+        }
+        
+        .detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .detail i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .fine-low .detail i {
+            color: #2E7D32;
+        }
+
+        .fine-medium .detail i {
+            color: #feb54f;
+        }
+
+        .fine-high .detail i {
+            color: #f44336;
+        }
+        
+        .warning-notice {
+            background-color: #fff1f0;
+            border-left: 4px solid #f44336;
+            color: #333;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95rem;
+        }
+        
+        .highlight-box {
+            background: #F4E8D8;
+            border-left: 5px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            color: #333;
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        
+        .fine-section {
+            margin-bottom: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .law-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .law-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/laws.jpg" alt="Taiwan Legal System" class="header-image">
+        <div class="header-content">
+            <h1>Taiwan Legal Regulations Guide</h1>
+            <p>Understanding local laws and regulations for a safe and compliant visit</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#smoking">Smoking</a></li>
+                <li><a href="#transportation">Transportation</a></li>
+                <li><a href="#customs">Customs Regulations</a></li>
+                <li><a href="#drugs">Drugs</a></li>
+                <li><a href="#drink">Drinking</a></li>
+                <li><a href="#ident">Identification</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Taiwan Legal Regulations</h2>
+            <p>Taiwan has specific laws and regulations that visitors should be aware of to ensure a safe and compliant stay. Understanding these rules will help you avoid fines and legal issues during your visit.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Important:</strong> Ignorance of the law is not considered a valid defense in Taiwan. It is your responsibility as a visitor to familiarize yourself with local regulations, especially those that differ significantly from laws in your home country.</p>
+            </div>
+        </section>
+
+        <section class="legal-areas">
+            <h2>Legal Areas</h2>
+            
+            <div class="law-grid" id="smoking">
+                <div class="law-card fine-medium">
+                    <div class="law-header">
+                        <div>
+                            <div class="law-name">Smoking Regulations</div>
+                            <div class="law-category"><i class="fas fa-ban"></i>Public Health</div>
+                        </div>
+                        <span class="fine-badge fine-medium">Medium Fine</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/smoking.jpg" alt="Smoking Regulations">
+                    </div>
+                    <div class="law-details">
+                        <div class="detail">
+                            <i class="fas fa-smoking-ban"></i>
+                            <span>E-cigarettes: Complete ban on import and sale</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Fines: NTD 2,000 - 10,000 for violations</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Social media posts about e-cigarettes can be fined</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Taiwan has strict smoking regulations, with particularly severe restrictions on e-cigarettes and vaping products. Smoking is prohibited in most indoor public spaces and many outdoor areas.</p>                   
+                    <div class="warning-notice">
+                        <strong>Warning:</strong> The ban on e-cigarettes is very strict. Authorities can interpret any online mention of e-cigarettes, including social media posts or reviews, as illegal advertising.
+                    </div>
+                </div>
+                
+                <div class="law-card fine-medium">
+                    <div class="law-header">
+                        <div>
+                            <div class="law-name">Transportation Laws</div>
+                            <div class="law-category"><i class="fas fa-car"></i>Traffic Regulations</div>
+                        </div>
+                        <span class="fine-badge fine-medium">Medium Fine</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/traffic.jpg" alt="Transportation Laws">
+                    </div>
+                    <div class="law-details">
+                        <div class="detail">
+                            <i class="fas fa-user-friends"></i>
+                            <span>Seatbelts mandatory for all passengers</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-helmet-safety"></i>
+                            <span>Helmets required for motorcycle/scooter riders</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Fines: NTD 1,500 - 6,000 for violations</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Taiwan has specific traffic laws that are strictly enforced. Understanding these regulations is essential for both drivers and passengers to ensure safety and avoid penalties.</p>
+                </div>
+            </div>
+
+            <div class="law-grid" id="customs">
+                <div class="law-card fine-high">
+                    <div class="law-header">
+                        <div>
+                            <div class="law-name">Customs Regulations</div>
+                            <div class="law-category"><i class="fas fa-box"></i>Border Control</div>
+                        </div>
+                        <span class="fine-badge fine-high">High Fine</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/pork.webp" alt="Customs Regulations">
+                    </div>
+                    <div class="law-details">
+                        <div class="detail">
+                            <i class="fas fa-piggy-bank"></i>
+                            <span>Pork products from overseas strictly prohibited</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>First offense: NTD 200,000</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>Second offense: NTD 1,000,000</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Taiwan has strict customs regulations, particularly regarding agricultural products, to prevent the spread of diseases like African swine fever.</p>                  
+                    <div class="warning-notice">
+                        <strong>Strict Liability:</strong> For the pork product ban, you can be fined regardless of whether you were aware of the contents of a parcel sent to you. Be cautious about receiving packages from overseas.
+                    </div>
+                </div>
+                
+                <div class="law-card fine-high" id="drugs">
+                    <div class="law-header">
+                        <div>
+                            <div class="law-name">Drug Policy</div>
+                            <div class="law-category"><i class="fas fa-cannabis"></i>Substance Control</div>
+                        </div>
+                        <span class="fine-badge fine-high">High Fine</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/drugs.jpg" alt="Drug Policy">
+                    </div>
+                    <div class="law-details">
+                        <div class="detail">
+                            <i class="fas fa-ban"></i>
+                            <span>Zero tolerance for all illegal drugs</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-gavel"></i>
+                            <span>Possession can lead to imprisonment</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-pills"></i>
+                            <span>Prescription meds in original containers only</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Taiwan has a "zero tolerance" policy for drugs, meaning severe penalties for possession or use of illegal substances.</p>
+                </div>
+            </div>
+
+            <div class="law-grid" id="drink">
+                <div class="law-card fine-low">
+                    <div class="law-header">
+                        <div>
+                            <div class="law-name">Legal Drinking Age</div>
+                            <div class="law-category"><i class="fas fa-wine-glass"></i>Alcohol Regulations</div>
+                        </div>
+                        <span class="fine-badge fine-low">Low Fine</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/drinking.webp" alt="Legal Drinking Age">
+                    </div>
+                    <div class="law-details">
+                        <div class="detail">
+                            <i class="fas fa-id-card"></i>
+                            <span>Legal drinking age: 18 years</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-store"></i>
+                            <span>ID may be requested at bars, clubs, and stores</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-user-check"></i>
+                            <span>Establishments must verify age if in doubt</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>The legal age for consuming alcohol in Taiwan is 18. Establishments are required to check identification for anyone who appears underage.</p>
+                </div>
+                
+                <div class="law-card fine-medium" id="ident">
+                    <div class="law-header">
+                        <div>
+                            <div class="law-name">Identification Requirements</div>
+                            <div class="law-category"><i class="fas fa-id-card"></i>Public Security</div>
+                        </div>
+                        <span class="fine-badge fine-medium">Medium Fine</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/identity.jpg" alt="Identification Requirements">
+                    </div>
+                    <div class="law-details">
+                        <div class="detail">
+                            <i class="fas fa-passport"></i>
+                            <span>Always carry your passport or a copy</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Police may request identification randomly</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Failure to produce ID can result in detention</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>You must carry identification with you at all times in Taiwan. For foreigners, this means your passport or a copy of it.</p>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Legal Compliance: </strong>Taiwanese authorities are generally helpful to tourists who make honest mistakes, but intentional violations of the law are treated seriously.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

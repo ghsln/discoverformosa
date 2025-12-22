@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Accommodations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(1, 0, 6, 0.2);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        .image-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+        
+        .content-image {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 3px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .hotel-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 1.5rem 0;
+        }
+        
+        .feature {
+            background: linear-gradient(#ffffff, #fff8de69);
+            padding: 15px;
+            border-radius: 3px;
+            border-left: 4px solid #8B1E1E;
+        }
+        
+        .feature h4 {
+            color: #8B1E1E;
+            margin-bottom: 5px;
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+        
+        .location-tag {
+            display: inline-block;
+            background-color: #8B1E1E;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        
+        .booking-btn {
+            display: inline-block;
+            background-color: #8B1E1E;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .booking-btn:hover {
+            background-color: #6d1616;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hotel-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .image-box {
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/luxury.jpg" alt="Luxury Hotel" class="header-image">
+        <div class="header-content">
+            <h1>Luxury Accommodations in Taiwan</h1>
+            <p>Experience world-class hospitality and exceptional comfort at Taiwan's finest hotels and resorts</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#mandarin-oriental">Mandarin Oriental</a></li>
+                <li><a href="#w-taipei">W Taipei</a></li>
+                <li><a href="#silks-taroko">Silks Place</a></li>
+                <li><a href="#the-lalu">The Lalu</a></li>
+                <li><a href="#silks-club">Silks Club</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Luxury Accommodations in Taiwan</h2>
+            <p>Taiwan offers a diverse range of luxury accommodations, from urban hotels in bustling Taipei to serene resorts in breathtaking natural settings. Each property provides unique experiences that blend international standards with local Taiwanese hospitality, ensuring unforgettable stays for discerning travelers.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Note:</strong> Each accommodation featured below offers distinctive amenities, locations, and experiences. Whether you're seeking urban sophistication, natural tranquility, or architectural beauty, Taiwan's luxury hotels deliver exceptional service and memorable stays.</p>
+            </div>
+        </section>
+
+        <section id="mandarin-oriental">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Taipei, Songshan District</span>
+            <h2>Mandarin Oriental, Taipei</h2>
+
+            <div class="image-box">
+                <img src="picture/mandarinoriental.jpg" alt="Mandarin Oriental Exterior" class="content-image">
+                <img src="picture/mandarinoriental2.jpg" alt="Mandarin Oriental Pool" class="content-image">
+                <img src="picture/mandarinoriental3.jpg" alt="Mandarin Oriental Room" class="content-image">
+            </div>
+
+            <p>Located in Taipei's Songshan District, the Mandarin Oriental offers an opulent European-style experience that stands out in the city's skyline. This hotel is a destination in itself, featuring a 20-meter heated outdoor pool and a lavish spa spanning 3,500 square meters.</p>
+
+            <p>Food enthusiasts will be delighted by the six on-site restaurants and lounges, including the Michelin-starred Ya Ge, which serves exquisite Cantonese cuisine and dim sum. The hotel's elegant rooms are equipped with marble bathrooms and walk-in closets, ensuring a stay defined by sophistication and comfort.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-swimming-pool"></i> Pool & Spa</h4>
+                    <p>20-meter heated outdoor pool and 3,500 sqm spa</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-utensils"></i> Dining</h4>
+                    <p>6 restaurants including Michelin-starred Ya Ge</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-bed"></i> Rooms</h4>
+                    <p>Elegant rooms with marble bathrooms</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-map-marker-alt"></i> Location</h4>
+                    <p>Prime location in Taipei's Songshan District</p>
+                </div>
+            </div>
+            
+            <a href="https://www.booking.com/hotel/tw/mandarin-oriental-taipei.html" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+
+        <section id="w-taipei">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Taipei, Xinyi District</span>
+            <h2>W Taipei</h2>
+
+            <div class="image-box">
+                <img src="picture/wtaipei.jpg" alt="W Taipei Exterior" class="content-image">
+                <img src="picture/wtaipei2.jpeg" alt="W Taipei Pool" class="content-image">
+                <img src="picture/wtaipei3.jpg" alt="W Taipei Room" class="content-image">
+            </div>
+
+            <p>For a vibrant and trendy stay in the heart of Taipei's Xinyi District, the W Taipei is the place to be. This hotel embodies a hip, high-energy vibe with an artsy interior, epic city views, and some rooms that directly face the iconic Taipei 101.</p>
+            <p>The experience begins in the lively 10th-floor lobby, which is home to the popular Woobar. You can enjoy the pool area, which often features DJs, or indulge in the excellent dining at Yen Chinese Restaurant. Its direct access to underground tunnels connecting to major shopping malls also makes it incredibly convenient for explorers.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-music"></i> Entertainment</h4>
+                    <p>Vibrant atmosphere with DJs at the pool</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-store"></i> Shopping</h4>
+                    <p>Direct access to major shopping malls</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-cocktail"></i> Nightlife</h4>
+                    <p>Popular Woobar in the 10th-floor lobby</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-landmark"></i> Views</h4>
+                    <p>Some rooms directly face Taipei 101</p>
+                </div>
+            </div>
+            
+            <a href="https://www.booking.com/hotel/tw/w-taipei.html" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+
+        <section id="silks-taroko">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Hualien County, Taroko Gorge</span>
+            <h2>Silks Place, Taroko Gorge</h2>
+            
+            <div class="image-box">
+                <img src="picture/silksplace.png" alt="Silks Place Exterior" class="content-image">
+                <img src="picture/silksplace2.jpg" alt="Silks Place Pool" class="content-image">
+                <img src="picture/silksplace3.jpg" alt="Silks Place Room" class="content-image">
+            </div>
+
+            <p>Nestled in the magnificent Taroko Gorge in Hualien County, Silks Place is the perfect base for exploring one of Taiwan's most stunning natural wonders. This hotel combines luxury with nature, offering a serene escape surrounded by towering peaks and waterfalls.</p>
+            <p>After a day of hiking, you can unwind in the gorge-facing swimming pool or rejuvenate in the hotel's wellness spa. The tranquil atmosphere and breathtaking scenery provide a uniquely Taiwanese luxury experience that focuses on relaxation and connection with the natural world.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-hiking"></i> Nature</h4>
+                    <p>Perfect base for exploring Taroko Gorge</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-spa"></i> Wellness</h4>
+                    <p>Gorge-facing pool and wellness spa</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-water"></i> Scenery</h4>
+                    <p>Surrounded by peaks and waterfalls</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-leaf"></i> Tranquility</h4>
+                    <p>Serene escape from urban life</p>
+                </div>
+            </div>
+            
+            <a href="https://www.booking.com/hotel/tw/tai-lu-ge-jing-ying-jiu-dian.html" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+
+        <section id="the-lalu">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Nantou County, Sun Moon Lake</span>
+            <h2>The Lalu, Sun Moon Lake</h2>
+            
+            <div class="image-box">
+                <img src="picture/thelalu3.jpg" alt="Sun Moon Lake" class="content-image">
+                <img src="picture/thelalu2.jpg" alt="The Lalu Villa" class="content-image">
+                <img src="picture/thelalu.jpg" alt="The Lalu Room" class="content-image">
+            </div>
+            
+            <p>Situated on the shores of the picturesque Sun Moon Lake in Nantou County, The Lalu is a masterpiece of minimalist design by renowned Australian architect Kerry Hill. The resort offers an atmosphere of serene luxury, with some villas featuring private, temperature-controlled swimming pools.</p>
+            <p>Designed by renowned Australian architect Kerry Hill, The Lalu showcases minimalist architecture that harmonizes with the natural landscape. Guests can enjoy stunning lake views, explore the property's unique "Scenic Steps" inspired by the Great Wall, or indulge in a soothing treatment at the Lalu Spa.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-archway"></i> Architecture</h4>
+                    <p>Minimalist design by Kerry Hill</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-swimming-pool"></i> Villas</h4>
+                    <p>Some with private temperature-controlled pools</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-spa"></i> Wellness</h4>
+                    <p>Lalu Spa with soothing treatments</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-hiking"></i> Exploration</h4>
+                    <p>Unique "Scenic Steps" inspired by Great Wall</p>
+                </div>
+            </div>
+            
+            <a href="https://www.agoda.com/the-lalu-sun-moon-lake/hotel/nantou-tw.html?site_id=1922876&tag=f0933872-fcfb-4a82-be63-0e2e24e83ee3&gad_source=1&gad_campaignid=22020094547&gbraid=0AAAAA9_WXQrse5lmrj13uxI0MB_SIJSW_&gclid=CjwKCAiA_orJBhBNEiwABkdmjMPWRTiIZm2HB1R-RvF53znWBr6FRR3_BeG1hdB5vxICsjyD29vmVxoC8SoQAvD_BwE&ds=y%2BY37xHhgxzodwIr" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+\
+        <section id="silks-club">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Kaohsiung, Asia New Bay Area</span>
+            <h2>Silks Club, Kaohsiung</h2>
+
+            <div class="image-box">
+                <img src="picture/silksclub.jpg" alt="Silks Club Lobby" class="content-image">
+                <img src="picture/silksclub2.jpeg" alt="Silks Club Pool" class="content-image">
+                <img src="picture/silksclub3.jpg" alt="Silks Club Interior" class="content-image">
+            </div>
+
+            <p>In the southern port city of Kaohsiung, the Silks Club offers a sophisticated boutique experience focused on art and design. From the moment you enter the lobby, you're greeted by the mesmerizing "Dancing Particles" motion art sculpture, setting the tone for a creatively inspired stay.</p>
+            <p>The hotel is located in the Asia New Bay Area, putting its modern attractions within easy reach. Known for its personalized service and stylish ambiance. The Silks Club provides a more intimate and curated luxury experience compared to larger hotel chains, making it a favorite for discerning travelers.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-paint-brush"></i> Art Focus</h4>
+                    <p>Mesmerizing "Dancing Particles" sculpture</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-map-marker-alt"></i> Location</h4>
+                    <p>In Kaohsiung's Asia New Bay Area</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-user-check"></i> Service</h4>
+                    <p>Personalized service for discerning travelers</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-heart"></i> Ambience</h4>
+                    <p>Intimate and curated luxury experience</p>
+                </div>
+            </div>
+            
+            <a href="https://www.booking.com/hotel/tw/jing-ying-guo-ji-xing-guan.html?chal_t=1763920514080&force_referer=https%3A%2F%2Fwww.google.com%2F" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+    </div>
+</body>
+</html>

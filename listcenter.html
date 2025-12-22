@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Information Centers in Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Funnel+Sans:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 0.7rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #FF9800;
+            padding-bottom: 0.5rem;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+        }
+        
+        .location-tag {
+            display: inline-block;
+            background: #8B1E1E;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .info-card {
+            background: linear-gradient(#ffffff, #fff8de69);
+            padding: 15px;
+            border-left: 4px solid #8B1E1E;
+            border-radius: 3px;
+        }
+
+        .maps-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            background-color: rgba(139, 30, 30, 0.9);
+            color: white;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .maps-btn:hover {
+            background-color: #501111;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-card h4 {
+            color: #8B1E1E;
+            margin-bottom: 0.5rem;
+        }
+        
+        .map-box {
+            margin-top: 1.5rem;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+        
+        iframe {
+            width: 100%;
+            height: 420px;
+            border: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                padding: 0.5rem 0.8rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/customerservice.webp" alt="Customer Service" class="header-image">
+        <div class="header-content">
+            <h1>Tourist Information Centers in Taiwan</h1>
+            <p>Your guide to official travel assistance across the island</p>
+        </div>
+    </div>
+    
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#taipei">Northern Taiwan</a></li>
+                <li><a href="#middle-taiwan">Center Taiwan</a></li>
+                <li><a href="#southern-taiwan">Southern Taiwan</a></li>
+                <li><a href="#airport">Airports</a></li>
+                <li><a href="#scenic">Scenic Areas</a></li>
+                <li><a href="#map">Map</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>Taiwan's Tourist Information Centers (also known as i-Centers) provide travelers with maps, transportation advice, attraction information, and multilingual assistance. They are commonly located at MRT stations, train stations, airports, and major scenic areas.</p>
+        </section>
+        
+        <section id="taipei">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Northern Taiwan</span>
+            <h2>Taipei Tourist Information Centers</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Taipei Main Station Tourist Center</h4>
+                    <p>Major hub offering city maps, transport guidance, and attraction info.</p>
+                    <a href="https://maps.app.goo.gl/e3DYj16UnLB9gaaW6" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Ximen MRT Tourist Service Center</h4>
+                    <p>Convenient stop for visitors exploring Ximending shopping district.</p>
+                    <a href="https://maps.app.goo.gl/XvqHe2QyDECBEVq88" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Taipei 101/World Trade Center i-Center</h4>
+                    <p>Assistance for visitors to Taipei 101 and surrounding Xinyi area.</p>
+                    <a href="https://maps.app.goo.gl/nL3UK7QrDjNgeazu8" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Beitou Tourist Information Center</h4>
+                    <p>Focused on hot springs, museums, and Beitou nature attractions.</p>
+                    <a href="https://maps.app.goo.gl/hVjqLucJkRbHZ9Bm8" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="middle-taiwan">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Center Taiwan</span>
+            <h2>Central Taiwan Information Centers</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Taichung Railway Station Tourist Service Center</h4>
+                    <p>Information hub for Taichung city, transportation, and nearby attractions like Rainbow Village and Gaomei Wetlands.</p>
+                    <a href="https://maps.app.goo.gl/ahV18y8R92pEDJXB9" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                <div class="info-card">
+                    <h4>Lukang Tourist Information Center</h4>
+                    <p>Guides for exploring Lukang's historic old town, temples, and traditional handicrafts.</p>
+                    <a href="https://maps.app.goo.gl/i4xCpetRK1YPdLRR7" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Alishan National Scenic Area Visitor Center</h4>
+                    <p>Information on forest railways, hiking trails, sunrise viewing, and mountain accommodations.</p>
+                    <a href="https://maps.app.goo.gl/2gdJDDZFYz8idG6t6" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Puli Visitor Center</h4>
+                    <p>Regional information covering Cingjing Farm, Puli, and other central mountain attractions.</p>
+                    <a href="https://maps.app.goo.gl/uteMsYCYkMkMqRPv7" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="southern-taiwan">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Southern Taiwan</span>
+            <h2>Southern Taiwan Information Centers</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Kaohsiung Main Station Tourist Service Center</h4>
+                    <p>Primary information point for Kaohsiung city, including Pier-2 Art Center, Lotus Pond, and night markets.</p>
+                    <a href="https://maps.app.goo.gl/4Z7YJaEiCGQqM3Yx6" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Tainan Tourist Information Center (Tainan Railway Station)</h4>
+                    <p>Historical and cultural guidance for Taiwan's ancient capital, including temples, forts, and traditional foods.</p>
+                    <a href="https://maps.app.goo.gl/VBrSU7Grnt7VZdp76" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Kenting National Park Visitor Center</h4>
+                    <p>Beach information, water activities, hiking trails, and accommodation options in Taiwan's premier beach destination.</p>
+                    <a href="https://maps.app.goo.gl/Rn67s4kQgYmTNj1N8" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="airport">
+            <span class="location-tag"><i class="fas fa-plane"></i> Transportation Hubs</span>
+            <h2>Airport Tourist Information Centers</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Taoyuan International Airport (T1 & T2)</h4>
+                    <p>24-hour service counters providing SIM cards, transport advice, and maps.</p>
+                    <a href="https://maps.app.goo.gl/uRvoNaYCSZbbrDqq7" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Kaohsiung International Airport</h4>
+                    <p>Travel assistance for southern Taiwan and Kaohsiung city.</p>
+                    <a href="https://maps.app.goo.gl/ymTN8NDG4BFMe85U6" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="scenic">
+            <span class="location-tag"><i class="fas fa-mountain"></i> Scenic Areas</span>
+            <h2>Scenic Area Visitor Centers</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Taroko National Park Visitor Center</h4>
+                    <p>Guidance on trails, safety, and park attractions.</p>
+                    <a href="https://maps.app.goo.gl/dqs3BPdskWhg1Mb78" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Sun Moon Lake Xiangshan Visitor Center</h4>
+                    <p>Information on cycling routes, lake cruises, and cultural sites.</p>
+                    <a href="https://maps.app.goo.gl/9KRDDrG4zCDtrQgV7" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Tamsui Visitor Information Center</h4>
+                    <p>Support for exploring historic Tamsui Old Street and riverside areas.</p>
+                    <a href="https://maps.app.goo.gl/nnQV5ccEjB1URxjd8" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="map">
+            <h2>Tourist Information Centers Map</h2>
+            <p>This map shows the general locations of major tourist information centers across Taiwan.</p>
+            
+            <div class="map-box">
+                <iframe 
+                    src="https://www.google.com/maps?q=Tourist+Information+Center+Taiwan&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+    </div>
+    
+</body>
+</html>
