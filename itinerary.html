@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-Day Taiwan Itinerary - Taiwan Tours</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        /* Navigation Bar */
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 1000;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('cover/taiwan.jpg') center/cover; 
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 100px;
+            font-weight: bold;
+            margin-bottom: 90px;
+            color: white;
+        }
+        
+        .carousel-wrapper {
+            width: 100vw; 
+            overflow: hidden; 
+            padding: 20px 0;
+            position: absolute; 
+            bottom: 0;
+        }
+        
+        .carousel-track {
+            display: flex;
+            width: max-content; 
+            animation: scroll-carousel 30s linear infinite; 
+            padding: 0 50px; 
+            gap: 20px;
+        }
+
+        .thumbnail-cards {
+            flex-shrink: 0; 
+            display: flex; 
+            gap: 20px;
+            margin-top: 0;
+        }
+
+        .card {
+            width: 180px; 
+            height: 250px; 
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes scroll-carousel {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } 
+        }
+
+        /* About Section */
+        .about-section {
+            background: #003B8E;
+            padding: 100px 50px 30px 50px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 60px;
+            margin-top: -50px;
+            letter-spacing: 8px;
+            position: relative;
+            color: #feb54f;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 200px;
+            height: 1px;
+            background: #feb54f;
+        }
+
+        .section-title::before {
+            left: 0;
+        }
+
+        .section-title::after {
+            right: 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ddd;
+        }
+
+        .about-text h3 {
+            color: #feb54f;
+            margin-bottom: 20px;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 30px;
+            bottom: -40px;
+            width: 2px;
+            background: #444;
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-dot {
+           width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #feb54f;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-days {
+            font-size: 12px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .timeline-location {
+            font-size: 18px;
+            font-weight: bold;
+            color: #feb54f;
+        }
+
+        .timeline-img {
+           width: 45%; 
+           max-width: 300px;
+           height: 200px;   
+           object-fit: cover; 
+           border-radius: 8px; 
+           z-index: 1;
+           transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .timeline-item:hover .timeline-img {
+           transform: translateY(-5px);
+           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* What's Included Section */
+        .included-section {
+            background: #003B8E;
+            padding: 100px 50px;
+        }
+
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .included-icon img {
+            width: 1.5em;
+            height: 1.5em;
+        }
+
+        .included-card {
+            background: #fff;
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .included-card:hover {
+            border-color: #f0a500;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+        
+        .included-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .included-card h3 {
+            color: #003B8E;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .included-card p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Day Details Section */
+        .details-section {
+            background: #003B8E;
+            padding: 100px 50px;
+        }
+
+        .day-accordion {
+            max-width: 900px;
+            margin: 60px auto 0;
+        }
+
+        .day-item {
+            border: 1px solid #f0a500;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .day-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+        }
+
+        .day-header {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #8B1E1E;
+            transition: background 0.3s;
+        }
+
+        .day-header:hover {
+            background: #8B1E1E;
+        }
+
+        .day-header h3 {
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .day-arrow {
+            font-size: 20px;
+            color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .day-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .day-content.active {
+            max-height: 1000px;
+        }
+
+        .day-item.active .day-arrow {
+            transform: rotate(180deg);
+        }
+
+        .day-details {
+            padding: 30px;
+        }
+
+        .time-block {
+            margin-bottom: 30px;
+        }
+
+        .time-block h4 {
+            color: #f0a500;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .time-block ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .time-block li {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .time-block li::before {
+            content: '→';
+            margin-right: 10px;
+            color: #f0a500;
+        }
+
+        .contact-section {
+            background: url('cover/taiwan.jpg') center/cover; 
+            position: relative;
+            padding: 100px 50px;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 10;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact-content h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            color: white;
+        }
+
+        .contact-content p {
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: #003B8E;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 60px;
+                letter-spacing: 10px;
+            }
+            
+            .about-content,
+            .included-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title::before,
+            .section-title::after {
+                width: 50px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Itinerary Routes</h2>
+            </div>
+            
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+                    <div class="thumbnail-cards">
+                        <div class="card">
+                            <img src="picture/img1.jpg" alt="pic1">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img2.jpg" alt="pic2">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img3.jpg" alt="pic3">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img4.jpg" alt="pic4">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img5.jpg" alt="pic5">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img6.jpg" alt="pic6">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img7.jpg" alt="pic7">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img8.jpg" alt="pic8">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img9.jpg" alt="pic9">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img10.jpg" alt="pic10">
+                        </div>
+                    </div>
+                    <div class="thumbnail-cards">
+                        <div class="card">
+                            <img src="picture/img1.jpg" alt="pic1">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img2.jpg" alt="pic2">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img3.jpg" alt="pic3">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img4.jpg" alt="pic4">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img5.jpg" alt="pic5">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img6.jpg" alt="pic6">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img7.jpg" alt="pic7">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img8.jpg" alt="pic8">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img9.jpg" alt="pic9">
+                        </div>
+                        <div class="card">
+                            <img src="picture/img10.jpg" alt="pic10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav>
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#itinerary">Itinerary</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <section class="about-section" id="about">
+            <h2 class="section-title">ABOUT THIS ITINERARY</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Perfect for First-Timers</h3>
+                    <p>We've planned a simple and convenient 5-day itinerary for your trip to Taiwan. You'll visit three amazing cities: Taipei, Jiufen, and Taichung.</p>
+                    <br>
+                    <p>No need to worry about routes, schedules, or finding places — everything is already organized. We'll show you where to go, what to see, and where to eat, so you can simply enjoy the journey.</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-days">Days 1-2</div>
+                            <div class="timeline-location">Taipei</div>
+                        </div>
+                        <img src="picture/taipei.jpg" alt="Taipei" class="timeline-img">
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-days">Day 3</div>
+                            <div class="timeline-location">Jiufen</div>
+                        </div>
+                        <img src="picture/juifen.jpg" alt="Juifen" class="timeline-img">
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-days">Days 4-5</div>
+                            <div class="timeline-location">Taichung</div>
+                        </div>
+                        <img src="picture/taichung.jpg" alt="Taichung" class="timeline-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="included-section" id="itinerary">
+            <h2 class="section-title">WHAT'S INCLUDED</h2>
+            <div class="included-grid">
+                <div class="included-card">
+                    <div class="included-icon">
+                        <img src="icons/map.svg" alt="icon">
+                    </div>
+                    <h3>Daily Highlights</h3>
+                    <p>Must-see spots carefully selected for each day of your journey</p>
+                </div>
+                <div class="included-card">
+                    <div class="included-icon">
+                        <img src="icons/train.svg" alt="icon">
+                    </div>
+                    <h3>Getting Around</h3>
+                    <p>Detailed transportation guide between cities and attractions</p>
+                </div>
+                <div class="included-card">
+                    <div class="included-icon">
+                        <img src="icons/food.svg" alt="icon">
+                    </div>
+                    <h3>Where to Eat</h3>
+                    <p>Local restaurant recommendations and night market must-tries</p>
+                </div>
+                <div class="included-card">
+                    <div class="included-icon">
+                        <img src="icons/money.svg" alt="icon">
+                    </div>
+                    <h3>Budget Tips</h3>
+                    <p>Estimated costs and money-saving advice throughout your trip</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="details-section">
+            <h2 class="section-title">DAY-BY-DAY PLAN</h2>
+            <div class="day-accordion">
+                <div class="day-item">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <h3>Day 1: Arrival in Taipei</h3>
+                        <span class="day-arrow">▼</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-details">
+                            <div class="time-block">
+                                <h4>Morning</h4>
+                                <ul>
+                                    <li>Arrive at Taoyuan Airport</li>
+                                    <li>Take Airport MRT to Taipei Main Station (35 mins, NT$160)</li>
+                                    <li>Check into hotel in Ximending area</li>
+                                </ul>
+                            </div>
+                            <div class="time-block">
+                                <h4>Afternoon</h4>
+                                <ul>
+                                    <li>Visit Chiang Kai-shek Memorial Hall</li>
+                                    <li>Explore Ximending shopping district</li>
+                                    <li>Try beef noodles at Yong Kang Beef Noodles</li>
+                                </ul>
+                            </div>
+                            <div class="time-block">
+                                <h4>Evening</h4>
+                                <ul>
+                                    <li>Shilin Night Market for dinner and snacks</li>
+                                    <li>Must-try: oyster omelet, stinky tofu, bubble tea</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-item">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <h3>Day 2: Taipei City Exploration</h3>
+                        <span class="day-arrow">▼</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-details">
+                            <div class="time-block">
+                                <h4>Morning</h4>
+                                <ul>
+                                    <li>Visit Taipei 101 Observatory (opens 9 AM)</li>
+                                    <li>Elephant Mountain hike for city views (1 hour)</li>
+                                </ul>
+                            </div>
+                            <div class="time-block">
+                                <h4>Afternoon</h4>
+                                <ul>
+                                    <li>National Palace Museum (2-3 hours)</li>
+                                    <li>Lunch at Din Tai Fung (xiaolongbao)</li>
+                                    <li>Walk around Yongkang Street area</li>
+                                </ul>
+                            </div>
+                            <div class="time-block">
+                                <h4>Evening</h4>
+                                <ul>
+                                    <li>Raohe Night Market</li>
+                                    <li>Try pepper buns and medicinal pork ribs soup</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-item">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <h3>Day 3: Jiufen & Northeast Coast</h3>
+                        <span class="day-arrow">▼</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-details">
+                            <div class="time-block">
+                                <h4>Morning</h4>
+                                <ul>
+                                    <li>Take bus 1062 from Taipei Main Station to Jiufen (90 mins)</li>
+                                    <li>Explore Jiufen Old Street</li>
+                                    <li>Visit A Mei Tea House</li>
+                                </ul>
+                            </div>
+                            <div class="time-block">
+                                <h4>Afternoon</h4>
+                                <ul>
+                                    <li>Lunch: taro balls with sweet soup</li>
+                                    <li>Walk to Jiufen Viewpoint</li>
+                                    <li>Optional: Visit nearby Shifen for sky lanterns</li>
+                                </ul>
+                            </div>
+                            <div class="time-block">
+                                <h4>Evening</h4>
+                                <ul>
+                                    <li>Return to Taipei</li>
+                                    <li>Ningxia Night Market for lighter evening snacks</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-item">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <h3>Day 4: Taichung Day Trip</h3>
+                        <span class="day-arrow">▼</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-details">
+                            <div class="time-block">
+                                <h4>Morning</h4>
+                                <ul>
+                                    <li>Take HSR to Taichung (1 hour, NT$700)</li>
+                                    <li>Visit Rainbow Village (colorful street art)</li>
+                                </ul>
+                            </div>
+                            <div class="time-block">
+                                <h4>Afternoon</h4>
+                                <ul>
+                                    <li>Miyahara Ice Cream (historic building)</li>
+                                    <li>Explore Fengjia Night Market (largest in Taiwan)</li>
+                                    <li>Try: grilled squid, fried king mushroom</li>
+                                </ul>
+                            </div>
+                            <div class="time-block">
+                                <h4>Evening</h4>
+                                <ul>
+                                    <li>Return to Taipei on HSR</li>
+                                    <li>Rest at hotel</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-item">
+                    <div class="day-header" onclick="toggleDay(this)">
+                        <h3>Day 5: Departure Day</h3>
+                        <span class="day-arrow">▼</span>
+                    </div>
+                    <div class="day-content">
+                        <div class="day-details">
+                            <div class="time-block">
+                                <h4>Morning</h4>
+                                <ul>
+                                    <li>Last-minute shopping at Taipei Station Underground Mall</li>
+                                    <li>Pick up pineapple cakes as souvenirs</li>
+                                </ul>
+                            </div>
+                            <div class="time-block">
+                                <h4>Afternoon</h4>
+                                <ul>
+                                    <li>Check out from hotel</li>
+                                    <li>Take Airport MRT to Taoyuan Airport</li>
+                                    <li>Arrive 3 hours before international flight</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact">
+            <div class="contact-content">
+                <h2>Need help planning?<br>Still have questions?</h2>
+                <p>Leave a request</p>
+                <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="1a359fb7-02cc-4cb7-83dc-845e91d357fc">
+                    <input type="text" name="name" placeholder="Your name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="text" name="phone" placeholder="Phone number">
+                    <textarea name="message" rows="3" placeholder="Comment" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleDay(header) {
+            const dayItem = header.parentElement;
+            const content = dayItem.querySelector('.day-content');
+            
+            // Close all other items
+            document.querySelectorAll('.day-item').forEach(item => {
+                if (item !== dayItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.day-content').classList.remove('active');
+                }
+            });
+            
+            // Toggle current item
+            dayItem.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

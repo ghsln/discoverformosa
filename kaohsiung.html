@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaohsiung - Taiwan Travel Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        p {
+            color: #F4E8D8;
+            text-align: justify;
+        }
+        .city-hero {
+            position: relative;
+            height: 700px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .slideshow {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slideshow .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(70%);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow .slide.active {
+            opacity: 1;
+        }
+
+        .city-hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            color: white;
+            z-index: 2;
+        }
+
+        .city-hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .slide-btn {
+            position: absolute;
+            top: 50%;
+            height: 50px;
+            width: 50px;
+            transform: translateY(-50%);
+            background: rgba(188, 188, 188, 0.4);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 5px 16px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 3;
+            transition: background 0.3s ease;
+        }
+
+        .slide-btn:hover {
+            background: rgba(0,0,0,0.7);
+        }
+
+        .prev { left: 20px; }
+        .next { right: 20px; }
+
+        /* === SECTION TITLES === */
+        h2 {
+           margin: 50px 0 25px;
+            font-size: 30px;
+            font-weight: 700;
+            color: #feb54f;
+            border-bottom: 2px solid #feb54f;
+            padding-bottom: 8px;
+        }
+
+        .intro-text {
+            width: 100%;
+            max-width: 1200px; 
+            margin: 40px auto;
+            font-size: 18px;
+            line-height: 1.75;
+            color: #444;
+        }
+
+        /* === ATTRACTION CARDS GRID === */
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* === INDIVIDUAL ATTRACTION CARD === */
+        .attraction-card {
+            background: rgba(255, 255, 255, 0.877);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .attraction-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .attraction-card.hidden {
+            display: none;
+        }
+
+        .card-image {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-number {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-content {
+            padding: 16px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .card-description {
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .rating-value {
+            font-weight: bold;
+            margin-right: 5px;
+            font-size: 0.9rem;
+        }
+
+        .review-count {
+            color: #777;
+            font-size: 0.85rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #777;
+            padding-top: 12px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* === ICON BUTTONS (MAP, HEART, SHARE) === */
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .icon-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .icon-btn.saved {
+            background: #ff4757;
+            color: white;
+        }
+
+        /* === SEARCH AND SORT CONTROLS === */
+        .controls {
+            display: flex;
+            color: #F4E8D8;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-radius: 30px;
+        }
+
+        .sort-options select {
+            padding: 6px 12px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+            margin-left: 7px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 12px 8px 36px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* === INFO BOX === */
+        .info-box {
+            background: rgba(255, 255, 255, 0.877);
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .info-box p {
+            color: #333;
+        }
+
+        /* === KLOOK STYLE CARDS (HOTELS & RESTAURANTS) === */
+        .klook-grid {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: nowrap;
+        }
+
+        .klook-card {
+            min-width: 360px; 
+            max-width: 360px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.877);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .klook-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .klook-image {
+            height: 150px; 
+            overflow: hidden;
+        }
+
+        .klook-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .klook-content {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .klook-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #777;
+            padding-top: 12px;
+            margin-top: auto;
+        }
+
+        .scroll-container {
+            position: relative;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .scroll-wrapper {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            padding: 10px 0;
+            scrollbar-width: none;
+        }
+
+        .scroll-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(139, 30, 30, 0.9);
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-arrow:hover {
+            background: rgba(139, 30, 30, 1);
+        }
+
+        .scroll-arrow.left {
+            left: -60px;
+        }
+
+        .scroll-arrow.right {
+            right: -60px;
+        }
+
+        .scroll-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1300px) {
+            .scroll-arrow.left { left: 5px; }
+            .scroll-arrow.right { right: 5px; }
+            .scroll-wrapper { padding: 10px 40px; }
+        }
+
+        .klook-facilities {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin: 10px 0 14px;
+        }
+
+        .klook-facilities span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .facility-icon {
+            width: 22px;
+            height: 22px;
+        }
+
+        .klook-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #222;
+            line-height: 1.4;
+        }
+
+        .klook-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .klook-stars {
+            color: #feb54f;
+            margin-right: 6px;
+            font-size: 0.9rem;
+        }
+
+        .klook-review-count {
+            color: #777;
+            font-size: 0.85rem;
+        }
+
+        .klook-price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.1rem;
+        }
+
+        .klook-btn {
+            background: #8B1E1E;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .klook-btn:hover {
+            background: #691515;
+        }
+
+        /* === VIEW MORE BUTTON === */
+        .view-more {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .view-more-btn {
+            background: F4E8D8;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .view-more-btn:hover {
+            border-color: #8B1E1E;
+            color: #8B1E1E;
+        }
+
+        /* === TOAST NOTIFICATION === */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* === MOBILE RESPONSIVE === */
+        @media (max-width: 768px) {
+            /* Hide ONLY slideshow arrows on mobile */
+            .slide-btn {
+                display: none;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            /* 2 CARDS PER ROW ON MOBILE */
+            .attractions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .attraction-card {
+                max-width: 100%;
+            }
+            
+            .card-image {
+                height: 140px;
+            }
+            
+            .card-content {
+                padding: 10px;
+            }
+            
+            .card-title {
+                font-size: 0.9rem;
+                line-height: 1.3;
+            }
+            
+            .card-description {
+                font-size: 0.75rem;
+                line-height: 1.3;
+            }
+            
+            .card-rating {
+                font-size: 0.75rem;
+                margin-bottom: 8px;
+            }
+            
+            .stars {
+                font-size: 0.8rem;
+            }
+            
+            .rating-value {
+                font-size: 0.75rem;
+            }
+            
+            .review-count {
+                font-size: 0.7rem;
+            }
+            
+            .card-number {
+                width: 24px;
+                height: 24px;
+                font-size: 0.75rem;
+                top: 8px;
+                left: 8px;
+            }
+            
+            .price {
+                font-size: 0.85rem;
+            }
+            
+            .icon-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 0.75rem;
+            }
+            
+            .action-buttons {
+                gap: 4px;
+            }
+            
+            /* SMALLER HOTEL/RESTAURANT CARDS ON MOBILE */
+            .klook-card {
+                min-width: 280px;
+                max-width: 280px;
+            }
+            
+            .klook-image {
+                height: 120px;
+            }
+            
+            .klook-content {
+                padding: 12px;
+            }
+            
+            .klook-title {
+                font-size: 0.95rem;
+                line-height: 1.3;
+            }
+            
+            .klook-stars {
+                font-size: 0.85rem;
+            }
+            
+            .klook-review-count {
+                font-size: 0.75rem;
+            }
+            
+            .klook-price {
+                font-size: 0.95rem;
+            }
+            
+            .klook-btn {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+            }
+            
+            .klook-facilities {
+                font-size: 12px;
+                gap: 8px;
+                margin: 8px 0 10px;
+            }
+            
+            .facility-icon {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .city-hero {
+                height: 250px;
+            }
+            
+            .city-hero h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="header">
+    <img src="Places/Kaohsiung/KaohsiungBanner.avif" alt="Kaohsiung" class="header-image">
+    <div class="header-content">
+        <h1>Kaohsiung County</h1>
+        <p>"A vibrant harbor city with modern architecture, night markets, and waterfront attractions</p>
+    </div>
+</div>
+
+<nav>
+    <div class="nav-container">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#attraction">Attractions</a></li>
+            <li><a href="#getting-there">Getting There</a></li>
+            <li><a href="#map">Attractions Map</a></li>
+            <li><a href="#hotel">Hotels</a></li>
+            <li><a href="#resto">Restaurants</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- HERO SECTION WITH SLIDESHOW -->
+    <div class="city-hero">
+        <div class="slideshow" id="overview">
+            <img src="Places/Kaohsiung/Kaohsiung1.jpg" class="slide active" alt="Kaohsiung">
+            <img src="Places/Kaohsiung/Kaohsiung2.webp" class="slide" alt="Kaohsiung">
+            <img src="Places/Kaohsiung/Kaohsiung3.jpg" class="slide" alt="Kaohsiung">
+            
+            <div class="city-hero-overlay">
+                <h1>Kaohsiung</h1>
+                <p>A modern harbor city blending art, industry, and coastal charm.</p>
+            </div>
+
+            <button class="slide-btn prev">❮</button>
+            <button class="slide-btn next">❯</button>
+        </div>
+    </div>
+
+    <div class="intro-text">
+        <p>Kaohsiung (高雄, Gāoxióng) is a major port city in southern Taiwan, combining industrial development with coastal scenery and modern urban life. Known for its harbor, vibrant night markets, and cultural attractions, Kaohsiung offers waterfront parks, historic sites, and artistic neighborhoods. With a warm climate, lively streets, and a strong maritime identity, the city is a key center for commerce, culture, and tourism in southern Taiwan.</p>
+    </div>
+
+
+    <!-- ATTRACTIONS SECTION -->
+    <h2 id="attraction">Top Attractions in Kaohsiung</h2>
+    <div class="controls">
+        <div class="sort-options">
+            <label for="sort">Sort by:</label>
+            <select id="sort">
+                <option value="recommended">Recommended</option>
+                <option value="rating">Rating</option>
+                <option value="reviews">Most Reviewed</option>
+            </select>
+        </div>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search attractions...">
+        </div>
+    </div>
+
+    <!-- ATTRACTIONS WILL APPEAR HERE -->
+    <div class="attractions-grid" id="attractionsContainer">
+        <!-- JavaScript will add cards here -->
+    </div>
+
+    <!-- VIEW MORE BUTTON -->
+    <div class="view-more">
+        <button class="view-more-btn">
+            <i class="fas fa-chevron-down"></i> Show More Attractions
+        </button>
+    </div>
+
+
+    <!-- GETTING AROUND INFO -->
+    <h2 id="getting-there">Getting There & Around</h2>
+    <div class="info-box">
+        <p><strong>Train:</strong> TRA and HSR stations link Kaohsiung to the west coast.</p>
+<p><strong>Bus System:</strong> Comprehensive buses and metro for local travel.</p>
+<p><strong>YouBike:</strong> Bike share available in central districts.</p>
+
+
+    </div>
+    
+    <!-- TAIPEI ATTRACTIONS MAP -->
+    <h2 id="map">Kaohsiung Attractions Map</h2>
+    <div class="info-box">
+        <div style="text-align: center; margin-bottom: 15px;">
+            <h3 style="color: #003B8E; margin-bottom: 10px;">Explore Kaohsiung Attractions</h3>
+            <p style="color: #333;">Find all major attractions on the interactive map</p>
+        </div>
+        
+        <!-- Google Maps Embed -->
+        <div style="width: 100%; height: 500px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <iframe 
+               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.1280281340178!2d120.3001305!3d22.611693799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e037f2a5a9001%3A0x28af37aaf30894aa!2s85%20Sky%20Tower!5e0!3m2!1sen!2stw!4v1766080766440!5m2!1sen!2stw"
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- HOTELS SECTION -->
+<h2 id="hotel">Hotels in Kaohsiung</h2>
+<div class="controls">
+    <div class="sort-options">
+        <label for="hotelSort">Sort by:</label>
+        <select id="hotelSort">
+            <option value="rating">Highest Rating</option>
+            <option value="priceLow">Price: Low to High</option>
+            <option value="priceHigh">Price: High to Low</option>
+        </select>
+    </div>
+</div>
+
+<div class="scroll-container">
+    <button class="scroll-arrow left" id="hotelScrollLeft">‹</button>
+    <div class="scroll-wrapper">
+        <div class="klook-grid" id="hotelContainer"></div>
+    </div>
+    <button class="scroll-arrow right" id="hotelScrollRight">›</button>
+</div>
+
+    <!-- RESTAURANTS SECTION -->
+<h2 id="resto">Restaurants in Kaohsiung</h2>
+
+<div class="scroll-container">
+    <!-- LEFT ARROW -->
+    <button class="scroll-arrow left" id="restoScrollLeft">‹</button>
+
+    <!-- SCROLL AREA -->
+    <div class="scroll-wrapper">
+        <div class="klook-grid" id="restoContainer">
+<!-- KAOHSIUNG – RESTAURANT CARD 1 -->
+<div class="klook-card">
+    <div class="klook-image">
+        <img src="https://www.cathaypacific.com/content/dam/focal-point/cx/inspiration/2024/01/The-best-places-to-travel-in-2024-Kaohsiung-Seafood-shamosan-Gettyimages-7.renditionimage.900.900.jpg" alt="Kaohsiung Seafood">
+    </div>
+    <div class="klook-content">
+        <div class="klook-title">Kaohsiung Harbor Seafood: Fresh & Affordable</div>
+        <div class="klook-rating">
+            <div class="klook-stars">★★★★★</div>
+            <span class="klook-review-count">42,800 reviews</span>
+        </div>
+        <div class="klook-footer">
+            <div class="klook-price">NT$200-400</div>
+            <a href="https://maps.google.com/?q=Kaohsiung+Seafood" target="_blank" class="klook-btn">View on Google Maps ></a>
+        </div>
+    </div>
+</div>
+
+<!-- CARD 2 -->
+<div class="klook-card">
+    <div class="klook-image">
+        <img src="https://th.bing.com/th/id/R.f5f056141373972485b0ca54b9e530e6?rik=He80j1pzhZ4ODA&pid=ImgRaw&r=0" alt="Liuhe Night Market">
+    </div>
+    <div class="klook-content">
+        <div class="klook-title">Liuhe Night Market: Famous Street Food</div>
+        <div class="klook-rating">
+            <div class="klook-stars">★★★★☆</div>
+            <span class="klook-review-count">65,900 reviews</span>
+        </div>
+        <div class="klook-footer">
+            <div class="klook-price">NT$60-200</div>
+            <a href="https://maps.google.com/?q=Liuhe+Night+Market" target="_blank" class="klook-btn">View on Google Maps ></a>
+        </div>
+    </div>
+</div>
+
+<!-- CARD 3 -->
+<div class="klook-card">
+    <div class="klook-image">
+        <img src="data:image/webp;base64,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" alt="Kaohsiung Beef Noodles">
+    </div>
+    <div class="klook-content">
+        <div class="klook-title">Kaohsiung Beef Noodles: Local Favorite</div>
+        <div class="klook-rating">
+            <div class="klook-stars">★★★★☆</div>
+            <span class="klook-review-count">9,840 reviews</span>
+        </div>
+        <div class="klook-footer">
+            <div class="klook-price">NT$120-200</div>
+            <a href="https://maps.google.com/?q=Kaohsiung+Beef+Noodles" target="_blank" class="klook-btn">View on Google Maps ></a>
+        </div>
+    </div>
+</div>
+
+<!-- CARD 4 -->
+<div class="klook-card">
+    <div class="klook-image">
+        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600" alt="Kaohsiung Cafe">
+    </div>
+    <div class="klook-content">
+        <div class="klook-title">Kaohsiung Café: Harbor View Coffee</div>
+        <div class="klook-rating">
+            <div class="klook-stars">★★★★☆</div>
+            <span class="klook-review-count">6,230 reviews</span>
+        </div>
+        <div class="klook-footer">
+            <div class="klook-price">NT$120-220</div>
+            <a href="https://maps.google.com/?q=Kaohsiung+Cafe" target="_blank" class="klook-btn">View on Google Maps ></a>
+        </div>
+    </div>
+</div>
+
+<button class="scroll-arrow right" id="restoScrollRight">›</button>
+</div>
+
+    </div>
+
+</div>
+    </div>
+    <button class="scroll-arrow right" id="restoScrollRight">›</button>
+</div>
+
+</div> <!-- end container -->
+
+<!--TOAST NOTIFICATION (HIDDEN BY DEFAULT) -->
+<div class="toast" id="toast"></div>
+
+<script>
+
+    // Global saved items array
+    let savedItems = JSON.parse(localStorage.getItem('savedAttractions')) || [];
+    let showingAll = false;
+    const INITIAL_DISPLAY_COUNT = 6;
+
+    function handleSave(attractionId, attractionName) {
+        const index = savedItems.indexOf(attractionId);
+        
+        if (index === -1) {
+          //heart turned red
+            savedItems.push(attractionId);
+            showToast(`Saved ${attractionName} to your list`);
+        } else {
+        // heart turned normal
+            savedItems.splice(index, 1);
+            showToast(`Removed ${attractionName} from your list`);
+        }
+        
+        // Save to browser storage
+        localStorage.setItem('savedAttractions', JSON.stringify(savedItems));
+        
+        // Update the display to show red hearts for saved items
+        if (window.renderAttractions) {
+            window.renderAttractions();
+        }
+    }
+
+    function handleShare(attractionName, mapLink) {
+        if (navigator.share) {
+            navigator.share({
+                title: attractionName,
+                text: `Check out ${attractionName} in Taipei!`,
+                url: mapLink
+            });
+        } else {
+            navigator.clipboard.writeText(`${attractionName} - ${mapLink}`).then(() => {
+                showToast('Link copied to clipboard!');
+            });
+        }
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      // slideshow time
+        const slides = document.querySelectorAll('.slideshow .slide');
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            currentSlide = n;
+        }
+
+        function nextSlide() {
+            let next = currentSlide + 1;
+            if (next >= totalSlides) next = 0;
+            showSlide(next);
+        }
+
+        function prevSlide() {
+            let prev = currentSlide - 1;
+            if (prev < 0) prev = totalSlides - 1;
+            showSlide(prev);
+        }
+
+        // SLOWER SLIDESHOW - 6 SECONDS INSTEAD OF 4
+        function startSlideshow() {
+            slideInterval = setInterval(nextSlide, 6000);
+        }
+
+        function stopSlideshow() {
+            clearInterval(slideInterval);
+        }
+
+        // Event listeners
+        document.querySelector('.next').addEventListener('click', function() {
+            stopSlideshow();
+            nextSlide();
+            startSlideshow();
+        });
+
+        document.querySelector('.prev').addEventListener('click', function() {
+            stopSlideshow();
+            prevSlide();
+            startSlideshow();
+        });
+
+        document.querySelector('.slideshow').addEventListener('mouseenter', stopSlideshow);
+        document.querySelector('.slideshow').addEventListener('mouseleave', startSlideshow);
+
+        // START SLIDESHOW IMMEDIATELY
+        showSlide(0);
+        startSlideshow();
+        //attractions
+        const attractions = [
+        {
+    id: 1,
+    name: "Liuhe Night Market",
+    description: "Popular night market offering Kaohsiung specialties and seafood.",
+    rating: 4.5,
+    reviews: 18234,
+    price: "Free",
+    image: "https://th.bing.com/th/id/OIP.RRVbrrv35z49yCierQmP8AHaE8?w=282&h=187&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Liuhe+Night+Market"
+},
+{
+    id: 2,
+    name: "Pier-2 Art Center",
+    description: "Creative hub with art exhibitions, installations, and cultural events.",
+    rating: 4.6,
+    reviews: 15234,
+    price: "Free",
+    image: "https://tse3.mm.bing.net/th/id/OIP.PzVfU3S6_DWANqCoHGO5JwHaFj?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Pier-2+Art+Center"
+},
+{
+    id: 3,
+    name: "Love River",
+    description: "Scenic river with boat rides, cafes, and romantic evening views.",
+    rating: 4.4,
+    reviews: 13456,
+    price: "Free",
+    image: "https://www.agoda.com/wp-content/uploads/2024/07/Love-River-in-Kaohsiung-Taiwan.jpg",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Love+River+Kaohsiung"
+},
+{
+    id: 4,
+    name: "Lotus Pond",
+    description: "Lake surrounded by temples and iconic dragon and tiger pagodas.",
+    rating: 4.5,
+    reviews: 11234,
+    price: "Free",
+    image: "https://eng.taiwan.net.tw/pic.ashx?qp=1/big_scenic_spots/pic_2149_18.jpg&sizetype=3",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Lotus+Pond+Kaohsiung"
+},
+{
+    id: 5,
+    name: "Fo Guang Shan Buddha Museum",
+    description: "Massive Buddhist complex with a giant Buddha statue and cultural exhibits.",
+    rating: 4.7,
+    reviews: 20345,
+    price: "Free",
+    image: "https://tse1.mm.bing.net/th/id/OIP.Wysv09pgqmKneKZefazkdgHaE8?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+    stars: "★★★★★",
+    mapLink: "https://maps.google.com/?q=Fo+Guang+Shan+Buddha+Museum"
+},
+{
+    id: 6,
+    name: "Cijin Island",
+    description: "Island known for seafood, beaches, and coastal cycling paths.",
+    rating: 4.4,
+    reviews: 9234,
+    price: "Free",
+    image: "https://hoponworld.com/wp-content/uploads/2022/02/cijin-island-ferry--800x600.jpg",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Cijin+Island"
+},
+{
+    id: 7,
+    name: "Kaohsiung 85 Sky Tower",
+    description: "Iconic skyscraper with observation decks and city views.",
+    rating: 4.3,
+    reviews: 8123,
+    price: "NT$150",
+    image: "https://tse4.mm.bing.net/th/id/OIP.785V_PNBPyfuqAaEJgX-hwHaE7?cb=ucfimg2&ucfimg=1&w=800&h=533&rs=1&pid=ImgDetMain&o=7&rm=3",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Kaohsiung+85+Sky+Tower"
+},
+{
+    id: 8,
+    name: "Dream Mall",
+    description: "One of Taiwan's largest shopping malls with entertainment and dining.",
+    rating: 4.2,
+    reviews: 7123,
+    price: "Free",
+    image: "https://tse3.mm.bing.net/th/id/OIP.6HD2-AWtO-g86yf2d7fqyQHaE7?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Dream+Mall+Kaohsiung"
+}
+
+        ];
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+            
+            let starsHTML = '';
+            for (let i = 0; i < fullStars; i++) starsHTML += '<i class="fas fa-star"></i>';
+            if (halfStar) starsHTML += '<i class="fas fa-star-half-alt"></i>';
+            for (let i = 0; i < emptyStars; i++) starsHTML += '<i class="far fa-star"></i>';
+            return starsHTML;
+        }
+
+        // Make renderAttractions globally accessible
+        window.renderAttractions = function(attractionsToRender = attractions) {
+            const container = document.getElementById('attractionsContainer');
+            container.innerHTML = '';
+            
+            attractionsToRender.forEach((attraction, index) => {
+                const isSaved = savedItems.includes(attraction.id);
+                const card = document.createElement('div');
+                card.className = 'attraction-card';
+                
+                // Hide cards after the 6th one if not showing all
+                if (!showingAll && index >= INITIAL_DISPLAY_COUNT) {
+                    card.classList.add('hidden');
+                }
+                
+                card.innerHTML = `
+                    <div class="card-image">
+                        <img src="${attraction.image}" alt="${attraction.name}">
+                        <div class="card-number">${attraction.id}</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">${attraction.name}</div>
+                        <p class="card-description">${attraction.description}</p>
+                        <div class="card-rating">
+                            <div class="stars">${generateStars(attraction.rating)}</div>
+                            <span class="rating-value">${attraction.rating}</span>
+                            <span class="review-count">${attraction.reviews.toLocaleString()}</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="price">${attraction.price}</div>
+                            <div class="action-buttons">
+                                <button class="icon-btn" title="View on Map" onclick="window.open('${attraction.mapLink}', '_blank')">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </button>
+                                <button class="icon-btn ${isSaved ? 'saved' : ''}" title="${isSaved ? 'Remove from Saved' : 'Save for Later'}" onclick="handleSave(${attraction.id}, '${attraction.name}')">
+                                    <i class="${isSaved ? 'fas' : 'far'} fa-heart"></i>
+                                </button>
+                                <button class="icon-btn" title="Share" onclick="handleShare('${attraction.name}', '${attraction.mapLink}')">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            // Update button visibility and text
+            const viewMoreBtn = document.querySelector('.view-more');
+            const btn = document.querySelector('.view-more-btn');
+            
+            if (attractionsToRender.length > INITIAL_DISPLAY_COUNT) {
+                viewMoreBtn.style.display = 'block';
+                btn.innerHTML = showingAll 
+                    ? '<i class="fas fa-chevron-up"></i> Show Less Attractions'
+                    : '<i class="fas fa-chevron-down"></i> Show More Attractions';
+            } else {
+                viewMoreBtn.style.display = 'none';
+            }
+        }
+
+        function sortAttractions(sortBy) {
+            const sortedAttractions = [...attractions];
+            
+            switch(sortBy) {
+                case 'rating': sortedAttractions.sort((a, b) => b.rating - a.rating); break;
+                case 'reviews': sortedAttractions.sort((a, b) => b.reviews - a.reviews); break;
+                default: break;
+            }
+            
+            sortedAttractions.forEach((attraction, index) => {
+                attraction.id = index + 1;
+            });
+            
+            return sortedAttractions;
+        }
+
+        // 1. Define your hotel data in a list
+const hotelData = [
+{
+  "name": "Kindness Hotel - Kaohsiung Main Station",
+  "price": 2800,
+  "rating": 4.9,
+  "reviews": 1000,
+  "image": "https://th.bing.com/th/id/OIP.UbU6CFawyJtjlaoojkpv3AHaE7?w=278&h=185&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1",
+  "stars": "★★★★☆",
+  "link": "https://www.klook.com/destination/c22-kaohsiung/3-hotel/",
+  "facilities": [
+    { "icon": "icons/wifi.svg", "name": "Wi-Fi" },
+    { "icon": "icons/gym.svg", "name": "Gym" }
+  ]
+},
+{
+  "name": "Holiday Garden Hotel SKM Park - Airport area",
+  "price": 3200,
+  "rating": 4.6,
+  "reviews": 341,
+  "image": "https://tse1.mm.bing.net/th/id/OIP.MR5vPEBdnmfntO_QESbahQHaFF?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+  "stars": "★★★★☆",
+  "link": "https://www.klook.com/zh-TW/hotels/city/22-kaohsiung-hotels/",
+  "facilities": [
+    { "icon": "icons/pool.svg", "name": "Pool" },
+    { "icon": "icons/wifi.svg", "name": "Wi-Fi" }
+  ]
+},
+{
+  "name": "Skyone Hotel - Qianjin budget favorite",
+  "price": 1800,
+  "rating": 4.7,
+  "reviews": 1000,
+  "image": "data:image/webp;base64,UklGRj4gAABXRUJQVlA4IDIgAACQqwCdASpqAfEAPp1Gnkulo6KnpjGbiPATiWdAa5hx2/Me/yTX6rWn5ydraH0e0fUwZaXuw2CsxDuC7/fOOwvVa4U2gncb+6ZwANBlf/bNA9n+/deih8J/7gVEe0HJStPa3UxnqnEyQsfnnX2OPPJxrxRAppK2s3+lC7rLs6ZFwx0qxaHaYRpgGGgB93ctKeX9C5e8Mv7zYgm/jslr63AiJ0ZzVmWcp0tfpiU/sZMGecEkf7lEwKKFHDhVDspiiViZATbjysbI8IAlbtiRJhQ9Vzwwi4vG6GOYTx4GQtzh6QAS+DTtGKIJ8IslA/jfgxP8VN2MCIpM6cnQB34E5hEcanJsqSl0Wx6HC/Gh4q14QVywXsoLV3qE5BJIVpUvqQtJMnDmD6ohfDeKthD59+rp7V/+ZWA31a7cW1diuwVsBSxaYdDnd+GHahMIycfrLE1EU5OOwnZ6jJpsWwLgW19h2KlziAfnIhw0hjCsZB/BSWxG4tNdnMczhKGANhOW9GOLi2kEWfVVwv/A9NFlL5rhH1SR+PAp6Ji74ELBmTBglq0/BXUyio8SWtQu7Dw3zpByIPFI1slSHDFI1yKwQ1uEZcKaCb5L/e+5mGyc6r8XmvpXAf3BoFYTgFpgrR6Sd3L5j0dtEYnUGpTIFgBaxMt+uPB6+T588CRTNtfHfaumWps/ZNg3yEMg4RywuII3K1LpNau+umXyfx+c2BzbDMk6CHVYCGnrXIkdFSdM/RN6YkOMv4UKOUUBmhKka1nwV7LxCxt8q2OURWKrx7CIMVIrRal/7DWeiVSrWucbpDc/q727m6jj/Gs1FypVOQa3qorSHZTkn9H8WfSFvNv63vhbc5xkrB3lnxR9Rux4Wg8ptB3cWIS1EmR+LUO5urw8lKWmnC99cqiTYR6Ghx1kBwBVLRLqpgJsuYnYYHzXyn4h1lzX5BJechILa63CFlvwPP1y+2NELNXzYYcEwjCgCsn3ZcvDMMDOuxQLrxXqwVSmILiFCBYhVOEZZcia4eQRspwj79QLvGcXspzwTW/SQP429w5YtkIxduVvzyrCsV6uTzpFIk+deDbpED2DHMcba5V8h0UeYjO+5O3N4vwUlPHK43P6pews9Qh0rjsLWO11uYnc1fmTm4FR0lkrmdNhutGVP7f7A9FPm7oe59PxGlufk9D3H+AnU44FiA8jqIT5iE3agMQUoBz8UYXdAFGB+g3MdIlG0tcpihRd8mI5ORGNM4b91QycvCDXrgtnO9tnDyX4eC8ZgOzViOoF7rLLOI/RBXdDGi0jjV4c2BSiszNDO8BtZ3jm+HWUtk6i4VF6UVO5hircr0BZ7A9TiuqoNyVZWbzBbC+KgNKDs/HrVSQ74fF562t5dpfdimLqygU6tjwjofp0+mn5mCEPI/KD5lXsJMyY7zoa25XA0iKRP8D4Usd2b5w2y021riAP7WGrxlOX+dLtQ1y55Yt//+2MGjmUTt+mr8D8NICx98oI5jY17KIJjZyZXrDwKEEOIM7pp5syLQP+I1W2DMUNNeO7HrC4IXHhR5H7qm3eqYXruqnsVzs2ya11SKsIjiA0kuG6EH0qg8FQ6WYmrHC/V+s+4Ya1+aXGNKpwqn1+3bGVSClA/zMmp5JMxOtATlinXuFGGWeKy+oIk073Vwh+QmaJRC4FJ/tOIWv/Ufkpz57lMn/jC2jGtP8fxbsyx9x7WlC902HV1sc2lqxXgEBwG2cYBvcUqp6TUEq/HcUN/gN8E86/MLXunF5vMCEzZgHvo87hMV5kyESaZ1Fpnelwuf07bRQf1Snc6d2V9W0bsM5zWRuinXL2LQDWp4VGikeOG7IWNDhfdkQAAP7l2wHJNPKTj+hXiN6s/t+R1NNwAhc/QCiz2tuICrngnjszB12bhV1SGYjtGwMqURDwMEfA3SXBhq6dXbcVV0NSwk6etlK/6f42fyc9EPlbCP6uDuhVUoc2DMH01vZ1bekSwF68tTMpKOKt+vMosHkcuDiADpeLwaXdmtz0o1lStUCTfafRQYHomMNASxV5Ov1uz0EJXyGZEGzATyFQXrtrLCGdu21VQ+cCG2ImsmwLdMHAhAAsD/pQ3NKQ2LUT6Thm/BQaPmKAfLVhVzdMrymL2fd6JRL15r+vaK0oJFw8/J9dtki8RTuUTGWU/S0OAa+hoirAJjRmp/P74B8cGAMPuIWlWU8TyOFcCtaelAg6bYSevkLZMcadBKWb/pMkY8aFt6Tygnv67/s/bHULIzQXarcPEd3ihqQ6+34gbi1Wpyjgc8H9Uo4TUWYS/uIqjw3AKykGNaYi20Pna2Rm4MJMorRkKnyU0tOG4Tr3p9qTOGeXaEmp3yawwUzbb80GfpDl06nNC8Mq8m9J5SEpUbGLhuQMNc6493VfgLO5ltBDy3J5nx+Ry+ddD3rbe8/3RDJBmqA13JMkUbb4P26tIIIiIQQD0Qgk7bMeRpA4i9eEoBy3/x8E51Mu5xgSYD9+5p68XKeyfdADBL5nXEQB77MQSsLoU0YMHN9cJs7VInCS3oUldIa9BjsUpjwCeCxna6HhABPMzdlWbO5D4bABCgZ4K5iTIGnbNRhiylYRju+S0O/sE3h1nkBaX875nbBdXrQR/OqR/AcEZS0QCgcq5GWfhfC1tCB1hZF6MkNhX3mOFLg2m/8Pud5udf+uxfHZKOFDxBWTXdWc0eHZyAIxoLaG/IwC5Uc8WNBn871FVCGyEnd7MyTBstXJig7xKf+PhBafCV7yZqWT4pa5xVBot9gXnhXyI7Lgo+DNcV3BYLT/B0a7cDYXtduM9+Zu3GVmxchzoMSKnF9A4UOEYfT7gIS6RRiCzKzAH5V0E6BxlXrKIDzWj0Ek1x7ipQD1krrgbLlOi25b1vjFkTqQaatp/WuTpb5ohmjyt3uc5uIAvNf3GuGyPojZljq8LUMpiJfHuETsneKgdohRsG3Hv0pU7baIX4UGpAEWJRsqW/VfRoiO2QY7QN4N6IbwsWHPpYj+YFWGkGeYMA1TTw0pGtk/gXkkNqOLVDgElA0YnK6uMwB20UutOA5hI51IA1g5wTyGW8t7k3k59C4QesUQp9PxJMYLydzfRyZKRFrNaEAFAxinmRP2IuoTBjsb+47yPpfOJ5FYdCdcc5fHKCfCq4j2kbvvYuXq0zT1x17OF2JMpSmQFtt1w6V0FVLdL1sIoVq9i7BklQ+0sFIQ2E2ZXlbYCaxyQSexCe+O+PLuyGRSfxIOfSwjSCM+E11eMqi75LfUFgxOCb39hqXFkF3e7/z1HZECwdJZ784YO0/NPhirpyRF7VZXnrQIDlwW9M1zRzr4lw3DhMqODM6Lnd7IbPsRhsmczV2bMC9LEVeM9J8BBG80jTePr8vPXlJMfKwV5fDHQmVL8LzUy7OvXF/f8bZwRogZ1hluE8ik8J51p0F3qFSdDl4ag5p/HQb3PHTTL+9KOM9RaKiGmPLVt9Huv32rlsEwsOCkn48+rLHJqYPxvOp9+xhp+5AyxBdT0BpzUJka2GX+spkgCaL8T0iPAJkOpQ/D5rhA41eCcEagSAv2qNr06of7Dok3jev18NFhfnJQpPycUH4vBBzhDf5a/ypM2oLGPXftanai+54/CgwEMxUahg55fAER6llAWtEvesqQkrvh0sYltxvjfF7lpDTEg66jfv85TZjPX/Adnv8sGOziFiSdscCzC3pWvZWTov7crBw28PoBHXyBLZ0CcxriXvTN1WcE9979DsjxWzNZ3+YIYQtS1PQCvhSa57qLLsXLZcvfb6RQlIz5yksLiBU88tHNxUWaAdVhRFaeKy5aQ65SOCK8WDfHapFfQwnbzfrc3C+EcA0RYU0H3j4j84f/AyKsQGEqgZAYe6HLhD4V5kgPFTSKi7mgu6f+KVQCjErUMGHvI6OhbGP5v+RKMkohjkzyTHwcrsHjw9QKFof0XsJBIDArBG+WcyASgXLN/iO34GJPNxBmCUOCODgMuOAdxo9fBpaQcKSjHghRhozoJztKW6mEKWrgVNZilUo+UMFydglwEsCKnYlccG1TRKuVZalv6KTyxmBrqsphsYvgJvsORp2F6PrnwAz7bJowbKmOP8aygZvbk2SRYr8UzB6GDpY8gRi8yRjDVOc3yCJEkxCu91t7N+L+ZQ3bsgT2BKePRg4SeLDc9egfePPqkLtGFmgnaZdRhbAq59QBkl7LSkYbeTN2EYhYhUalczheUEo1VyuGbay0Vn8H6dYd8EJfFMfRx9+Tz+ZfYXunTQJXjPaU304Y4DYLLGmNQtQ3zH09wyf7WZBE+JrX3fbQRLQA7+MYYfpEbooINmn7LrRGXeqctEpYzHuQS3+2zvy/gRaG9BJSuHThZnPuFM2IzwwCp6q0bSYMUSsZaEwYF53WlDW4Iqyvwbj8igPn9ul6G4W09SWMmm0ie10dYEMbDvzYwUsl8aP0Ry6NuBKX/s10yK5YB0FZ1VNb3v0VJZbAo8IcFXwKYKZ/oYeQ8wWubl+uQ7lVrpjHqchZF4sQiZ4TUeP6okCr9qj/39T3IC2XUAtBxGjO90JLoXrV43iY3U4brISVCHhgE2LLMa8V+GFqkv0qIc4ls2fP/IbklFH8BcOFlvEkS8w4FyvBom6iCqFDBJhDsxcDxxtqDPmIgPJaCTZD0UKpYW0w1ANB5FzYFmSVHyGw9G/CuUuLjUUa6f8pyar6xJWZ8xGT99TdGp8v+c7eXR/KoQ1mPwWFQ8fgC2533bh0VG0jj7FhKv5QWUUvYznmrEKKFyL1jd7sA1o02qtA+hb/m5qvqkHjnvSjGEKxY7yZgK4oqtmhnA2O4It8NE3ruMAkO4uNZBy/ywV+6OJyuaJmsJJJciFu1PArlU7TvTT+eZKp7q8L4Ca2nRFxXz/50qr82AgizBMeRz5KLNC/O68L/KKFJIOVcaLKmDAmovPs/6dPzs/T8xfeDqe0bIyOwZsphQC5kMy4Xf+iInWuExwKXfijCc5zbOSP++d9AMdrTCs2YuOgrOv25huQghym8Ts9EAVbLjvvT3G5eQrTxRlbHDXi7wEL5ip5Si2TK2o9AgCf+A/egBOiaPp2QOvPNcfXnYnM26cXxZOxBGP0dOMPYRDGpKA4Y8QaAXaZdtEWgV/gIoqgjBI8V8eGPTWPA6P/n6vCvK8b/pmf8tgMGOMCTCfUcVMv1vxv1ev/gwliBMRTrsMLnuw9HGxRjhJE4oUNmcVW0QorbvcTnPbnEOfVY5t5ZQ528pw25PsBAI7He817u6cF7xkIzHU6TXIFZX/Bu0ozTNiF+vAS3Pl7oC+113aY7Ok9+d+ToW8dsqS0lPxYWJJQCQw+sjXOHO1I0WtphA2MNhIi8RwUvaSTG1g6MTYPGZ/TUAWhTO+DVkt80BfGr69qIVHlGEPz1kQttU28NAbhtkJdXwNYf+7AGh5g4fK896poVj/J4mz67vx9eWkH+a5Rjng99tMUdXzrl/AYCY/wMSWhuDIzZEwYrHMAT4VzLKByiuF7eiLXP55VcP2JtKDhbGY20cTVPC1Hn9yNNjEZ6QvjtMcNkdOtrLMpmyydEAEiSBkTJIgjxAE1QFJOiMR8oEuQOE7F8N98TwJFXDv/cVMdBY5Wvyppird62vbtGsBIrLoKKRUSRdH9dVceE/UpvGtWewAC6Tv0PIRQ9yXFdmtcIu5yEmhtiqvJU4goSuq/tadVQDpu6luLBR7ult3syKFVbCyB6e1lBgT5Wp34B4KVenDJ7tGhsteXrV/7ZblXGT+gsKQfLwE8D6exAgPAsQOBKn8KICD6cypg+BFNS8vhlJRfZs+frpxDyOlLPQQMVOk1QxL+So2bbnlF3zVdL98gH3+epBSbuk7QMuWWr7mkY4HOJWKsBdJHvCq6Q2VSeipAvSpybMzrjtr9qprFMLe2keKwq7chP6gM7oqS/bt4oAntf1gDbEfEkYKAZz8Qo6lu5bNiXnxZEACwk+UBm/6CtHNF7dH2ZvddFW3kYSZtqsmvMEduGH82psUI54jOd66CR8E9j3F0XPvpTIWeLGT7NIuNE9S1CJyNXs6Q49KHJXFG0/K2N8iY23j4kzmJesk9NwUrXEOye6R50t0s2J7rzKRlOJjplOaXxsucenS6oMSZPDbJ7KZnKGVCTrXRRSwPgNIUw72iLGF/1Ejgxx+ljRSsyfhxMS8dzMq3J+NtSo7arM5PgrYTK0zTegmYl6pFV7weowm9Ffq5oe/VQVIjCbNnJDpRy1jkgXefSUiKs52RzNBj+1U+yT0HoUf79dOHABzf3pgpYwHNxRr4esLxh38is/a7Bt2vYjtGPXzFMYGpzwasGhel/kx0Pz8IhsCJR80Moh+l+nZm2FEhNs0c9ntxh8gIU0YfC5WhOu0BdyKbQ2cGvk3owTrJ16oNqD3jnn3PR1UWPc5mpTZbhjxvHmviUtRahFy+owSXGQpX5gB02P5hcpbJ3SQiEVOztXtHVu98IQbgx1KRlIOpasZKj1b69a1pLO2of4G5/ZfyyFWxsQCTjuVBJsIGfF8/zRs7lFqhXubpE4flBq1DuLhYEkSqzGqw9zkGrPDYCqJs7gd4DAlrBMM4am9UiS6DNtb+ZGF2Q8sLNrFOZtKIyTWgdDfJG9oQqXNZIOJwNTnUcy5XVSQUs5EcWmWhlMMmKDsdjQl9IYB4ygBlMMPhyro2B4tAumw7+U5PR5xkGiJwtZ1XrG6aUmxeUJIXSZPpu9M+3ZpWsSYRLelXVuKq5tQaELE2NmYw+/CzpAkrWBbEGbkocAGK0FpWtV+38kkYd2vW+8qDW0tRlg7WLt8Oq0LM8iFWNmXSqV7q6bRIHAzqull+qYgUC57JdbRiEX2EdcH4s6Btn/6CsBvYK0ehjO/rjeW/MvN+PcPLiPM5uPcwamt7V1JdNAUfzDJ6LQfMAnlbIccEDs8MUF9dvbJfKyWRrzrGFB/QARoDMIY7BxvcjNDV2xjrn3ZgE+Ulv/noTPCIpq4nZ/tohGoxeQvgIj/DGoyvahBy1aFtMHGZtn1iYen9RR0twcFgcCGL9oBhDqEfJw3wFf3kyC8DDF0a9DTsWx9xXIK0MmsfWEM9nUVvnQ5maHcnvQp0QRfkQU+KkEyL9p9i+UpLro6sl9+FTOC5quRQfcrAcD1zGKLoNkOmIKRF+lmNfrwbBRRvEjYppXSe9Y7IpcEU8hBGdU1ofAW5lMdozFY/mTvJ5Ikn4mw9xorIPsqp/w9koP4BnhhnojcY/hCpnyGy4wG4q/CESAU4NhnLRhswfA+AxZ6PTAj4znpS6HvnL8s/MvC+iVHimakSjfHXZwm6R3XE7Hr4iEUZAp+WEwLEQ6MMFfm1P9iJ3PyYuISoHLFf3zvF8k4MPbzCzc2ygP2VRlTNyb73x+y64bTbJUpPM+QvlGzSttrGyf/F+5FFsYMLXDcllFS3bo8Y5tybhpBTRxKThM1WaRmGt8snJG8Lwja6x1ulK+iYY888coXsqfMELsXX6RS2bpv9Vk6NngKuL//MDqbdZw0zAonbD+98S9uziRVPJAyknCvjZztkqImDPOGjk7zLojVwXFjcB2k7S4F7yb7N2RT5/2VvMNtSgsiqzUdwxVCkNaGzVfnGxVU1HqSTXlgmK9NEmj974LYiKoX8WRvQPiqSO+ruW0YdZr00+I4dfBq5UfdhHFR8zgsr41t5Ece7hMMp8yW/NdO+BRgwcXpZT5Kfa6Jbszvj0fTPn4Z3y9svb5J3/El7mz2JyvKAdfe1Pgk5N5hs0QUlU5Pu3VVXQ1roccGqxVYrzGS1oKUIWAEG01GjQITpzmaBjGQ0R32UG7C16SKrRTkxYJQ9Tj2U3o0/9bCh/BCqnON6++y4UrZpTClybUHTfQpSWw/Nca+QqXbubSOwdJSuDewFg90ru/+zWgRU05HNQ/qiNqoUF04SWzFPuv6f7Q1tcw5YR3qwlL0szu3WrnbMPkb6daXg0BjAzKcTQfV2C5mTNwQUjqfpdHAQnBE3ZhWg37d073VgjWtuL22bE7Ld30JdgjZvmCb5UoZcq4V8h8ShbAoc2YdGmpMvZreav/HmJ62UhdbYExBk8z/HEbkL/iZqKTL47SOn74DAOyct1oWTBBAdlA2wobQDu7RjaAtXLCCSllXEVrOJjUMfzbYZy6WBgXF8dVAHyygtg56dtZURk48TUtzjbAbEg9dtNC6k7K634Z0gpQBAZQoJmz45cpYCszmcmyopHDdhA5CUkc2E1Uaw7dYBkp4th+2P5waKDYiHcXDxB0fZClwCSemfKVPiUGG9RP1pq3zKmvaj8eMtnKXsVI3/OV+Debkp9h+SaIdJAnUrjgHOFea8cFOXzZFxXm/Nd0zuf22lQ+pddUiVZ3JzR5sOkBylPxdPyEAeWpu3+zxodkNEWzrtXck1fUAgswj1ytKZkheDfceUDgIM514QqTGY0G8YBoL1qOTbqXNOplj+Em66Z77kyrpRPaqMZkgYeDTOD1/7e1Oei4mCJf88WNhXcz4FHBcckt+l4TipXIzwfXkBVKD49fa1X57wuuajFYfw6g/+mZsymzJb6r4cBqilRRQoRPTe22vSXvN3kiyf8qiDqnxkD2mP+lKU1Qv+nXEh1K/5C4HFSUnpL3/2Fihw0JAyz//hoR4dSfBsPLk3z0iGyVj+BF1Xy5ufEvgr6uCWWih5C57SGBed6ll5/u3u8EAPXHpnYc55Gh3z2zRSCGyHP+4LZDHcbmY6HIwJm8kWNYT4FgWz2Q5pCLs0j2Vc7o3RKNoMPMtiNRlFUpmFf7sCCo0rKm1KUu2YMjTFENnqQenEvH6Qxa6JAia25AWy9f68bcJfaBK4Vo18LRSZSiTIaBzI9XXrVZUvfkOoo3rem3G7BtY5faUBI5K91NCK5wdMMKcmir+bZqRFyqGtFMJ12S/PochFPzgMi6YTrKdcqnKjgKGWUFh6hNb0fOJzQ9UnLTpOXvO1/VKrLyemoPI2zurqHT4yvxWUqa2lG4UGVIl5WNI7qiPZwSjrFizPMEr65icLkwIcHaWfZLCmgtISPBZEXyHUGVKgFCCckkrsOUevpDcEutfQ+L0Bm/vRux/le4vwZg08G7ArJCrh6DgSALnVyXrGku5l0J6XVeUyANcXVyvGa1SRUUip0UJ3jtjPPzkjY0pjLZayFJda3W5VKWpf5AXURXco0ZqztHZcrSKkxnG7LyEatUs9SK/WsN/iOlqFFLeoTOmcbFB98l3/syU6FkGaqI2tL3uFxOvHwy4ZvjWNeTZOC6ZJSDCcMl0b/BRm/Tb8r22FT3tJvKmeOa1up2CuEevAVjMsbv81BpDAVfFv0/o8W/KJjjDQS+661RMhtVLD5lKctQq9d0o6t3+nkf3yqTmXmdMGx/C4g5fl6xI2RQ7ZBUS8rTg0QBpUG+gjnRkrftxYG/FKeknwmTeCaICpLOZRaBmry1tS7+BrILtkac1PalqGpusn2uQEZbwxTHBNCcMgDKuc0lTWSwbBPRvSGZvhbfDwLXeC4goXRWzy0ylbSeX8bQqTCJ5OM7kemAHwIu8lxjwR0vQJQmRzPbEbwo257nEPtCkhMmIChbdfMs99MaGni/L6IDyQ1BuzrvgllXAA0xW8R+nn6j87gNMc9/KzG8P6MpAGA4EKftE+EsQg6l6mzo1DliKx30kmTlw78A1V9HE291kWKhOvCfx5rai6IKyZeRU1kgKLug62vRaK9x1yKP4aJtFIUGPxvnB6PVPszn6xpP3l+97dK/HKI8cEwtKE0Vj+yeQ9uDFapx3He+M3dOCBMeTiwAkxDRaKUVUavPodfwSoAPfsCoDiSgieDER8KfUor052GnRFDH6z/2SfbS2wZIrfLATLA8duiN5odgeygrmstLaZZ1161HI++xa5H8vi1JaQXQ4+HHklFwYAu9dMkP+rSTnMOcd5a61wS5InKsVWCdW4+oixSBVo+a9RoL3vfVJv8VZYLGdFUjrn6h9wE/lpO133wYgf73amlt9pFDnwCu4jWD/9oerLUcoQS/GiMjbSCIwOjd9XcFYvJ90qJj70AN1mMr+jdvKga3QA2iHGVAd0RGryH+WnheBWRLxMILrkZNmSAt2u4l1H+dKToZ2WMkMIOhGh9sy7VwUyYQ+ZETLCz6hmiOlm5J8cDOJ6EY/Xaz4ZsxLLigLjw5WKMPJH641ozTKBMsNzQI/alrjIMf26ONe1sZaAYWvJCWplRxRee8KKB89M9wlM7hBN9c7RZ4/cpjOyNtI6Zx4v6DfK18g0NqTr0WYWy902HGKe5QMEWTboh5I2XLbxoej02pdpMK6W5bbE9EzkHCigE3FNYxubS3ig28ihMuo/hS0WQKWgbvbyKhLfbQPeNriNPUdPHoM/nv1Gk7y7dfTNsNO94GhFYrVVsGEqabv+MUo5V9lsNpYwN5PtZHnutVCUwV/C82jKQDpBCixUtZTHEDVLA5IRftf3qZJ3RFv+e3uQeu7AtmdbDOYRDfGA+FLPq1N0h35Wuu1Er5kws3/13ROF3QrwbMu+liH4mnH4bkJxQYtTmulEAeS3G+jwjO99IuQ0s3aX4ErT0n7MymOSx/y6JatvXXyxqOW6H0sihfbHj5PTmLG4NSlJN4lGs/fLFjK/7IJTpdjarvTXs9ECj55Xl5pmSJtmKNL+doIeZjHJDo9xqLYK1WJ5h35v/q7Iv8EKrjE5zsS3c6Lcv+9/YhL1WqD0LHuTKZiNAGu1DGgPIwALVbPrp7clWsZeU7zQSZFSa4MVv62sFDzdAsjP2WfsMqe6PMAxwdwIx3nNwvFhaivGcRYu96i0e/7uSF5LTVs4o3QT+n2XuKEQkobM64F2wkL2Sbjk94o0SexBr96wAFimPzZBhExG3+rmAIqNpTpm+AhpF5+eeiIFmrHc51JyckJ1o3RoMKbUYSIX1VKNiJEz7oiJnm9gOfwpdG9J80uS4N3n9f7qGwi0KCS7wVhvxVfh6/+Skqil4YEdz2MxgCTecDHJxjG5+s6woGp8IA+Vd0AISPWliMITgoUaAAAA",
+  "stars": "★★★★☆",
+  "link": "https://www.klook.com/destination/c22-kaohsiung/3-hotel/",
+  "facilities": [
+    { "icon": "icons/wifi.svg", "name": "Wi-Fi" }
+  ]
+},
+{
+  "name": "Kindness Hotel Houyi Jiuru - Near subway",
+  "price": 2600,
+  "rating": 4.8,
+  "reviews": 1000,
+  "image": "https://th.bing.com/th/id/OIP.R-HaCTxR8Wcys30-Z8PVNQHaE6?w=297&h=197&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1",
+  "stars": "★★★★☆",
+  "link": "https://www.klook.com/destination/c22-kaohsiung/3-hotel/",
+  "facilities": [
+    { "icon": "icons/wifi.svg", "name": "Wi-Fi" }
+  ]
+}
+
+]
+
+
+// 2. Create the function that draws the cards on the screen
+function renderHotels(data) {
+    const container = document.getElementById('hotelContainer');
+    
+    container.innerHTML = data.map(hotel => {
+        const facilitiesHTML = hotel.facilities.map(f => `
+            <span><img src="${f.icon}" alt="${f.name}" class="facility-icon"> ${f.name}</span>
+        `).join('');
+
+        return `
+            <div class="klook-card">
+                <div class="klook-image"><img src="${hotel.image}" alt="${hotel.name}"></div>
+                <div class="klook-content">
+                    <div class="klook-title">${hotel.name}</div>
+                    <div class="klook-rating">
+                        <div class="klook-stars">${hotel.stars}</div>
+                        <span class="klook-review-count">${hotel.reviews.toLocaleString()} reviews</span>
+                    </div>
+                    
+                    <div class="klook-facilities">
+                        ${facilitiesHTML}
+                    </div>
+
+                    <div class="klook-footer">
+                        <div class="klook-price">NT$${hotel.price.toLocaleString()}</div>
+                        
+                        <a href="${hotel.link}" target="_blank" class="klook-btn">
+                            View on Klook >
+                        </a>
+
+                    </div>
+                </div>
+            </div>`;
+    }).join('');
+}
+// 3. Listen for when the user changes the "Sort by" dropdown
+document.getElementById('hotelSort').addEventListener('change', function() {
+    const criteria = this.value;
+    let sorted = [...hotelData];
+
+    if (criteria === 'priceLow') {
+        sorted.sort((a, b) => a.price - b.price);
+    } else if (criteria === 'priceHigh') {
+        sorted.sort((a, b) => b.price - a.price);
+    } else if (criteria === 'rating') {
+        sorted.sort((a, b) => b.rating - a.rating);
+    }
+
+    renderHotels(sorted); // Redraw the hotels in the new order
+});
+
+// 4. Run once on page load to show the hotels initially
+renderHotels(hotelData);
+
+// ========== SCROLL ARROWS FUNCTIONALITY ==========
+function setupScrollArrows(containerId, leftBtnId, rightBtnId) {
+    const container = document.querySelector(`#${containerId}`).closest('.scroll-wrapper');
+    const leftBtn = document.getElementById(leftBtnId);
+    const rightBtn = document.getElementById(rightBtnId);
+    
+    function updateArrows() {
+        const isAtStart = container.scrollLeft <= 0;
+        const isAtEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
+        
+        leftBtn.disabled = isAtStart;
+        rightBtn.disabled = isAtEnd;
+    }
+    
+    leftBtn.addEventListener('click', () => {
+        container.scrollBy({ left: -400, behavior: 'smooth' });
+        setTimeout(updateArrows, 300);
+    });
+    
+    rightBtn.addEventListener('click', () => {
+        container.scrollBy({ left: 400, behavior: 'smooth' });
+        setTimeout(updateArrows, 300);
+    });
+    
+    container.addEventListener('scroll', updateArrows);
+    updateArrows();
+}
+
+// Initialize scroll arrows for hotels and restaurants
+setupScrollArrows('hotelContainer', 'hotelScrollLeft', 'hotelScrollRight');
+setupScrollArrows('restoContainer', 'restoScrollLeft', 'restoScrollRight');
+
+        function sortHotels(sortBy) {
+    const cards = Array.from(document.querySelectorAll('#hotelContainer .klook-card'));
+
+    cards.sort((a, b) => {
+        const priceA = parseInt(a.querySelector('.klook-price').innerText.replace(/\D/g, ''));
+        const priceB = parseInt(b.querySelector('.klook-price').innerText.replace(/\D/g, ''));
+        const ratingA = a.querySelector('.klook-stars').innerText.length;
+        const ratingB = b.querySelector('.klook-stars').innerText.length;
+
+        if (sortBy === 'priceLow') return priceA - priceB;
+        if (sortBy === 'priceHigh') return priceB - priceA;
+        if (sortBy === 'rating') return ratingB - ratingA;
+    });
+
+    const container = document.getElementById('hotelContainer');
+    cards.forEach(card => container.appendChild(card));
+}
+
+
+        // Initialize
+        window.renderAttractions();
+        
+        document.getElementById('sort').addEventListener('change', function(e) {
+            const sortedAttractions = sortAttractions(e.target.value);
+            showingAll = false; // Reset to show only 6
+            window.renderAttractions(sortedAttractions);
+        });
+        
+        document.querySelector('.search-box input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredAttractions = attractions.filter(attraction => 
+                attraction.name.toLowerCase().includes(searchTerm) || 
+                attraction.description.toLowerCase().includes(searchTerm)
+            );
+            showingAll = false; // Reset to show only 6
+            window.renderAttractions(filteredAttractions);
+        });
+        
+        document.querySelector('.view-more-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showingAll = !showingAll;
+            window.renderAttractions();
+        
+            if (!showingAll) {
+                document.getElementById('attraction').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+    });
+    
+</script>
+</body>
+</html>

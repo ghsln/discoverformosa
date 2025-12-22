@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immigration in Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(1, 0, 6, 0.2);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-container ul {
+            margin-left: 0;
+            margin-bottom: 0;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 10px;
+        }
+
+        .highlight-box strong {
+            color: #8B1E1E;
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="cover/immigration.jpg" alt="Taiwan Essentials" class="header-image">
+        <div class="header-content">
+            <h1>Immigration & Visa Guide for Taiwan</h1>
+            <p>Complete information for visiting and staying in Taiwan</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#visa-requirements">Visa Requirements</a></li>
+                <li><a href="#application-tips">Application Tips</a></li>
+                <li><a href="#residence">Residence & ARC</a></li>
+                <li><a href="#contact">Contact Information</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Taiwan Tourist Visa Requirements 2025</h2>
+            <p>Complete guide to tourist visa requirements for Taiwan. Learn about visa applications, required documents, processing times, and fees.</p>
+        </section>
+
+        <section id="visa-requirements">
+            <h2>Visa Requirements</h2>
+            <p>To apply for a tourist visa to Taiwan, you will need the following documents:</p>
+            <ul>
+                <li>Valid passport with at least 6 months validity</li>
+                <li>Completed visa application form</li>
+                <li>Passport-sized photographs</li>
+                <li>Proof of accommodation (hotel bookings or invitation letter)</li>
+                <li>Return flight tickets</li>
+                <li>Proof of sufficient funds</li>
+                <li>Travel insurance (may be required)</li>
+                <li>Yellow fever vaccination certificate (if arriving from endemic areas)</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Visa Duration</strong></p>
+                <p>Tourist visas typically allow stays of 30-90 days, depending on nationality and visa type.</p>
+            </div>
+        </section>
+
+        <section id="application-tips">
+            <h2>Application Tips</h2>
+            <p>Follow these important guidelines to ensure a smooth visa application process:</p>
+            <ul>
+                <li>Apply at least 2-4 weeks before your planned travel date</li>
+                <li>Ensure all documents are translated to English or the local language</li>
+                <li>Some countries offer visa on arrival or e-visa options for tourists</li>
+                <li>Check if your nationality is eligible for visa-free entry</li>
+                <li>Keep copies of all submitted documents</li>
+            </ul>
+        </section>
+
+        <section id="residence">
+            <h2>Residence - Long-Term Stays</h2>
+            <p>For long-term stays in Taiwan, the duration of residency varies based on the purpose of the application, typically ranging from 6 months to 3 years. Extension of residency is permitted if foreigners meet the relevant requirements.</p>
+            
+            <h3>How to Apply for Residence</h3>
+            <ol>
+                <li>Foreigners may apply for a "visa" through the Ministry of Foreign Affairs or R.O.C. Embassies and Missions Abroad if they meet the relevant requirements. After entering Taiwan with the visa for specific reasons, they can apply for an "Alien Resident Certificate (ARC)" with the National Immigration Agency (NIA).</li>
+                <li>The validity of the ARC varies depending on the reason for the application and generally ranges from 6 months to 3 years.</li>
+                <li>Extension or change of residence purpose is applicable if foreigners comply with the relevant requirements.</li>
+            </ol>
+
+            <div class="highlight-box">
+                <p><strong>Official Residency Information</strong></p>
+                <p>For the official government guide on ARC application and residency rules, please visit:</p>
+                <p><a href="https://www.immigration.gov.tw/5475/5478/141465/141808/" target="_blank"><strong>National Immigration Agency – Residency & ARC Application Guidelines</strong></a></p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>National Immigration Agency Contact</h2>
+            <p>For inquiries and assistance regarding immigration matters, you can contact the National Immigration Agency through the following channels:</p>
+            
+            <h3>Address</h3>
+            <p>No. 15, Guangzhou St., Zhongzheng District, Taipei City 100-213, Taiwan, ROC</p>
+
+            <h3>Phone Numbers</h3>
+            <ul>
+                <li><strong>NIA Headquarters:</strong> +886-2-2388-9393
+                    <br><small>(If you want to contact for official business, your call will be transferred to the appropriate department)</small>
+                </li>
+                <li><strong>Foreigners In Taiwan Hotline:</strong>
+                    <ul>
+                        <li>Domestic: 1990</li>
+                        <li>Overseas: +886-800-001990</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Office Hours</h3>
+            <p>08:00 AM - 05:00 PM (Monday to Friday, through the lunch hour)</p>
+
+            <div class="highlight-box">
+                <p><strong>Important Note</strong></p>
+                <p>For the most up-to-date information and specific requirements based on your nationality, please visit the official National Immigration Agency website or contact them directly.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

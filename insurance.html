@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Travel Insurance Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .hero-banner {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .content-section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .insurance-types h2 {
+            color: #8B1E1E;
+        }
+        
+        .insurance-types p {
+            color: #F4E8D8;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        .section-title i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        .subsection-title {
+            color: #8B1E1E;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            padding-left: 10px;
+            border-left: 4px solid #FF9800;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .insurance-grid p {
+            color: #333;
+        }
+
+        .insurance-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 3px;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        
+        .insurance-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .insurance-card i {
+            color:#2E7D32
+        }
+        
+        .insurance-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .insurance-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .insurance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .insurance-name {
+            font-weight: 700;
+            color: #2E7D32;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .insurance-category {
+            color: #737373;
+            font-size: 1rem;
+        }
+
+        .insurance-category i {
+            margin-right: 5px;
+        }
+        
+        .insurance-details {
+            margin: 15px 0;
+        }
+        
+        .coverage-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .coverage-detail i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .addition-card {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 1.5rem;
+        }
+        
+        .info-card {
+            background: linear-gradient(#ffffff, #fff8de69);
+            padding: 15px;
+            border-left: 4px solid #8B1E1E;
+            border-radius: 3px;
+            text-align: justify;
+        }
+
+        .info-card i {
+            color:#8B1E1E;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+            align-items: center;
+        }
+
+        .buy-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .buy-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #FF9800;
+            color: white;
+            padding: 0.7rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .buy-button:hover {
+            background-color: #e68a00;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .insurance-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .addition-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .insurance-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="hero-banner">
+        <img src="picture/travelinsurance.jpg" alt="Taiwan Travel Insurance" class="hero-image">
+        <div class="hero-content">
+            <h1 class="hero-title">Travel Insurance in Taiwan</h1>
+            <p class="hero-subtitle">Helps protect you from medical emergencies, accidents, and unexpected travel disruptions</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#common">Common Insurance</a></li>
+                <li><a href="#additional">Additional Coverage</a></li>
+                <li><a href="#buy">How to Buy</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="content-wrapper">
+        <section id="overview" class="content-section">
+            <h2 class="section-title">Travel Insurance in Taiwan</h2>
+            <p>Travel insurance in Taiwan refers to a voluntary insurance policy you can purchase to protect yourself against unexpected events during travel, such as emergency medical treatment, accidents, trip cancellations, lost baggage, or delays. Many Taiwanese insurance companies offer 旅遊平安險 (travel safety insurance) that provides coverage for accidental injury, medical expenses, and other travel-related risks, and plans can often be bought online, through travel agencies, or sometimes at airport insurance counters before departure.</p>
+        </section>
+
+        <section id="common" class="content-section insurance-types">
+            <h2 class="section-title">Common Insurance</h2>
+            
+            <div class="insurance-grid">
+                <div class="insurance-card">
+                    <div class="insurance-header">
+                        <div>
+                            <div class="insurance-name">旅遊平安險<br>(Travel Safety/Accident Insurance)</div>
+                        </div>
+                    </div>
+                    <div class="insurance-image">
+                        <img src="picture/insurance1.png" alt="Travel Safety Insurance">
+                    </div>
+                    <div class="insurance-details">
+                        <div class="coverage-detail">
+                            <i class="fas fa-first-aid"></i>
+                            <span>Covers accidental injury</span>
+                        </div>
+                        <div class="coverage-detail">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>Covers accidental death or disability</span>
+                        </div>
+                        <div class="coverage-detail">
+                            <i class="fas fa-ambulance"></i>
+                            <span>Emergency medical treatment</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="insurance-card">
+                    <div class="insurance-header">
+                        <div>
+                            <div class="insurance-name">旅遊不便險<br>(Travel Inconvenience/Trip Protection Insurance)</div>
+                        </div>
+                    </div>
+                    <div class="insurance-image">
+                        <img src="picture/insurance2.jpg" alt="Travel Protection Insurance">
+                    </div>
+                    <div class="insurance-details">
+                        <div class="coverage-detail">
+                            <i class="fas fa-plane"></i>
+                            <span>Compensation for flight delays or cancellations</span>
+                        </div>
+                        <div class="coverage-detail">
+                            <i class="fas fa-suitcase-rolling"></i>
+                            <span>Compensation for baggage delay or loss</span>
+                        </div>
+                        <div class="coverage-detail">
+                            <i class="fas fa-file-alt"></i>
+                            <span>For trip interruption or change and travel document loss</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="additional" class="content-section">
+            <h2 class="section-title">Additional Coverage</h2>
+            <div class="info-grid addition-card">
+                <div class="info-card">
+                    <span><i class="fas fa-tooth"></i></span>
+                    <h4>Overseas emergency medical/dental care (especially important for travel abroad)</h4>
+                </div>
+                <div class="info-card">
+                    <span><i class="fas fa-ambulance"></i></span>
+                    <h4>Emergency rescue services (medical evacuation, repatriation, etc.)</h4>
+                </div>
+                <div class="info-card">
+                    <span><i class="fas fa-handshake"></i></span>
+                    <h4>Third-party liability (if you accidentally injure someone or damage property)</h4>
+                </div>
+                <div class="info-card">
+                    <span><i class="fas fa-gavel"></i></span>
+                    <h4>Optional add-ons or riders, like coverage for legal assistance or special risks (varies by policy)</h4>
+                </div>
+            </div>
+        </section>
+        
+        <section id="buy" class="content-section">
+        <h2 class="section-title">How to Buy</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <span><i class="fas fa-file"></i></span>
+                <h4>Directly from Taiwanese insurance companies (e.g., Fubon, Cathay, Taiwan Property & Casualty)</h4>
+            </div>
+            <div class="info-card">
+                <span><i class="fas fa-desktop"></i></span>
+                <h4>Online through comparison or insurer websites</h4>
+            </div>
+            <div class="info-card">
+                <span><i class="fas fa-credit-card"></i></span>
+                <h4>Sometimes through credit cards or travel agencies (though credit card coverage may be limited)</h4>
+            </div>
+            <div class="info-card">
+                <span><i class="fas fa-plane-departure"></i></span>
+                <h4>Airport insurance counters before departure</h4>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <h3 class="subsection-title">Quick Links to Buy Insurance Online</h3>
+            <div class="buy-buttons">
+                <a href="https://www.fubon.com/insurance" target="_blank" class="buy-button">
+                    Fubon Insurance
+                </a>
+                <a href="https://www.cathayholdings.com/insurance" target="_blank" class="buy-button">
+                    Cathay Insurance
+                </a>
+                <a href="https://www.taiwaninsurance.com" target="_blank" class="buy-button">
+                    Taiwan Insurance
+                </a>
+            </div>
+        </div>
+    </section>
+    </div>
+</body>
+</html>
