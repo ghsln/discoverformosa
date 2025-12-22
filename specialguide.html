@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Travel Guides for Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(1, 0, 6, 0.2);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        h4 {
+            color: #2E7D32;
+            margin: 1rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-container ul {
+            margin-left: 0;
+            margin-bottom: 0;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-image {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 1.5rem auto;
+            display: block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .content-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 10px;
+        }
+        
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .info-box p {
+            margin-bottom: 10px;
+        }
+        
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+        
+        .guide-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #8B1E1E;
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .guide-card h4 {
+            color: #8B1E1E;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guide-card h4 svg {
+            width: 24px;
+            height: 24px;
+            fill: #8B1E1E;
+            flex-shrink: 0;
+        }
+
+        .attraction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 1.5rem 0;
+        }
+
+        .attraction-card {
+            background: linear-gradient(135deg,  #f7f5f2 100%);
+            color: rgb(149, 7, 7);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .attraction-card h5 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .attraction-card h5 svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            flex-shrink: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: white;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #8B1E1E;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .resource-link {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 10px 10px 0;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background-color: #45a049;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .guide-grid, .attraction-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="cover/special.jpg" alt="Special Travel Guides" class="header-image">
+        <div class="header-content">
+            <h1>Special Travel Guides for Taiwan</h1>
+            <p>Comprehensive guides for families, solo travelers, and special dietary needs</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#family">Family Travel</a></li>
+                <li><a href="#solo">Solo Travel</a></li>
+                <li><a href="#muslim">Muslim Guide</a></li>
+                <li><a href="#vegetarian">Vegetarian Guide</a></li>
+                <li><a href="#accessibility">Accessibility</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Welcome to Taiwan's Special Travel Guides</h2>
+            <p>Taiwan is an incredibly welcoming destination for all types of travelers. Whether you're traveling with family, exploring solo, following dietary restrictions, or have accessibility needs, Taiwan offers exceptional experiences tailored to your journey. This comprehensive guide will help you navigate the island with confidence and ease.</p>
+        </section>
+
+        <section id="family">
+            <h2>Family Travel in Taiwan</h2>
+            <img src="cover/family.jpg" alt="Family Travel" class="content-image">
+            <p>Taiwan is extremely family-friendly, offering discounted fares for children, kid-friendly facilities, and numerous attractions perfect for families.</p>
+            
+            <h3>Child Fares</h3>
+            <h4>Taiwan High-Speed Rail (THSR)</h4>
+            <ul>
+                <li><strong>Infants (0-5 years):</strong> Free</li>
+                <li><strong>Children (6-11 years):</strong> 50% off</li>
+            </ul>
+
+            <h3>Kid-Friendly Attractions</h3>
+            <h4>Taipei</h4>
+            <div class="attraction-grid">
+                <div class="attraction-card">
+                    <h5>
+                        <i class="fas fa-tree"></i>
+                        Taipei Zoo
+                    </h5>
+                    <p>Giant pandas and wildlife</p>
+                </div>
+                <div class="attraction-card">
+                    <h5>
+                        <i class="fas fa-heart"></i>
+                        Maokong Gondola
+                    </h5>
+                    <p>Scenic cable car ride</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solo">
+            <h2>Solo Travel in Taiwan</h2>
+            <img src="cover/solo.jpg" alt="Solo Travel" class="content-image">
+            <p>Taiwan is a solo traveler's dream with excellent safety, transportation, and welcoming people.</p>
+
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h4>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                        Unmatched Safety
+                    </h4>
+                    <p>One of the safest countries in the world for solo travelers.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h4>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-4 0-8 .5-8 4v9.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h2.23l2-2H14l2 2h2v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V6c0-3.5-4-4-8-4z"/></svg>
+                        Easy Transportation
+                    </h4>
+                    <p>Efficient HSR, TRA, and MRT systems with English signage.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h4>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3z"/></svg>
+                        Friendly People
+                    </h4>
+                    <p>Locals are known for kindness and hospitality.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h4>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+                        Foodie Paradise
+                    </h4>
+                    <p>Night markets perfect for solo food exploration.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="muslim">
+            <h2>Muslim Traveler's Guide</h2>
+            <img src="cover/musilm.webp" alt="Muslim Travel" class="content-image">
+            <p>Finding Halal food and mosques in Taiwan is becoming easier, especially in major cities.</p>
+
+            <div class="info-box">
+                <p><strong>Essential Resource: IslamTaiwan.com</strong></p>
+                <a href="https://www.islamtaiwan.com/restaurants" target="_blank" class="resource-link">Visit IslamTaiwan.com</a>
+            </div>
+
+            <h3>Major Mosques in Taiwan</h3>
+            <ul>
+                <li><strong>Taipei Grand Mosque:</strong> Largest mosque near Daan MRT</li>
+                <li><strong>Taichung Mosque:</strong> Serves central Taiwan</li>
+                <li><strong>Kaohsiung Mosque:</strong> Main mosque in southern Taiwan</li>
+            </ul>
+        </section>
+
+        <section id="vegetarian">
+            <h2>Vegetarian Traveler's Guide</h2>
+            <img src="cover/vegetarian-travel.avif" alt="Vegetarian Travel" class="content-image">
+            <p>Taiwan is a top destination for vegetarians with deep Buddhist vegetarian culture.</p>
+
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h4>HappyCow</h4>
+                    <a href="https://www.happycow.net/asia/taiwan/" target="_blank" class="resource-link">Visit HappyCow</a>
+                    <p>Most reliable international platform with reviews and filters.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h4>Su Shi Man (素食曼)</h4>
+                    <a href="https://www.suiis.com/" target="_blank" class="resource-link">Visit Su Shi Man</a>
+                    <p>Massive Taiwanese site listing thousands of vegetarian restaurants.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="accessibility">
+            <h2>Accessibility Guide</h2>
+            <img src="cover/accessibility-travel.webp" alt="Accessibility" class="content-image">
+            <p>Taiwan has made significant strides in accessibility, especially in major cities.</p>
+
+            <h3>Transportation Accessibility</h3>
+            <h4>MRT (Metro)</h4>
+            <ul>
+                <li>All stations have elevators</li>
+                <li>Tactile guiding paths throughout</li>
+                <li>Priority seating available</li>
+            </ul>
+
+            <h3>Accessible Attractions</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Attraction</th>
+                        <th>Location</th>
+                        <th>Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Taipei 101</td>
+                        <td>Taipei</td>
+                        <td>Fully accessible with elevators</td>
+                    </tr>
+                    <tr>
+                        <td>National Palace Museum</td>
+                        <td>Taipei</td>
+                        <td>Free wheelchairs, elevators</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>General Tips</h2>
+            
+            <h3>Useful Apps</h3>
+            <ul>
+                <li>Google Maps - Navigation</li>
+                <li>Google Translate - Language help</li>
+                <li>Taiwan Travel - Official tourism app</li>
+            </ul>
+
+            <h3>Emergency Contacts</h3>
+            <ul>
+                <li><strong>Police:</strong> 110</li>
+                <li><strong>Fire/Ambulance:</strong> 119</li>
+                <li><strong>Tourist Hotline:</strong> 0800-011-765</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>

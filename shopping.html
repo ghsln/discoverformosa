@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping in Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background:  linear-gradient(#0056b3, #003B8E);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #ffcc00;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .maps-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            background-color: #8B1E1E;
+            color: white;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(139, 30, 30, 0.2);
+        }
+
+        .maps-btn:hover {
+            background-color: #5a1313;
+            box-shadow: 0 6px 20px rgba(139, 30, 30, 0.3);
+        }
+        
+        .cards-scroll-container {
+            position: relative;
+            margin: 2rem 0 0;
+        }
+        
+        .scroll-cards {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0.5rem;
+            scroll-behavior: smooth;
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        
+        .scroll-cards::-webkit-scrollbar {
+            display: none; 
+        }
+        
+        .scroll-card {
+            flex: 0 0 350px;
+            background: linear-gradient(145deg, rgba(255, 245, 230, 0.95), rgba(255, 250, 240, 0.95));
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid #FFD700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(139, 30, 30, 0.1);
+        }
+        
+        .scroll-card:hover {
+            transform: translateY(-10px);
+            border-color: #8B1E1E;
+            box-shadow: 0 8px 25px rgba(139, 30, 30, 0.15);
+        }
+        
+        .scroll-card h3 {
+            color: #8B1E1E;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'DM Serif Text', serif;
+        }
+        
+        .scroll-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            text-align: justify;
+        }
+        
+        .scroll-card-icon img {
+            height: 100%;
+            width: 300px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .scroll-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #8B1E1E;
+            color: #8B1E1E;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(139, 30, 30, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-nav-btn:hover {
+            background: #8B1E1E;
+            color: white;
+            border-color: #8B1E1E;
+        }
+
+        .scroll-nav-btn.prev {
+            left: -25px;
+        }
+        
+        .scroll-nav-btn.next {
+            right: -25px;
+        }
+
+        /* Shopping specific styles */
+        .shopping-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .shopping-card {
+            background: linear-gradient(145deg, rgba(255, 245, 230, 0.95), rgba(255, 250, 240, 0.95));
+            border-radius: 15px;
+            padding: 1.8rem;
+            border: 2px solid #FFD700;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(139, 30, 30, 0.1);
+        }
+
+        .shopping-card:hover {
+            transform: translateY(-10px);
+            border-color: #8B1E1E;
+            box-shadow: 0 10px 25px rgba(139, 30, 30, 0.15);
+        }
+
+        .shopping-card h3 {
+            color: #8B1E1E;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+            font-family: 'DM Serif Text', serif;
+            text-align: center;
+        }
+        
+        .location-tag {
+            display: inline-block;
+            background: #2196f3;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            align-self: center;
+        }
+        
+        .shopping-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .shopping-card p {
+            font-size: 1rem;
+            margin-bottom: 0;
+            text-align: justify;
+            flex-grow: 1;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 420px;
+            border: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .shopping-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            .scroll-card {
+                flex: 0 0 300px;
+            }
+            
+            .scroll-nav-btn {
+                display: none;
+            }
+            
+            .shopping-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .shopping-card {
+                padding: 1.5rem;
+            }
+            
+            .shopping-image {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links li {
+                padding: 0.8rem 1rem;
+            }
+            
+            .shopping-card {
+                padding: 1.2rem;
+            }
+            
+            .shopping-image {
+                height: 150px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/shoppingexplore.jpeg" alt="Taiwan Shopping" class="header-image">
+        <div class="header-content">
+            <h1>Shopping in Taiwan</h1>
+            <p>From high-end malls to bustling markets, Taiwan offers a diverse shopping experience.</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#night-markets">Night Markets</a></li>
+                <li><a href="#malls-outlets">Malls & Outlets</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="section" id="overview">
+            <h2>Shopping in Taiwan</h2>
+            <p>From high-end malls to bustling markets, Taiwan offers a diverse shopping experience. Whether you're looking for luxury brands, trendy fashion, local souvenirs, or delicious street food, you'll find it in Taiwan's vibrant shopping destinations.</p>
+        </div>
+
+        <div class="section" id="night-markets">
+            <h2>Night Markets</h2>
+            <p>The heart of Taiwanese shopping and street food.</p>
+            
+            <div class="cards-scroll-container">
+                <button class="scroll-nav-btn prev" onclick="scrollCards(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="scroll-cards" id="shoppingCards">
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/shilin.jpg" alt="Shilin Night Market">
+                        </div>
+                        <h3>Shilin Night Market<br>(士林夜市)</h3>
+                        <a href="https://maps.app.goo.gl/Dj5XfBVMGHCaDsW38" target="_blank" class="maps-btn">View on Maps</a>
+                        <p>The largest and most famous night market in Taipei, selling everything from clothes and gadgets to iconic Taiwanese snacks. A must-visit for any shopping and food enthusiast.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/raohe.jpg" alt="Raohe Street Night Market">
+                        </div>
+                        <h3>Raohe Street Night Market<br>(饒河夜市)</h3>
+                        <a href="https://maps.app.goo.gl/iTr3BDr43yyiod4k7" target="_blank" class="maps-btn">View on Maps</a>
+                        <p>A more traditional night market with a fantastic selection of food and a famous pepper bun stall at the entrance. Located along Raohe Street in Taipei's Songshan District.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/fengjia.jpg" alt="Fengjia Night Market">
+                        </div>
+                        <h3>Fengjia Night Market<br>(逢甲夜市)</h3>
+                        <a href="https://maps.app.goo.gl/GhSqwbERsqkaHDMS7" target="_blank" class="maps-btn">View on Maps</a>
+                        <p>One of the largest and most innovative night markets in Taiwan, located in Taichung. Known for trendy fashion, creative street food, and a youthful atmosphere.</p>
+                    </div>
+                </div>
+                
+                <button class="scroll-nav-btn next" onclick="scrollCards(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="section" id="malls-outlets">
+            <h2>Malls and Outlets</h2>
+            <p>For those looking for a more upscale shopping experience.</p>
+            
+            <div class="shopping-grid">
+                <div class="shopping-card">
+                    <img src="picture/xinyi.jpg" class="shopping-image">
+                    <h3>Xinyi District (信義區), Taipei</h3>
+                    <p>Taipei's upscale shopping hub, home to malls like Taipei 101 Mall, Breeze Xinyi, and Shin Kong Mitsukoshi. This area features luxury brands, department stores, cinemas, and fine dining restaurants all within walking distance.</p>
+                </div>
+                
+                <div class="shopping-card">
+                    <img src="picture/gloriaoutlet.jpg" class="shopping-image">
+                    <h3>GLORIA OUTLETS (華泰名品城), Taoyuan</h3>
+                    <p>Taiwan's first open-air, luxury-brand outlet mall, located near Taoyuan HSR station. Features international designer brands at discounted prices with a pleasant outdoor shopping environment.</p>
+                </div>
+                
+                <div class="shopping-card">
+                    <img src="picture/mitsui.jpg" class="shopping-image">
+                    <h3>Mitsui Outlet Park (三井 Outlet)</h3>
+                    <p>Large Japanese-style outlet malls with locations in both Taichung and Taipei (Linkou). Offers a great mix of international brands, restaurants, entertainment, and family-friendly facilities.</p>
+                </div>
+                
+                <div class="shopping-card">
+                    <img src="picture/shinkong.jpg" class="shopping-image">
+                    <h3>Department Stores & Boutiques</h3>
+                    <p>Beyond malls and outlets, Taiwan has numerous department stores like Sogo, Shin Kong Mitsukoshi, and Far Eastern Department Stores scattered throughout major cities, offering everything from luxury goods to daily necessities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollCards(direction) {
+            const container = document.getElementById('shoppingCards');
+            const scrollAmount = 350; 
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
