@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportation in Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 0.8rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 0.5rem 0 1rem;
+            font-size: 1.7rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .feature-card ul, 
+        .feature-card ol,
+        .transport-card ul,
+        .transport-card ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin: 0.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .public {
+            background: none;
+            box-shadow: none;
+            padding: 0;
+            border: none;
+        }
+
+        .public h2 {
+            color: #FF9800;
+            border-color: #FF9800;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .transport-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .transport-card {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid #e0e0e0;
+            border-top: 4px solid #8B1E1E;
+        }
+        
+        .transport-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .transport-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .image-gallery .transport-image {
+            height: 180px;
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            margin-bottom: 10px;
+        }
+        
+        .highlight-box ul {
+            margin-top: 10px;
+        }
+        
+        .website-link {
+            display: inline-block;
+            background-color: #8B1E1E;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        .website-link:hover {
+            background-color: #501111;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-section {
+            margin-top: 3rem;
+        }
+        
+        .contact-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-item {
+            background: linear-gradient(#ffffff, #fff8de69);
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #8B1E1E;
+        }
+        
+        .contact-item h4 {
+            color: #8B1E1E;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-item h4 i {
+            margin-right: 10px;
+        }
+        
+        .contact-item ul {
+            margin-left: 1rem;
+            margin-bottom: 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(#ffffff, #fff8de69);
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #8B1E1E;
+        }
+        
+        @media (max-width: 1024px) {
+            .transport-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .transport-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .transport-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/transportation.jpeg" alt="Transportation" class="header-image">
+        <div class="header-content">
+            <h1>Transportation in Taiwan</h1>
+            <p>Your trusted friend to travel through Taiwan</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#easycard">EasyCard/iPass</a></li>
+                <li><a href="#public-transport">Public Transport</a></li>
+                <li><a href="#private-transport">Private Transport</a></li>
+                <li><a href="#important-contact">Important Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview" class="section">
+            <h2>Getting Around Taiwan</h2>
+            <p>Taiwan's transportation system is one of the most convenient and visitor-friendly in Asia. Whether you're traveling between cities or heading to a local market, Taiwan offers many fast, reliable, and affordable options. Once you understand how each mode connects, you can easily mix and match TRA, High-Speed Rail, MRT, buses, YouBike, and taxis.</p>
+        </section>
+
+        <section id="easycard" class="section">
+            <h2>EasyCard/iPass - Your Transport Super Card</h2>
+            <p>EasyCard and iPass are the most essential items for traveling around Taiwan. They offer seamless access to almost all public transportation systems.</p>
+            
+            <img src="picture/easycard.jpg" alt="EasyCard" class="transport-image">
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Where You Can Use EasyCard/iPass</h3>
+                    <ul>
+                        <li>MRT systems</li>
+                        <li>City buses</li>
+                        <li>YouBike</li>
+                        <li>TRA (for local and short-distance rides)</li>
+                        <li>Some taxis and convenience stores</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Where to Buy & Pricing</h3>
+                    <ul>
+                        <li>MRT stations</li>
+                        <li>Convenience stores (7-Eleven, FamilyMart)</li>
+                        <li>Taoyuan Airport counters</li>
+                        <li>Card deposit: around NTD $100</li>
+                        <li>Load any amount as needed</li>
+                        <li>Cheaper fares than cash on many routes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="public-transport" class="public">
+            <h2><i class="fas fa-bus"></i> Public Transportation</h2>
+            
+            <div class="transport-grid">
+                <div class="transport-card" id="tra">
+                    <h3><i class="fas fa-train"></i> Taiwan Railway (TRA)</h3>
+                    <p>TRA connects the entire island, covering big cities and small towns, especially along the scenic east coast.</p>
+                    
+                    <img src="picture/tra.jpg" alt="TRA" class="transport-image">
+                    
+                    <h4>How to Use TRA</h4>
+                    <ul>
+                        <li>Use EasyCard for short or mid-distance travel</li>
+                        <li>Book tickets in advance for long-distance or express trains</li>
+                        <li>TRA Tourist Pass (TR Pass) offers unlimited rides</li>
+                        <li>Day/Tour Pass allows unlimited rides within specific zones on the validation day</li>
+                    </ul>
+
+                    <h4>How to Buy Tickets</h4>
+                    <ul>
+                        <li>Purchase at stations (counter or machine)</li>
+                        <li>Buy online and collect at stations, post offices, or convenience stores</li>
+                        <li>Convenience store pickup requires entering booking info + passport/ID number</li>
+                    </ul>
+                    
+                    <h4>Online Booking</h4>
+                    <a href="https://tip.railway.gov.tw/tra-tip-web/tip?lang=EN_US" target="_blank" class="website-link">TRA Booking Website</a>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Important Notes</strong></p>
+                        <ul>
+                            <li>Bookings open 28 days before departure</li>
+                            <li>Pre-booking is essential for busy days</li>
+                            <li>Pay within 2 days after booking</li>
+                            <li>Same-day bookings must be paid at least 30 minutes before departure</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="transport-card" id="thsr">
+                    <h3><i class="fas fa-train"></i> THSR - Taiwan High-Speed Rail</h3>
+                    <p>THSR runs along the west coast, connecting Taipei to Kaohsiung in 1.5-2 hours with speeds up to 300 km/h.</p>
+                    
+                    <img src="picture/thsr.jpg" alt="THSR" class="transport-image">
+                    
+                    <h4>Types of THSR Tickets</h4>
+                    <ul>
+                        <li><strong>Business Car:</strong> Reserved, spacious seating</li>
+                        <li><strong>Standard Car:</strong> Reserved seating</li>
+                        <li><strong>Non-Reserved Car:</strong> Choose any available seat in designated cars</li>
+                    </ul>
+                    
+                    <h4>How to Ride THSR</h4>
+                    <ul>
+                        <li>Buy tickets online (<a href="https://en.thsrc.com.tw/" target="_blank">https://en.thsrc.com.tw/</a>), at stations, or via travel platforms</li>
+                        <li>Discounts available: Early Bird (10-35%), student fares, tourist passes</li>
+                        <li>Enter by inserting ticket at the gate</li>
+                        <li>HSR stations are often outside city centers—plan follow-up travel</li>
+                    </ul>
+                    
+                    <a href="https://en.thsrc.com.tw/" target="_blank" class="website-link">THSR Official Website</a>
+                </div>
+
+                <div class="transport-card" id="mrt">
+                    <h3><i class="fas fa-subway"></i> MRT (Metro/Subway)</h3>
+                    <p>Taipei, New Taipei, Taoyuan, and Kaohsiung operate clean, efficient MRT systems with English-friendly navigation.</p>
+                    
+                    <div class="image-gallery">
+                        <img src="picture/taoyuanmetro.jpg" alt="Taoyuan Metro" class="transport-image">
+                        <img src="picture/taipeimrt.JPG" alt="Taipei MRT" class="transport-image">
+                    </div>
+                    
+                    <h4>How to Use MRT</h4>
+                    <ul>
+                        <li>Tap EasyCard when entering and exiting</li>
+                        <li>Ticket machines accept coins; counters sell single-journey tokens</li>
+                        <li>Operating hours typically 6:00 AM - midnight</li>
+                        <li>No food or drink allowed beyond the gates</li>
+                    </ul>
+                    
+                    <h4>MRT Websites</h4>
+                    <a href="https://www.tymetro.com.tw/tymetro-new/en/index.php" target="_blank" class="website-link">Taoyuan Metro</a>
+                    <a href="https://english.metro.taipei/Default.aspx" target="_blank" class="website-link">Taipei Metro</a>
+                    <a href="https://www.krtc.com.tw/eng/" target="_blank" class="website-link">Kaohsiung Metro</a>
+                </div>
+
+                <div class="transport-card" id="bus">
+                    <h3><i class="fas fa-bus"></i> Buses in Taiwan</h3>
+                    <p>Buses cover cities, rural towns, mountains, and attractions not easily reached by TRA, MRT, or HSR.</p>
+                    
+                    <img src="picture/bus.jpg" alt="Bus" class="transport-image">
+                    
+                    <h4>How to Ride Buses</h4>
+                    <ul>
+                        <li>Tap EasyCard when boarding (and sometimes when exiting)</li>
+                        <li>Google Maps works well for routes</li>
+                        <li>Typical fare: NT$15-30 for city rides</li>
+                        <li>Track schedules using Bus+ or Bus Taiwan apps</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="private-transport" class="public">
+            <h2><i class="fas fa-car"></i> Private Transportation</h2>
+            
+            <div class="transport-grid">
+                <div class="transport-card" id="youbike">
+                    <h3><i class="fas fa-bicycle"></i> YouBike</h3>
+                    <p>YouBike is ideal for sightseeing riversides, exploring neighborhoods, or traveling short distances.</p>
+                    
+                    <img src="picture/youbike.jpg" alt="Youbike" class="transport-image">
+                    
+                    <h4>How to Rent a YouBike</h4>
+                    <ul>
+                        <li>Register EasyCard/iPass in the YouBike app (passport + local phone number may be required)</li>
+                        <li>Tap your card at the dock to rent</li>
+                        <li>Return to any dock and tap your card to complete payment</li>
+                    </ul>
+                    
+                    <h4>Pricing</h4>
+                    <ul>
+                        <li>The first 30 minutes often free</li>
+                        <li>Rates increase with time used</li>
+                    </ul>
+                </div>
+
+                <div class="transport-card" id="taxis">
+                    <h3><i class="fas fa-taxi"></i> Taxis</h3>
+                    <p>Taxis are convenient for late-night travel, luggage, and places not covered well by public transit.</p>
+                    
+                    <img src="picture/taxi.png" alt="Taxi" class="transport-image">
+                    
+                    <h4>How Taxis Work</h4>
+                    <ul>
+                        <li>Fares based on distance + time using meters</li>
+                        <li>Extra charges apply late at night or on highways</li>
+                        <li>Apps (Uber, LINE Taxi, Taiwan Taxi, yoxi) show estimated fares</li>
+                    </ul>
+                    
+                    <h4>How to Catch a Taxi</h4>
+                    <ul>
+                        <li>Hail one on the street or at taxi stands</li>
+                        <li>Yellow cars with a red light on are available</li>
+                        <li>Cash always accepted; some accept cards/mobile payments</li>
+                    </ul>
+                    
+                    <h4>Safety & Etiquette</h4>
+                    <ul>
+                        <li>Use official taxis or reputable apps</li>
+                        <li>Wear seatbelts and secure belongings</li>
+                        <li>Ask for receipts before the ride</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="important-contact" class="section contact-section">
+            <h2><i class="fas fa-phone-alt"></i> Important Contact Numbers</h2>
+            
+            <div class="contact-list">
+                <div class="contact-item">
+                    <h4><i class="fas fa-city"></i> Taipei City</h4>
+                    <ul>
+                        <li><strong>Traffic Division:</strong> +886-2311-6409, +886-2375-2100</li>
+                        <li><strong>Department of Transportation:</strong> +886-2-2725-6888</li>
+                        <li><strong>Public Transportation Office:</strong> +886-2-2759-2677</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-item">
+                    <h4><i class="fas fa-plane"></i> Taoyuan Airport Taxi</h4>
+                    <ul>
+                        <li><strong>Taxi Service:</strong> +886-3-398-5558</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-item">
+                    <h4><i class="fas fa-city"></i> Taichung City</h4>
+                    <ul>
+                        <li><strong>Transportation Bureau:</strong> +886-4-2228-9111</li>
+                        <li><strong>Motor Vehicles Office:</strong> +886-4-2691-3464</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-item">
+                    <h4><i class="fas fa-city"></i> Tainan City</h4>
+                    <ul>
+                        <li><strong>Transportation Department:</strong> +886-6-295-3221</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-item">
+                    <h4><i class="fas fa-city"></i> Kaohsiung City</h4>
+                    <ul>
+                        <li><strong>Transportation Bureau:</strong> +886-7-222-6816</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-item">
+                    <h4><i class="fas fa-plane"></i> Kaohsiung International Airport</h4>
+                    <ul>
+                        <li><strong>Aviation Police Bureau:</strong> +886-7-801-1447</li>
+                        <li><strong>Email:</strong> kia@mail.kia.gov.tw</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

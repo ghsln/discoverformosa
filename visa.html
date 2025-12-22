@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Visa Information</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(1, 0, 6, 0.2);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        .container ul {
+            margin-left: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .image-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+        
+        .content-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 3px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .overview .content-image {
+            height: auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .twac .content-image {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        
+        .feature {
+            background: linear-gradient(#ffffff, #fff8de69);
+            padding: 15px;
+            border-radius: 3px;
+            border-left: 4px solid #8B1E1E;
+        }
+        
+        .feature h4 {
+            color: #8B1E1E;
+            margin-bottom: 5px;
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #b6b4b4;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            color: #8B1E1E;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .contact-embassy p {
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .image-box {
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/visapass.jpg" alt="Taiwan Passport" class="header-image">
+        <div class="header-content">
+            <h1>Visa Information</h1>
+            <p>Your complete guide to visa requirements, application process, and entry procedures for Taiwan</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#visa-types">Visa Types</a></li>
+                <li><a href="#visitor-visas">Visitor Visas</a></li>
+                <li><a href="#validity-fees">Validity & Fees</a></li>
+                <li><a href="#extending-stay">Extending Stay</a></li>
+                <li><a href="#twac">Taiwan Arrival Card</a></li>
+                <li><a href="#special-entry">Special Entry</a></li>
+                <li><a href="#tips-advice">Tips and Advice</a></li>
+                <li><a href="#contact-embassy">Embassies' Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section class="overview" id="overview">
+            <h2>Planning Your Trip to Taiwan</h2>
+            <div class="image-box">
+                <img src="picture/resident.gif" alt="Resident Visa" class="content-image">
+                <img src="picture/visitor.gif" alt="Resident Visa" class="content-image">
+            </div>
+            <p>One of the most important things to remember is the visa rules. With recent changes, it's more streamlined than ever, but still requires attention. Below is a full guide to help you navigate the visa process confidently and smoothly.</p>
+        </section>
+        
+        <section id="visa-types" class="visa-types">
+            <h2>Visa Types</h2>
+            <ul>
+                <li><strong>Visitor (Tourist/Short-Term):</strong> For tourism, visiting relatives or friends, business, conferences, short study, medical treatment, etc.</li>
+                <li><strong>Resident Visa:</strong> If you plan to stay in Taiwan for more than six months</li>
+                <li><strong>Landing Visa:</strong> For entering via airport under certain special conditions</li>
+            </ul>
+        </section>
+        
+        <section id="visitor-visas" class="visitor-visas">
+            <h2>Understanding Visitor Visas for Taiwan</h2>
+            <p>If your trip to Taiwan is for tourism, short business, visiting friends, or a conference, you'll most likely apply for a Visitor Visa. According to Taiwan's Bureau of Consular Affairs (BOCA), you need to fill out an online application form through BOCA's official visa portal, print it, then submit it along with other documents.</p>
+            
+            <h3>Required Documents</h3>
+            <ul>
+                <li>Two passport-sized photos (color, white background, taken within the last six months)</li>
+                <li>A valid passport (must remain valid for at least six months and have blank pages)</li>
+                <li>Invitation letter, if applicable (for business and conferences)</li>
+                <li>Proof of financial means, such as bank statements, to show you can support your stay</li>
+                <li>Travel itinerary or ticket proof, and any additional documents as requested (tour agency confirmation, etc.)</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p><strong>Important Note:</strong> Visa approvals are not guaranteed. BOCA reserves the right to refuse an application, and visa application fees are non-refundable.</p>
+            </div>
+        </section>
+        
+        <section id="validity-fees" class="validity-fees">
+            <h2>Visa Validity, Duration of Stay, and Visa Fees</h2>
+            
+            <h3>Visa Validity</h3>
+            <p>For many foreign nationals, visitor visas can be valid from 3 months up to 1 year depending on mutual visa agreements.</p>
+            
+            <h3>Duration per Entry</h3>
+            <p>It depends on what the visa grants (visa type and country), a stay can be 14 days, 30 days, 60 days, or 90 days.</p>
+            
+            <h3>Visa Fees</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Fee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nationals from countries with reciprocal visa-waiver agreements</td>
+                        <td>Sometimes free</td>
+                    </tr>
+                    <tr>
+                        <td>Single-entry visitor visa (non-waiver countries)</td>
+                        <td>NTD $1,600 (or US$ 50 when applying abroad)</td>
+                    </tr>
+                    <tr>
+                        <td>Multiple-entry visitor visa (non-waiver countries)</td>
+                        <td>NTD $3,200 (or US$ 100 abroad)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p><strong>Note for US passport holders:</strong> There's a special rate listed (check BOCA or the local TECO office for exact, current pricing).</p>
+        </section>
+        
+        <section id="extending-stay" class="extending-stay">
+            <h2>Extending Your Stay in Taiwan</h2>
+            <p>If you decided to stay longer than the visa initially allows, you may be able to extend your visitor visa under specific conditions:</p>
+            
+            <ul>
+                <li><strong>Requirement:</strong> Your visa must not have the remark "no extension will be granted"</li>
+                <li><strong>Maximum extension:</strong> You can apply for up to six months in total stay if eligible</li>
+                <li><strong>Application:</strong> Submit your extension request at a local National Immigration Agency (NIA) service center before your current permitted stay expires (up to 15 days in advance is allowed)</li>
+                <li><strong>Documents required:</strong> Passport, current visa, and proof supporting the reason you need to stay longer (e.g. hospitalization, family visit, or personal circumstances)</li>
+                <li><strong>Extension Fee:</strong> NTD $300</li>
+            </ul>
+        </section>
+        
+        <section id="twac" class="twac">
+            <h2>What You Need to Know about the New Taiwan Arrival Card (TWAC)</h2>
+            <div class="image-box">
+                <img src="picture/twac.png" alt="TWAC" class="content-image">
+            </div>
+            <p>Starting October 1, 2025, Taiwan is phasing out the paper arrival card and making the Taiwan Arrival Card (TWAC) fully digital. This is a major change to make immigration faster and more efficient.</p>
+            
+            <h3>How TWAC Works</h3>
+            <ul>
+                <li>You must fill it out online through the official website (twac.immigration.gov.tw) between 1 and 3 days before arrival.</li>
+                <li>The form supports multiple languages (English, Chinese, Japanese, Korean, Thai, Vietnamese, Indonesian), making it very traveler-friendly</li>
+                <li>You can upload a photo of your passport's data page to auto-fill many fields</li>
+                <li>For group travel: one person can submit the form up to 16 people</li>
+                <li>After submitting, you'll receive a confirmation email. You don't need to show the email at immigration, when your passport is scanned, the system will automatically retrieves your TWAC data.</li>
+                <li>The cost is free</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p><strong>Important:</strong> If you don't complete the TWAC online within the appropriate window, you may face issues at immigration. NIA states that immigration clearance "cannot proceed" without the TWAC submission.</p>
+            </div>
+        </section>
+
+        <section id="special-entry" class="special-entry">
+            <h2>Special Entry Situations</h2>
+            <p>Some travelers don't need a visa at all:</p>
+            <ul>
+                <li>For example, nationals of Thailand, Brunei, and the Philippines are under a trial visa-free program (New Southbound Policy), which has been extended through July 31, 2026</li>
+                <li>Even if you're visa-exempt, you still need to complete the TWAC online</li>
+            </ul>
+        </section>
+        
+        <section id="tips-advice" class="tips-advice">
+            <h2>Tips and Advice</h2>
+            <ul>
+                <li>Taiwan's visa-issuing authority reserves the right to refuse a visa application without explanation</li>
+                <li>Since TWAC is mandatory for most travelers, don't wait until the last minute, fill it out within the 3-day window</li>
+                <li>Double-check embassy/TECO: Always check with your nearest Taipei Economic and Cultural Office (TECO) or Taipei Representative Office for the most up-to-date visa procedures, fees, and requirements</li>
+                <li>Overstaying is risky: Understand exactly how long your visa allows you to stay because overstaying can lead to fines or entry bans</li>
+            </ul>
+        </section>
+
+        <section id="contact-embassy" class="contact-embassy">
+            <h2>Embassies' Contact</h2>
+            <p>Here is the link to <strong>MOFA's "Overseas Offices" page for the detailed contact embassies:</strong></p>
+            <p><a href="https://en.mofa.gov.tw/OverseasOfficeLink.aspx?n=1573&sms=957" target="_blank">https://en.mofa.gov.tw/OverseasOfficeLink.aspx?n=1573&sms=957</a></p>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Weather Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .landmark {
+            background: none;
+            border: none;
+            transition: none;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .landmark h2 {
+            color: #e0e0e0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .maps-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            background-color: rgba(139, 30, 30, 0.9);
+            color: white;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .maps-btn:hover {
+            background-color: #501111;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .seasons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .season-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.15) 0%, rgba(129, 176, 223, 0.25) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .season-card.spring {
+            border-top: 4px solid rgba(255, 105, 180, 0.8);
+        }
+        
+        .season-card.summer {
+            border-top: 4px solid rgba(255, 165, 0, 0.8);
+        }
+        
+        .season-card.autumn {
+            border-top: 4px solid rgba(218, 165, 32, 0.8);
+        }
+        
+        .season-card.winter {
+            border-top: 4px solid rgba(135, 206, 250, 0.8);
+        }
+
+        .season-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        }
+
+        .season-card p {
+            text-align: justify;
+            color: #f0f0f0;
+        }
+
+        .season-card hr {
+            opacity: 30%;
+            margin: 6px 0;
+            border: none;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .season-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(129, 176, 223, 0.3) 100%);
+        }
+        
+        .season-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .season-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .season-months {
+            color: #f0f0f0;
+            font-size: 1rem;
+        }
+
+        .season-months i {
+            margin-right: 5px;
+        }
+        
+        .season-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .season-details {
+            margin: 15px 0;
+        }
+        
+        .detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #f0f0f0;
+        }
+        
+        .detail i {
+            margin-right: 10px;
+            width: 20px;
+            color: #ffcc00;
+        }
+        
+        .temp-display {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .seasons-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .seasons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/weather.jpeg" alt="Taiwan Weather and Seasons" class="header-image">
+        <div class="header-content">
+            <h1>Taiwan Weather & Seasons</h1>
+            <p>Plan your visit with this comprehensive guide to Taiwan's climate and seasonal variations</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Weather Overview</a></li>
+                <li><a href="#seasons">Seasonal Guide</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="section" id="overview">
+            <h2>Taiwan's Climate</h2>
+            <p>Taiwan has a subtropical climate with distinct seasonal variations. The island experiences warm temperatures year-round, but with significant differences between seasons. Northern Taiwan tends to be cooler and rainier than the south, while mountainous areas can be much colder, with occasional snowfall in winter. Understanding Taiwan's weather patterns will help you plan the perfect trip based on your preferences for activities and comfort.</p>
+            
+            <div class="highlight-box">
+                <p><strong  id="seasons">Travel Tip:</strong> Taiwan's weather can be unpredictable, especially during seasonal transitions. Always check the local forecast before heading out and be prepared with appropriate clothing for sudden changes.</p>
+            </div>
+        </div>
+
+        <div class="landmark">
+            <h2><i class="fas fa-calendar-alt"></i>Seasonal Guide</h2>
+            
+            <div class="seasons-grid">
+                <div class="season-card spring" id="spring">
+                    <div class="season-header">
+                        <div>
+                            <div class="season-name" >Spring</div>
+                            <div class="season-months"><i class="fas fa-calendar"></i>March - May</div>
+                        </div>
+                        <div class="temp-display">18-25°C (64-77°F)</div>
+                    </div>
+                    <div class="season-image">
+                        <img src="picture/spring.jpg" alt="Spring in Taiwan">
+                    </div>
+                    <hr>
+                    <div class="season-details">
+                        <div class="detail">
+                            <i class="fas fa-leaf"></i>
+                            <span><strong>Cherry blossoms season</strong>, comfortable for hiking</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-umbrella"></i>
+                            <span>Light jacket recommended, occasional rain</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Spring is one of the most beautiful times to visit Taiwan. The weather is mild and comfortable, with blooming flowers throughout the island. Cherry blossoms are the main attraction during this season, with popular viewing spots like Yangmingshan National Park and Alishan. It's the perfect time for outdoor activities like hiking and exploring Taiwan's natural beauty without the intense heat of summer.</p>
+                </div>
+                
+                <div class="season-card summer" id="summer">
+                    <div class="season-header">
+                        <div>
+                            <div class="season-name">Summer</div>
+                            <div class="season-months"><i class="fas fa-calendar"></i>June - August</div>
+                        </div>
+                        <div class="temp-display">28-35°C (82-95°F)</div>
+                    </div>
+                    <div class="season-image">
+                        <img src="picture/summer.jpg" alt="Summer in Taiwan">
+                    </div>
+                    <hr>
+                    <div class="season-details">
+                        <div class="detail">
+                            <i class="fas fa-sun"></i>
+                            <span><strong>Hot and humid</strong>, typhoon season begins</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-water"></i>
+                            <span>Beach weather, light clothing, umbrella essential</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Summer in Taiwan is hot, humid, and rainy, especially in the south. This is typhoon season, with occasional heavy storms typically occurring between July and September. Despite the heat and humidity, summer is a great time for beach activities, water sports, and visiting Taiwan's many night markets. The east coast and islands like Penghu and Green Island are particularly popular during this season.</p>
+                </div>
+                
+                <div class="season-card autumn" id="autumn">
+                    <div class="season-header">
+                        <div>
+                            <div class="season-name">Fall</div>
+                            <div class="season-months"><i class="fas fa-calendar"></i>September - November</div>
+                        </div>
+                        <div class="temp-display">20-28°C (68-82°F)</div>
+                    </div>
+                    <div class="season-image">
+                        <img src="picture/autumn.jpg" alt="Autumn in Taiwan">
+                    </div>
+                    <hr>
+                    <div class="season-details">
+                        <div class="detail">
+                            <i class="fas fa-hiking"></i>
+                            <span><strong>Ideal travel season</strong>, minimal rainfall</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-music"></i>
+                            <span>Perfect for outdoor activities and festivals</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Fall is considered by many to be the best time to visit Taiwan. The weather is pleasant with comfortable temperatures, low humidity, and minimal rainfall. This is an excellent season for outdoor activities like hiking, cycling, and exploring Taiwan's national parks. Numerous festivals take place during fall, including the Mid-Autumn Festival and Taiwan's National Day celebrations.</p>
+                </div>
+                
+                <div class="season-card winter" id="winter">
+                    <div class="season-header">
+                        <div>
+                            <div class="season-name">Winter</div>
+                            <div class="season-months"><i class="fas fa-calendar"></i>December - February</div>
+                        </div>
+                        <div class="temp-display">13-18°C (55-64°F)</div>
+                    </div>
+                    <div class="season-image">
+                        <img src="picture/winter.jpg" alt="Winter in Taiwan">
+                    </div>
+                    <hr>
+                    <div class="season-details">
+                        <div class="detail">
+                            <i class="fas fa-snowflake"></i>
+                            <span><strong>Cool and dry</strong>, snow in high mountains</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-temperature-low"></i>
+                            <span>Warm layers needed, especially in northern Taiwan</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Winter in Taiwan is cool and relatively dry, though northern areas can be rainy. Temperatures are mild compared to many countries, but the lack of central heating in most buildings can make it feel colder. High mountain areas like Hehuanshan and Yushan may experience snowfall, attracting visitors for winter scenery. Hot springs are particularly popular during this season, with numerous resorts throughout the island.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

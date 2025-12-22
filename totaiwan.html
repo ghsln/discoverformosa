@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Get to Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Funnel+Sans:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .content-section {
+            background: rgba(255,255,255,0.96);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 6px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 1.5rem 0;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .content-image {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 3px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #8B1E1E;
+            border-bottom: 3px solid #FF9800;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 12px;
+        }
+
+        .subsection-title {
+            font-size: 1.4rem;
+            color: #8B1E1E;
+            margin: 2rem 0 1rem;
+            padding-left: 10px;
+            border-left: 4px solid #FF9800;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 1.5rem;
+        }
+
+        .info-card {
+            background: linear-gradient(#ffffff, #fff7e3);
+            padding: 20px;
+            border-left: 4px solid #8B1E1E;
+            border-radius: 4px;
+        }
+
+        .info-card i {
+            font-size: 1.6rem;
+            color: #8B1E1E;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            font-size:1.3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <img src="picture/plane.png" alt="China Airlines Plane" class="header-image">
+        <div class="header-content">
+            <h1>How to Get to Taiwan</h1>
+            <p>Taiwan is easily accessible by air and sea, with international flights arriving at major airports and limited cruise or ferry services docking at key ports</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#air">By Air</a></li>
+                <li><a href="#sea">By Sea</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+
+        <section id="overview" class="content-section">
+            <h2 class="section-title">
+                Ways to Get to Taiwan
+            </h2>
+            <p>
+                Most visitors travel to Taiwan by international flight, arriving at major airports such as Taiwan Taoyuan International Airport, Taipei Songshan, Taichung, or Kaohsiung, which offer convenient connections across Asia and beyond. A smaller number of travelers arrive by sea via cruise ships or ferries that dock at ports like Keelung or Kaohsiung, providing an alternative entry option for certain routes and itineraries.
+            </p>
+        </section>
+
+        <section id="air" class="content-section">
+            <h2 class="section-title">By Air</h2>
+
+            <p>
+                Most travelers arrive by international flights at major airports like Taiwan Taoyuan International Airport (TPE) near Taipei, Taiwan's main global gateway, and Kaohsiung International Airport (KHH) in the south, both offering direct flights from many countries.
+                Taipei Songshan Airport (TSA) and Taichung Airport (RMQ) also handle some flights (especially regional ones), and you can easily connect onward through Taiwan's efficient transport (MRT, train, buses) to other cities.
+            </p>
+
+            <div class="image-box">
+                <img src="picture/taoyuanairport.jpg" alt="Taoyuan Airport" class="content-image">
+                <img src="picture/songshanairport.jpeg" alt="Songshan Airport" class="content-image">
+                <img src="picture/taichungairport.jpg" alt="Taichung Airport" class="content-image">
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-plane-arrival"></i>
+                    <h4>Taiwan Taoyuan International Airport (TPE)</h4>
+                    <p>Main international hub near Taipei with extensive global connections.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-city"></i>
+                    <h4>Other Airports</h4>
+                    <p>Taipei Songshan (TSA), Taichung (RMQ), and Kaohsiung (KHH) handle regional and limited international flights.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sea" class="content-section">
+            <h2 class="section-title">By Sea</h2>
+
+            <p>
+                While air travel is the main entry method, some people also reach Taiwan by sea, especially on cruise ships that dock at major ports like Keelung (near Taipei) or Kaohsiung.
+                There are also growing ferry routes to/from nearby islands and abroad, for example, a regular ferry from Xiamen to Kinmen or planned ferry services connecting Keelung with destinations like Ishigaki (Japan), offering a sea alternative for certain itineraries.
+            </p>
+
+            <div class="image-box">
+                <img src="picture/keelungharbor.jpg" alt="Keelung Harbor" class="content-image">
+                <img src="picture/kaohsiungport.jpeg" alt="Kaohsiung Airport" class="content-image">
+                <img src="picture/kaohsiungship.jpg" alt="Kaohsiung Port" class="content-image">
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-anchor"></i>
+                    <h4>Keelung Port</h4>
+                    <p>Main cruise port near Taipei, commonly used by international cruise lines.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-water"></i>
+                    <h4>Kaohsiung Port</h4>
+                    <p>Southern cruise terminal serving international and regional cruise routes. </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>

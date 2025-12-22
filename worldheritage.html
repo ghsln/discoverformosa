@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Heritage Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .landmark {
+            background: none;
+            border: none;
+            transition: none;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .landmark h2 {
+            color: #e0e0e0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .maps-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            background-color: rgba(139, 30, 30, 0.9);
+            color: white;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .maps-btn:hover {
+            background-color: #501111;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .site-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.15) 0%, rgba(129, 176, 223, 0.25) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid rgba(139, 30, 30, 0.8);
+        }
+
+        .site-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        }
+
+        .site-card p {
+            font-size: 15px;
+            text-align: justify;
+            color: #f0f0f0;
+        }
+
+        .site-card hr {
+            opacity: 30%;
+            margin: 6px 0;
+            border: none;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .site-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(129, 176, 223, 0.3) 100%);
+        }
+        
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .site-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .site-location {
+            color: #f0f0f0;
+            font-size: 1rem;
+        }
+
+        .site-location i {
+            margin-right: 5px;
+        }
+        
+        .site-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .site-details {
+            margin: 15px 0;
+        }
+        
+        .detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #f0f0f0;
+        }
+        
+        .detail i {
+            margin-right: 10px;
+            width: 20px;
+            color: #ffcc00;
+        }
+
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .sites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sites-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/heritage.jpg" alt="Taiwan Heritage" class="header-image">
+        <div class="header-content">
+            <h1>Taiwan's Heritage Treasures</h1>
+            <p>Discover the cultural and natural landmarks of outstanding universal value</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#sites">Notable Sites</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="section" id="overview">
+            <h2>Taiwan's Potential World Heritage Treasures</h2>
+            <p>While Taiwan is not a member state of UNESCO and therefore cannot have sites on the official World Heritage List, it boasts a rich collection of cultural and natural landmarks of "Outstanding Universal Value." The Taiwanese government has identified a tentative list of sites that represent the island's unique heritage, from majestic natural landscapes to profound historical and cultural landmarks. These destinations are already treasured locally and are more than worthy of a visit for any traveler seeking to understand the soul of Taiwan.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Note:</strong> All sites mentioned are recognized by the Taiwanese government as having potential Outstanding Universal Value and are protected under Taiwan's domestic cultural and natural heritage laws.</p>
+            </div>
+        </div>
+
+        <div class="landmark">
+            <h2><i class="fas fa-landmark"></i>Notable Heritage Sites</h2>
+            
+            <div class="sites-grid" id="sites">
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Taroko National Park</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Hualien</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/taorokonationalpark.jpg" alt="Taroko National Park">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-ticket"></i>
+                            <span>Admission: $200 NTD</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Opening Hours: 24 hours</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-phone"></i>
+                            <span>Phone: 03 862 1100</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Taroko National Park, on Taiwan's east coast, is famous for the breathtaking, marble-walled Taroko Gorge carved by the Liwu River, featuring towering cliffs, lush forests, and turquoise waters. A biodiversity hotspot with high peaks, diverse habitats, and numerous hiking trails like Swallow Grotto and Tunnel of Nine Turns, it's a major natural wonder offering stunning scenery, waterfalls (like Baiyang), and cultural sites such as the Eternal Spring Shrine.</p>
+                    
+                    <a href="https://maps.app.goo.gl/W2Jd4ecq9ZT8k5zi8" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">The Alishan Forest Railway</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Chiayi</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/alishanforestrail.jpg" alt="Alishan Forest Trail">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-ticket"></i>
+                            <span>Admission: $198 NTD</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Opening Hours: 08:30 AM - 04:30 PM </span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-phone"></i>
+                            <span>Phone: 05 267 9200</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>The Alishan Forest Railway is a historic, narrow-gauge mountain railway in Chiayi, Taiwan, renowned for its engineering marvels, stunning scenery, and rich history as a former logging route. It is a popular tourist attraction, passing through three climate zones (tropical, subtropical, and temperate) as it climbs from Chiayi City (elevation 30 m) to the Alishan mountain area (over 2,000 m).</p>
+                    
+                    <a href="https://maps.app.goo.gl/a4tSfpkzVRkEuTKx6" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Yushan National Park</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Nantou</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/yushannational.jpg" alt="Yushan National Park">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-ticket"></i>
+                            <span>Admission: Free (Need permit to enter)</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Opening Hours: 24 hours </span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-phone"></i>
+                            <span>Phone: 04 9277 3121</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Yushan National Park is a protected alpine region in the heart of Taiwan, famous for containing Yushan (Mount Jade), the highest peak in Northeast Asia at 3,952 meters (12,966 ft). The park is a haven for hikers and a critical ecological sanctuary.</p>
+                    
+                    <a href="https://maps.app.goo.gl/8aujc3hATLEFRpeTA" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Penghu Columnar Basalt</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Penghu</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/columnar.jpg" alt="Penghu Columnar Basalt">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-ticket"></i>
+                            <span>Admission: Free</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Opening Hours: 24 hours </span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-phone"></i>
+                            <span>Phone: 06 993 3082</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Penghu's columnar basalts are spectacular geological formations of tightly packed, often hexagonal, volcanic rock columns created when ancient lava flows cooled and cracked, forming impressive cliffs and unique landscapes like the "pipe organ" basalt at Jishanyu or the easily accessible walls at Daguoyue, a protected natural wonder in Taiwan.</p>
+                    
+                    <a href="https://maps.app.goo.gl/5WdhNt6usRNrPcDN7" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Kinmen Islands</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Kinmen</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/kinmenisland.jpg" alt="Kinmen Island">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-city"></i>
+                            <span>Largest City: Jincheng</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-city"></i>
+                            <span>Specialties: Kaoliang Liqour, Gong Tang </span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-plane"></i>
+                            <span>Get There: 1h 5m from Taoyuan</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>The Kinmen Islands (or Quemoy) are a Taiwanese-governed archipelago near mainland China, famous for their unique blend of stunning natural scenery, distinct traditional architecture (like ancient homes and European-style buildings from wealthy Chinese), rich history as a Cold War military front, and unique culture, including shell-crafted knives and famous Kaoliang liquor.</p>
+                    
+                    <a href="https://maps.app.goo.gl/FK12QwkWK2EnkCHQ9" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Orchid Island</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Taitung</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/orchidisland.jpg" alt="Orchid Island">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-person"></i>
+                            <span>Ethnic Groups: Tao, Han</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-fish"></i>
+                            <span>Specialties: Flying fish culture </span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-plane"></i>
+                            <span>Get There: 1h 5m from Taoyuan</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Orchid Island (Lanyu), known to its indigenous inhabitants as "Pongso no Tao" or "Island of the People," is a remote volcanic island off Taiwan's southeastern coast and home to the Tao (Yami) people. The Tao have a distinctive and well-preserved maritime culture centered around fishing and agriculture, which is unique among Taiwan's indigenous groups.</p>
+                    
+                    <a href="https://maps.app.goo.gl/zgT6CB3k2fraWT8c6" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+            </div>     
+        </div>
+    </div>
+</body>
+</html>
