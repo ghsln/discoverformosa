@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwanese Cuisine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#0056b3, #003B8E);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #ffcc00;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .cards-scroll-container {
+            position: relative;
+            margin: 2rem 0 0;
+        }
+        
+        .scroll-cards {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0.5rem;
+            scroll-behavior: smooth;
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        
+        .scroll-cards::-webkit-scrollbar {
+            display: none; 
+        }
+        
+        .scroll-card {
+            flex: 0 0 350px;
+            background: linear-gradient(145deg, rgba(255, 204, 172, 0.9), rgba(255, 238, 217, 0.9));
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid #fdefe3;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .scroll-card:hover {
+            transform: translateY(-10px);
+            border-color: #e74c3c;
+        }
+        
+        .scroll-card h3 {
+            color: #e74c3c;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'DM Serif Text', serif;
+        }
+        
+        .scroll-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            text-align: justify;
+        }
+        
+        .scroll-card-icon img {
+            height: 100%;
+            width: 300px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .scroll-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #e74c3c;
+            color: #e74c3c;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-nav-btn:hover {
+            background: #b23d30;
+            color: white;
+            border-color:#b23d30;
+        }
+        
+        .scroll-nav-btn.prev {
+            left: -25px;
+        }
+        
+        .scroll-nav-btn.next {
+            right: -25px;
+        }
+
+        .food-category {
+            margin-bottom: 3rem;
+        }
+
+        .food-category h2 {
+            color: #1E5E8B;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #4CAF50;
+            font-size: 2rem;
+        }
+
+        .food-card h3 {
+            color: #1E5E8B;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'DM Serif Text', serif;
+        }
+
+        .food-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            text-align: justify;
+        }
+
+        .food-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .classic-tag {
+            background-color: #e74c3c;
+        }
+
+        .street-tag {
+            background-color: #2ecc71;
+        }
+
+        .drink-tag {
+            background-color: #3498db;
+        }
+
+        .breakfast-tag {
+            background-color: #9b59b6;
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            .scroll-card {
+                flex: 0 0 300px;
+            }
+            
+            .scroll-nav-btn {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links li {
+                padding: 0.8rem 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/cuisineexplore.jpg" alt="Taiwanese Cuisine" class="header-image">
+        <div class="header-content">
+            <h1>Taiwanese Cuisine</h1>
+            <p>Discover the rich flavors and iconic dishes of Taiwan's food culture</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#classic">Classic Dishes</a></li>
+                <li><a href="#street">Street Food</a></li>
+                <li><a href="#drinks">Drinks & Desserts</a></li>
+                <li><a href="#breakfast">Breakfast & Everyday</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="section" id="classic">
+            <h2>Classic & Iconic Dishes</h2>
+            
+            <div class="cards-scroll-container">
+                <button class="scroll-nav-btn prev" onclick="scrollClassicCards(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="scroll-cards" id="classicCards">
+                    <div class="scroll-card">
+                        <div class="category-tag classic-tag">Classic Dish</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/beefnoodlesoup.jpg" alt="Beef Noodle Soup">
+                        </div>
+                        <h3>Beef Noodle Soup<br>(牛肉麵)</h3>
+                        <p>Taiwan's national dish: hearty broth, tender beef, and chewy noodles.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag classic-tag">Classic Dish</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/braisedporkrice.jpg" alt="Braised Pork Rice">
+                        </div>
+                        <h3>Braised Pork Rice<br>(滷肉飯/Lu Rou Fan)</h3>
+                        <p>Comfort food staple: savory minced pork over rice.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag classic-tag">Classic Dish</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/xiaolongbao.jpg" alt="Xiao Long Bao">
+                        </div>
+                        <h3>Xiao Long Bao<br>(小籠包)</h3>
+                        <p>Steamed soup dumplings with juicy pork inside; famous at places like Din Tai Fung.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag classic-tag">Classic Dish</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/danzai.jpg" alt="Dan-Zai Noodles">
+                        </div>
+                        <h3>Dan-Zai Noodles<br>(擔仔麵)</h3>
+                        <p>Tainan specialty: light broth noodles topped with minced pork and shrimp.</p>
+                    </div>
+                </div>
+                
+                <button class="scroll-nav-btn next" onclick="scrollClassicCards(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="section" id="street">
+            <h2>Street Food & Night Market Favorites</h2>
+            
+            <div class="cards-scroll-container">
+                <button class="scroll-nav-btn prev" onclick="scrollStreetCards(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="scroll-cards" id="streetCards">
+                    <div class="scroll-card">
+                        <div class="category-tag street-tag">Street Food</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/oysteromelette.jpg" alt="Oyster Omelette">
+                        </div>
+                        <h3>Oyster Omelette<br>(蚵仔煎)</h3>
+                        <p>Chewy, savory, with a sweet-savory sauce.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag street-tag">Street Food</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/fried-chicken.jpg" alt="Taiwanese Fried Chicken">
+                        </div>
+                        <h3>Taiwanese Fried Chicken<br>(鹹酥雞/炸雞排)</h3>
+                        <p>Crispy, flavorful, often seasoned with basil and pepper salt.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag street-tag">Street Food</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/guabao.webp" alt="Gua Bao">
+                        </div>
+                        <h3>Gua Bao<br>(刈包)</h3>
+                        <p>"Taiwanese hamburger": braised pork belly in a soft steamed bun with pickles and peanuts.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag street-tag">Street Food</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/pepper-buns.jpg" alt="Pepper Buns">
+                        </div>
+                        <h3>Pepper Buns<br>(胡椒餅)</h3>
+                        <p>Hot and juicy baked buns with peppery pork filling (especially at Raohe Night Market).</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag street-tag">Street Food</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/oyster-vermicelli.jpg" alt="Oyster Vermicelli">
+                        </div>
+                        <h3>Oyster Vermicelli<br>(蚵仔麵線)</h3>
+                        <p>Thick noodle soup with oysters (and sometimes pig intestine).</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag street-tag">Street Food</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/stinkytofu.jpg" alt="Stinky Tofu">
+                        </div>
+                        <h3>Stinky Tofu<br>(臭豆腐)</h3>
+                        <p>Fermented tofu snack with a strong aroma but delicious fried texture.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag street-tag">Street Food</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/bawan.jpg" alt="Ba Wan">
+                        </div>
+                        <h3>Ba Wan<br>(肉圓)</h3>
+                        <p>Large chewy dumpling made with sticky rice flour and savory filling.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag street-tag">Street Food</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/coffin-bread.jpg" alt="Coffin Bread">
+                        </div>
+                        <h3>Coffin Bread<br>(棺材板)</h3>
+                        <p>Unique Tainan snack: a hollowed bread bowl filled with creamy stew.</p>
+                    </div>
+                </div>
+                
+                <button class="scroll-nav-btn next" onclick="scrollStreetCards(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="section" id="drinks">
+            <h2>Drinks & Desserts</h2>
+            
+            <div class="cards-scroll-container">
+                <button class="scroll-nav-btn prev" onclick="scrollDrinkCards(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="scroll-cards" id="drinkCards">
+                    <div class="scroll-card">
+                        <div class="category-tag drink-tag">Drink</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/bubbletea.jpg" alt="Bubble Tea">
+                        </div>
+                        <h3>Bubble Tea<br>(珍珠奶茶/Boba)</h3>
+                        <p>Taiwan's world-famous tea drink with chewy tapioca pearls.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag drink-tag">Dessert</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/shaved-ice.jpg" alt="Shaved Ice">
+                        </div>
+                        <h3>Shaved Ice<br>(剉冰/Mango Shaved Ice)</h3>
+                        <p>Refreshing dessert topped with fruit, condensed milk, and toppings.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag drink-tag">Dessert</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/pineapple-cake.avif" alt="Pineapple Cake">
+                        </div>
+                        <h3>Pineapple Cake<br>(鳳梨酥)</h3>
+                        <p>Sweet pastry with pineapple jam — great as a snack or gift.</p>
+                    </div>
+                </div>
+                
+                <button class="scroll-nav-btn next" onclick="scrollDrinkCards(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="section" id="breakfast">
+            <h2>Breakfast & Everyday Eats</h2>
+            
+            <div class="cards-scroll-container">
+                <button class="scroll-nav-btn prev" onclick="scrollBreakfastCards(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="scroll-cards" id="breakfastCards">
+                    <div class="scroll-card">
+                        <div class="category-tag breakfast-tag">Breakfast</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/danbing.webp" alt="Dan Bing">
+                        </div>
+                        <h3>Dan Bing<br>(蛋餅)</h3>
+                        <p>Classic Taiwanese breakfast food - savory egg crepe with various fillings.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag breakfast-tag">Breakfast</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/scallion-pancake.jpg" alt="Scallion Pancakes">
+                        </div>
+                        <h3>Scallion Pancakes<br>(蔥抓餅)</h3>
+                        <p>Crispy, flaky pancakes with scallions - a popular breakfast or snack.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="category-tag breakfast-tag">Breakfast</div>
+                        <div class="scroll-card-icon">
+                            <img src="picture/soy-milk.jpg" alt="Soy Milk & Youtiao">
+                        </div>
+                        <h3>Soy Milk & Youtiao<br>(豆漿+油條)</h3>
+                        <p>Traditional Taiwanese breakfast combo. Hot soy milk with crispy fried dough sticks.</p>
+                    </div>
+                </div>
+                
+                <button class="scroll-nav-btn next" onclick="scrollBreakfastCards(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollClassicCards(direction) {
+            const container = document.getElementById('classicCards');
+            const scrollAmount = 370; 
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        function scrollStreetCards(direction) {
+            const container = document.getElementById('streetCards');
+            const scrollAmount = 370;
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        function scrollDrinkCards(direction) {
+            const container = document.getElementById('drinkCards');
+            const scrollAmount = 370;
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        function scrollBreakfastCards(direction) {
+            const container = document.getElementById('breakfastCards');
+            const scrollAmount = 370;
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Cultural Events Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .landmark {
+            background: none;
+            border: none;
+            transition: none;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .landmark h2 {
+            color: #e0e0e0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .maps-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            background-color: rgba(139, 30, 30, 0.9);
+            color: white;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .maps-btn:hover {
+            background-color: #501111;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .site-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.15) 0%, rgba(129, 176, 223, 0.25) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid rgba(139, 30, 30, 0.8);
+        }
+
+        .site-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        }
+
+        .site-card p {
+            font-size: 15px;
+            text-align: justify;
+            color: #f0f0f0;
+        }
+
+        .site-card hr {
+            opacity: 30%;
+            margin: 6px 0;
+            border: none;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .site-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(129, 176, 223, 0.3) 100%);
+        }
+        
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .site-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .site-location {
+            color: #f0f0f0;
+            font-size: 1rem;
+        }
+
+        .site-location i {
+            margin-right: 5px;
+        }
+        
+        .site-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .site-details {
+            margin: 15px 0;
+        }
+        
+        .detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #f0f0f0;
+        }
+        
+        .detail i {
+            margin-right: 10px;
+            width: 20px;
+            color: #ffcc00;
+        }
+
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+        
+        .arch-elements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 2rem;
+        }
+        
+        .arch-element {
+            background: linear-gradient(139deg, #ffa6a6, #ffda55);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            border-left: 4px solid #FF9800;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .arch-element:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+        }
+        
+        .arch-element h3 {
+            color: #f0f0f0;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            position: relative;
+        }
+        
+        .arch-element p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            color: #f0f0f0;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .arch-element-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .arch-element::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .sites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .arch-elements-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .arch-element {
+                min-height: 220px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sites-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/festivalexplore.jpg" alt="Taiwan Cultural Events" class="header-image">
+        <div class="header-content">
+            <h1>Taiwan's Cultural Celebrations</h1>
+            <p>Experience the vibrant traditions and festive spirit of Taiwan's annual cultural events</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#events">Major Events</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="section" id="overview">
+            <h2>Taiwan's Cultural Calendar</h2>
+            <p>Taiwan's calendar is filled with vibrant cultural events rooted in tradition. These celebrations showcase the island's rich heritage, blending religious devotion, community spirit, and festive joy. From lantern-lit skies to dragon boat races, each event offers a unique glimpse into Taiwanese culture and traditions.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Note:</strong> Taiwan's festivals are deeply connected to lunar calendar traditions and local customs. They serve as important occasions for family reunions, community bonding, and cultural preservation, reflecting the island's diverse heritage and spiritual beliefs.</p>
+            </div>
+        </div>
+
+        <div class="landmark">
+            <h2>Major Cultural Events & Celebrations</h2>
+            
+            <div class="sites-grid" id="events">
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Lantern Festival (元宵節)</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Pingxi & Nationwide</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/lanternfestival.jpg" alt="Lantern Festival">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Timing: 15th day of Lunar New Year</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Main Feature: Sky Lanterns</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-significance"></i>
+                            <span>Significance: End of Lunar New Year</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Marks the end of the Lunar New Year. The main event in Pingxi features thousands of sky lanterns released with wishes, while other cities host large lantern displays. The festival symbolizes letting go of the past year's misfortunes and welcoming new beginnings with hope and aspirations written on lanterns.</p>
+                    
+                    <a href="https://www.taiwanobsessed.com/lantern-festival-pingxi-taipei-taiwan/" target="_blank" class="maps-btn">Learn More</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Mazu Pilgrimage (大甲媽祖遶境)</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Dajia, Taichung</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/mazupilgrimage.jpg" alt="Mazu Pilgrimage">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Duration: 9 days, 8 nights</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-award"></i>
+                            <span>Status: UNESCO Recognized</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-users"></i>
+                            <span>Participants: Millions annually</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>A massive, nine-day, eight-night pilgrimage following the statue of the sea goddess Mazu from Zhenlan Temple in Dajia. It's a UNESCO-recognized cultural event with millions of participants. Pilgrims walk approximately 340 kilometers, visiting numerous temples along the route in one of the world's largest religious processions.</p>
+                    
+                    <a href="https://taiwangods.moi.gov.tw/html/landscape_en/1_0011.aspx?i=39" target="_blank" class="maps-btn">Learn More</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Dragon Boat Festival (端午節)</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Nationwide</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/dragonboat.jpg" alt="Dragon Boat Festival">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Date: 5th day of 5th lunar month</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-ship"></i>
+                            <span>Main Activity: Dragon Boat Races</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-utensils"></i>
+                            <span>Traditional Food: Zongzi</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Features exciting dragon boat races across the island. People also eat zongzi (sticky rice dumplings). The festival commemorates the ancient poet Qu Yuan and includes traditions meant to ward off evil spirits and disease. Teams paddle ornately decorated dragon boats to the beat of drums in competitive races.</p>
+                    
+                    <a href="https://www.foreignersintaiwan.com/blog/taiwan-dragon-boat-festival" target="_blank" class="maps-btn">Learn More</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Mid-Autumn Festival (中秋節)</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Nationwide</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/midautumn.jpg" alt="Mid-Autumn Festival">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Date: 15th day of 8th lunar month</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-moon"></i>
+                            <span>Focus: Moon Appreciation</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-utensils"></i>
+                            <span>Traditional Food: Mooncakes</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>Celebrated with family barbecues in parks and on sidewalks, while admiring the full moon and eating mooncakes. Known as the Moon Festival, it's a time for family reunions and thanksgiving for the harvest. Taiwanese uniquely celebrate with massive outdoor barbecues, creating a festive atmosphere across neighborhoods.</p>
+                    
+                    <a href="https://www.klook.com/blog/autumn-in-taiwan-guide/" target="_blank" class="maps-btn">Learn More</a>
+                </div>
+            </div>     
+        </div>
+    </div>
+</body>
+</html>

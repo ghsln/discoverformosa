@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diving & Snorkeling in Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .diving-spots {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 3rem;
+        }
+
+        .diving-spots:hover {
+            transform: none;
+        }
+
+        .diving-spots h2 {
+            color: #feb54f;
+        }
+        
+        .diving-spots p {
+            color: #F4E8D8;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #2E7D32;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            padding-left: 10px;
+            border-left: 4px solid #FF9800;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .beginner {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .intermediate {
+            background-color: #FF9800;
+            color: white;
+        }
+
+        .advanced {
+            background-color: #0056b3;
+            color: white;
+        }
+        
+        .all-levels {
+            background-color: #9C27B0;
+            color: white;
+        }
+
+        .spot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .spot-grid p {
+            color: #333;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 3px;
+            margin-bottom: 8px;
+        }
+        
+        .spot-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .spot-card.beginner::before {
+            background-color: #4CAF50;
+        }
+        
+        .spot-card.intermediate::before {
+            background-color: #FF9800;
+        }
+        
+        .spot-card.advanced::before {
+            background-color: #0056b3;
+        }
+        
+        .spot-card.all-levels::before {
+            background-color: #9C27B0;
+        }
+        
+        .spot-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .spot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .spot-name {
+            font-weight: 700;
+            color: #0056b3;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .spot-location {
+            color: #737373;
+            font-size: 1rem;
+        }
+
+        .spot-location i {
+            margin-right: 5px;
+        }
+        
+        .spot-features {
+            margin: 15px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .feature i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .beginner .feature i {
+            color: #4CAF50;
+        }
+
+        .intermediate .feature i {
+            color: #FF9800;
+        }
+
+        .advanced .feature i {
+            color: #0056b3;
+        }
+        
+        .all-levels .feature i {
+            color: #9C27B0;
+        }
+       
+        .highlight-box {
+            background: #F4E8D8;
+            border-left: 5px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            color: #333;
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+
+        .tip-box {
+            background: #e8f4fd;
+            border-left: 5px solid #0056b3;
+            padding: 1.8rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .tip-box i {
+            font-size: 1.8rem;
+            color: #0056b3;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tip-box h3 {
+            color: #0056b3;
+            margin: 0.5rem 0 1rem;
+            padding-left: 0;
+            border-left: none;
+            font-size: 1.4rem;
+        }
+
+        .tip-box p {
+            margin-bottom: 0;
+            color: #333;
+        }
+
+        .marine-life-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        .marine-life-card {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .marine-life-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .marine-life-icon {
+            font-size: 2.5rem;
+            color: #0056b3;
+            margin-bottom: 15px;
+        }
+
+        .marine-life-card h4 {
+            color: #8B1E1E;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .marine-life-card p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .spot-grid, .marine-life-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .spot-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .marine-life-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/diving.jpg" alt="Diving in Taiwan" class="header-image">
+        <div class="header-content">
+            <h1>Diving & Snorkeling in Taiwan</h1>
+            <p>Discover Taiwan's underwater world with diverse marine life, coral gardens, and dive sites for all skill levels</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#diving-spots">Diving Spots</a></li>
+                <li><a href="#marine-life">Marine Life</a></li>
+                <li><a href="#tips">Diving Tips</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Why Dive in Taiwan</h2>
+            <p>Taiwan is surrounded by clear ocean waters and offers a rich variety of underwater experiences — from shallow reef dives and coral gardens to deeper ocean walls and wrecks. The island's ocean currents and geography create diverse marine life, colorful corals, and multiple dive sites for all skill levels.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Taiwan Today:</strong> Whether you're a complete beginner or an advanced diver, Taiwan has options ranging from shore dives near major cities to boat dives around remote islands.</p>
+            </div>
+        </section>
+
+        <section class="diving-spots" id="diving-spots">
+            <h2><i class="fas fa-water"></i>Top Diving & Snorkeling Spots in Taiwan</h2>
+            
+            <div class="spot-grid" id="all-spots">
+                <div class="spot-card all-levels" data-level="all-levels">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Green Island (綠島)</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Taitung County</div>
+                        </div>
+                        <span class="level-badge all-levels">All Levels</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/green.jpg" alt="Green Island">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>One of Taiwan's most popular dive destinations</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-eye"></i>
+                            <span>Excellent visibility & abundant coral reefs</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-map"></i>
+                            <span>Known areas: Shilang and Dabaisha</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Great for both snorkeling and scuba diving. Water clarity and marine diversity make it ideal for reef exploration.</p>
+                </div>
+                
+                <div class="spot-card beginner" data-level="beginner">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Xiaoliuqiu (小琉球)</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Pingtung County</div>
+                        </div>
+                        <span class="level-badge beginner">Beginner-Friendly</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/xiaoliuqiudive.webp" alt="Xiaoliuqiu">
+                    </div>
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-turtle"></i>
+                            <span>Famous for sea turtles</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-fish"></i>
+                            <span>Abundant tropical fish & calm waters</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-map"></i>
+                            <span>Sites: Vase Rock and Lobster Cave</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>A small island famous for its sea turtles, abundant tropical fish, and calm waters. Suitable for beginners to intermediate divers.</p>
+                </div>
+
+                <div class="spot-card all-levels" data-level="all-levels">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Kenting & Hengchun Peninsula</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Kenting/Hengchun</div>
+                        </div>
+                        <span class="level-badge all-levels">All Levels</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/hengchun.jpg" alt="Hengchun">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-sun"></i>
+                            <span>Southern Taiwan's tropical waters</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Year-round diving hotspot</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-map"></i>
+                            <span>Sites: Wanlitong and Houbihu</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Coral reefs, sandy plains, and fish schools make it a great all-round dive destination. Southern Taiwan's tropical waters make this area a year-round diving hotspot.</p>
+                </div>
+                
+                <div class="spot-card intermediate" data-level="intermediate">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Penghu (澎湖群島)</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Penghu Archipelago</div>
+                        </div>
+                        <span class="level-badge intermediate">Intermediate</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/penghudive.jpg" alt="Penghu">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>Striking underwater scenery & coral gardens</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-eye"></i>
+                            <span>High visibility</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-map"></i>
+                            <span>Includes South Penghu Marine National Park</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>An archipelago with striking underwater scenery, coral gardens, and high visibility. The South Penghu Marine National Park includes coral reefs and marine habitats. Excellent for both snorkeling and scuba.</p>
+                </div>
+
+                <div class="spot-card beginner" data-level="beginner">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Northeast Coast & North Taiwan</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Near Taipei</div>
+                        </div>
+                        <span class="level-badge beginner">Beginner-Friendly</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/northeast.jpg" alt="Northeast Coast">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-car"></i>
+                            <span>Accessible by short trip from Taipei</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-map"></i>
+                            <span>Sites: Longdong Bay, Bat Cave, Chaojing Park</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Popular year-round dive sites</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Accessible by a short trip from Taipei, this area includes dive spots such as Longdong Bay (popular year-round), Bat Cave and Secret Garden (interesting spots for frequent dives), and Chaojing Park (fun local dive area for both beginners and fun dives).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="marine-life">
+            <h2>What You Can See Underwater</h2>
+            <p>Taiwan's diverse marine ecosystems offer a wide variety of underwater encounters:</p>
+            
+            <div class="marine-life-grid">
+                <div class="marine-life-card">
+                    <div class="marine-life-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h4>Tropical Fish & Reef Dwellers</h4>
+                    <p>Parrotfish, clownfish, and other colorful reef species</p>
+                </div>
+                
+                <div class="marine-life-card">
+                    <div class="marine-life-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h4>Coral Gardens</h4>
+                    <p>Beautiful coral formations and underwater rock structures</p>
+                </div>
+                
+                <div class="marine-life-card">
+                    <div class="marine-life-icon">
+                        <i class="fas fa-anchor"></i>
+                    </div>
+                    <h4>Sea Turtles</h4>
+                    <p>Especially abundant around Xiaoliuqiu island</p>
+                </div>
+                
+                <div class="marine-life-card">
+                    <div class="marine-life-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4>Macro Life</h4>
+                    <p>Colorful critters and small marine creatures</p>
+                </div>
+                
+                <div class="marine-life-card">
+                    <div class="marine-life-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h4>Wrecks & Walls</h4>
+                    <p>Some sites feature wrecks or steep walls for advanced diving</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tips">
+            <h2>Diving Tips</h2>
+            <p>Make the most of your diving adventure in Taiwan with these essential tips:</p>
+            
+            <div class="tip-box">
+                <i class="fas fa-user-shield"></i>
+                <h3>Certified Operators</h3>
+                <p>Always dive with a certified operator and guide. 台灣潛水TaiwanDiveCenter and other licensed operators ensure safety and quality experiences.</p>
+            </div>
+            
+            <div class="tip-box">
+                <i class="fas fa-cloud-sun"></i>
+                <h3>Weather Conditions</h3>
+                <p>Check local weather and sea conditions before going out. Taiwan's weather can change quickly, especially in coastal areas.</p>
+            </div>
+
+            <div class="tip-box">
+                <i class="fas fa-tools"></i>
+                <h3>Equipment</h3>
+                <p>Many dive shops include equipment and tanks — confirm what's included in your package before booking.</p>
+            </div>
+
+            <div class="tip-box">
+                <i class="fas fa-ship"></i>
+                <h3>Transportation</h3>
+                <p>Some remote dive spots require boat transport. Plan accordingly and confirm transportation details with your operator.</p>
+            </div>
+
+            <div class="tip-box">
+                <i class="fas fa-hands-helping"></i>
+                <h3>Respect Marine Life</h3>
+                <p>Respect marine life and coral — maintain good buoyancy control and avoid touching or disturbing underwater creatures.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwanese Etiquette Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        h4 {
+            color: #8B1E1E;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .section ul, .section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        .etiquette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+        
+        .etiquette-card {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            border-top: 4px solid #8B1E1E;
+        }
+        
+        .etiquette-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .etiquette-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #8B1E1E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: white;
+            font-size: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .etiquette-title {
+            font-weight: 600;
+            color: #8B1E1E;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .practice-box {
+            background: #F4E8D8;
+            border-left: 5px solid #feb54f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .practice-box h4 {
+            color: #8B1E1E;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .practice-box h4 i {
+            margin-right: 8px;
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+        
+        .do-dont-container {
+            display: flex;
+            gap: 20px;
+            margin: 1.5rem 0;
+        }
+        
+        .do-box, .dont-box {
+            flex: 1;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .do-box {
+            background-color: #e8f5e9;
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .dont-box {
+            background-color: #ffebee;
+            border-left: 5px solid #f44336;
+        }
+        
+        .do-box h4, .dont-box h4 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .do-box h4 {
+            color: #2e7d32;
+        }
+        
+        .dont-box h4 {
+            color: #c62828;
+        }
+        
+        .do-box h4 i, .dont-box h4 i {
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .etiquette-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .do-dont-container {
+                flex-direction: column;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .etiquette-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/ethic.png" alt="People Talking" class="header-image">
+        <div class="header-content">
+            <h1>Taiwanese Etiquette Guide</h1>
+            <p>Understanding the cultural customs and social norms of Taiwan</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#greetings">Greetings</a></li>
+                <li><a href="#shoes">Shoes Off</a></li>
+                <li><a href="#temples">Temples</a></li>
+                <li><a href="#gifts">Gift Giving</a></li>
+                <li><a href="#chopsticks">Chopsticks</a></li>
+                <li><a href="#face">Face Culture</a></li>
+                <li><a href="#queueing">Queueing</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview" class="section">
+            <h2>A Deeper Dive into Taiwanese Etiquette</h2>
+            <p>Understanding the "why" behind these customs will help you navigate social situations with confidence and show respect for the local culture.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Cultural Insight:</strong> Taiwanese culture places a strong emphasis on harmony, respect, and collective well-being. These etiquette guidelines reflect values that have been shaped by Confucian principles and centuries of tradition.</p>
+            </div>
+        </section>
+
+        <section id="greetings" class="section">
+            <h2> Greetings</h2>
+            <p>While handshakes are common in business, a slight, graceful nod of the head or a very subtle bow is a traditional and deeply respected form of greeting. This gesture signifies humility and respect for the other person.</p>
+            
+            <div class="etiquette-grid">
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="etiquette-title">In Practice</div>
+                    <p>You don't need to perform a deep bow. A meaningful nod while making eye contact and offering a verbal greeting like "Nǐ hǎo" (Hello) is perfectly appropriate. The key is the intention behind it, showing that you are acknowledging the other person with respect.</p>
+                </div>
+                
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="etiquette-title">Cultural Significance</div>
+                    <p>This custom reflects the Confucian value of humility and the importance of showing respect to others, particularly elders and those in positions of authority.</p>
+                </div>
+            </div>
+            
+            <div class="do-dont-container">
+                <div class="do-box">
+                    <h4><i class="fas fa-check-circle"></i> Do</h4>
+                    <ul>
+                        <li>Use a slight nod or subtle bow</li>
+                        <li>Make eye contact while greeting</li>
+                        <li>Use appropriate verbal greetings</li>
+                        <li>Show humility and respect</li>
+                    </ul>
+                </div>
+                <div class="dont-box">
+                    <h4><i class="fas fa-times-circle"></i> Don't</h4>
+                    <ul>
+                        <li>Offer overly familiar physical contact</li>
+                        <li>Ignore proper greeting protocols with elders</li>
+                        <li>Make exaggerated or deep bows</li>
+                        <li>Forget to acknowledge people properly</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="shoes" class="section">
+            <h2>Shoes Off</h2>
+            <p>This custom is rooted in practicality and hygiene. The outside world is considered "dirty," and the inside of a home is a clean, protected space. Removing your shoes before entering is a way to keep this boundary intact.</p>
+            
+            <div class="etiquette-grid">
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="etiquette-title">In Practice</div>
+                    <p>This is non-negotiable in homes and also applies to many traditional inns (minsu), temples, and even some doctor's offices or spas. You will typically see a pile of shoes at the entrance or a designated shoe cabinet. It's a good idea to wear socks without holes or easily removable shoes. The host will often provide slippers for you to wear inside.</p>
+                </div>
+                
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="etiquette-title">Where It Applies</div>
+                    <p>Private homes, traditional inns (minsu), temples, some restaurants with tatami seating, certain clinics and spas, and sometimes even in modern apartments.</p>
+                </div>
+            </div>
+            
+            <div class="practice-box">
+                <h4>Pro Tip</h4>
+                <p>When visiting someone's home, observe what others are doing. If you see shoes at the entrance, follow suit. It's better to ask if you're unsure rather than assume it's okay to keep your shoes on.</p>
+            </div>
+        </section>
+
+        <section id="temples" class="section">
+            <h2>Attitude in Temples</h2>
+            <p>Temples are active places of worship, not just tourist attractions. Dressing modestly (covering shoulders and knees) shows respect for the deities and the devotees. Speaking quietly maintains the serene atmosphere necessary for prayer and meditation.</p>
+            
+            <div class="etiquette-grid">
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="etiquette-title">Photography Etiquette</div>
+                    <p>Before taking photos, always look for signs or observe if locals are doing so. Never use a flash on religious statues or artifacts, as it can be damaging and disruptive.</p>
+                </div>
+                
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-user-alt"></i>
+                    </div>
+                    <div class="etiquette-title">Respectful Conduct</div>
+                    <p>Avoid pointing your feet at altars or statues while sitting, as feet are considered the lowest and dirtiest part of the body. Maintain a quiet demeanor and observe how locals behave.</p>
+                </div>
+            </div>
+            
+            <div class="do-dont-container">
+                <div class="do-box">
+                    <h4><i class="fas fa-check-circle"></i> Do</h4>
+                    <ul>
+                        <li>Dress modestly (cover shoulders and knees)</li>
+                        <li>Speak quietly and maintain a respectful demeanor</li>
+                        <li>Observe photography rules and restrictions</li>
+                        <li>Follow the lead of local worshippers</li>
+                    </ul>
+                </div>
+                <div class="dont-box">
+                    <h4><i class="fas fa-times-circle"></i> Don't</h4>
+                    <ul>
+                        <li>Use flash photography</li>
+                        <li>Touch religious artifacts without permission</li>
+                        <li>Point your feet at altars or statues</li>
+                        <li>Disturb people who are praying or meditating</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="gifts" class="section">
+            <h2>Gift Giving</h2>
+            <p>Presenting or receiving anything, a gift, a business card, a purchase, even change, with both hands is a sign of full attention, sincerity, and respect. It shows you are honoring the transaction and the person you are interacting with.</p>
+            
+            <div class="etiquette-grid">
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <div class="etiquette-title">In Practice</div>
+                    <p>The recipient will likely also use both hands. They may not open the gift immediately, as this is done to avoid appearing greedy or being embarrassed if the gift is not what they expected. When paying for items in a store, it is polite to place the money on the small tray provided rather than handing it directly to the cashier.</p>
+                </div>
+                
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="etiquette-title">Gift Opening Customs</div>
+                    <p>Don't be offended if your gift isn't opened immediately. This is a common practice to show that the relationship is more important than the gift itself, and to avoid potential embarrassment for both giver and receiver.</p>
+                </div>
+            </div>
+            
+            <div class="practice-box">
+                <h4>Pro Tip</h4>
+                <p>When presenting a business card, hold it with both hands with the text facing the recipient so they can read it easily. Take a moment to look at the card you receive before putting it away.</p>
+            </div>
+        </section>
+
+        <section id="chopsticks" class="section">
+            <h2>Chopsticks</h2>
+            <p>Sticking chopsticks upright in a bowl of rice directly resembles the incense sticks burned for the dead in Buddhist and Taoist funeral rites. It is considered a terrible omen, symbolizing death and inviting bad luck.</p>
+            
+            <div class="etiquette-grid">
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="etiquette-title">In Practice</div>
+                    <p>If you need to set your chopsticks down, always place them across the rim of your bowl or on the provided chopstick rest. Never spear your food with them or use them to point at people.</p>
+                </div>
+                
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="etiquette-title">Additional Taboos</div>
+                    <p>Avoid passing food from your chopsticks directly to someone else's, as this also resembles a funeral ritual. Don't tap your chopsticks on bowls or plates, and don't use them to move bowls or plates around the table.</p>
+                </div>
+            </div>
+            
+            <div class="do-dont-container">
+                <div class="do-box">
+                    <h4><i class="fas fa-check-circle"></i> Do</h4>
+                    <ul>
+                        <li>Place chopsticks on the rest or bowl rim</li>
+                        <li>Use serving utensils for shared dishes</li>
+                        <li>Hold chopsticks properly</li>
+                        <li>Ask for help if you're unfamiliar with usage</li>
+                    </ul>
+                </div>
+                <div class="dont-box">
+                    <h4><i class="fas fa-times-circle"></i> Don't</h4>
+                    <ul>
+                        <li>Stick chopsticks upright in food</li>
+                        <li>Spear food with chopsticks</li>
+                        <li>Use them to gesture or point at people</li>
+                        <li>Pass food directly from your chopsticks to others</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="face" class="section">
+            <h2>Face Culture</h2>
+            <p>"Face" represents a person's reputation, dignity, and prestige. Causing someone to "lose face" through public criticism, anger, or direct confrontation is one of the most serious social faux pas. The goal is to maintain harmony and mutual respect at all times.</p>
+            
+            <div class="etiquette-grid">
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="etiquette-title">In Practice</div>
+                    <p>If you have a disagreement or complaint, address it calmly and privately. Be indirect and diplomatic. Taiwanese communication is often subtle, so pay attention to tone and non-verbal cues. A person may say "maybe" or "it might be difficult" when they actually mean "no."</p>
+                </div>
+                
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="etiquette-title">Giving Face</div>
+                    <p>You can "give face" by showing respect, offering sincere compliments (without exaggeration), and acknowledging someone's status or achievements appropriately. This helps build strong relationships.</p>
+                </div>
+            </div>
+            
+            <div class="practice-box">
+                <h4>Pro Tip</h4>
+                <p>When making requests or giving feedback, use indirect language. Instead of "This is wrong," try "Perhaps we could consider another approach." Pay attention to subtle cues like hesitation or avoidance of direct answers, which might indicate discomfort with your request.</p>
+            </div>
+        </section>
+
+        <section id="queueing" class="section">
+            <h2>Queueing</h2>
+            <p>This is a matter of collective efficiency and fairness. Pushing or cutting in line is seen as extremely selfish and disrespectful to everyone who is waiting their turn.</p>
+            
+            <div class="etiquette-grid">
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <div class="etiquette-title">In Practice</div>
+                    <p>You will see orderly lines for everything: the MRT, buses, night market stalls, and ticket counters. Always look for the end of the line. On escalators, especially in Taipei, the unwritten rule is to stand on the right and leave the left side clear for people who are in a hurry to walk up.</p>
+                </div>
+                
+                <div class="etiquette-card">
+                    <div class="etiquette-icon">
+                        <i class="fas fa-map-signs"></i>
+                    </div>
+                    <div class="etiquette-title">Public Transportation</div>
+                    <p>When using public transportation, wait for passengers to exit before boarding. Offer seats to elderly, pregnant, or disabled passengers. Keep your voice down and avoid loud conversations on phones.</p>
+                </div>
+            </div>
+            
+            <div class="do-dont-container">
+                <div class="do-box">
+                    <h4><i class="fas fa-check-circle"></i> Do</h4>
+                    <ul>
+                        <li>Form orderly lines and wait your turn</li>
+                        <li>Stand on the right side of escalators</li>
+                        <li>Let people exit before boarding transportation</li>
+                        <li>Be patient and respectful in queues</li>
+                    </ul>
+                </div>
+                <div class="dont-box">
+                    <h4><i class="fas fa-times-circle"></i> Don't</h4>
+                    <ul>
+                        <li>Cut in line or push ahead</li>
+                        <li>Block the left side of escalators</li>
+                        <li>Board before others have exited</li>
+                        <li>Become impatient or complain loudly</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
