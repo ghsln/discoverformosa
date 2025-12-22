@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Visitor Hotlines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Funnel+Sans:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #FF9800;
+            padding-bottom: 0.5rem;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .info-card {
+            background: linear-gradient(#ffffff, #fff8de69);
+            padding: 15px;
+            border-left: 4px solid #8B1E1E;
+            border-radius: 3px;
+        }
+
+        .info-card h4 {
+            color: #8B1E1E;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                padding: 0.7rem 0.8rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/hotline.jpg" alt="Customer Service" class="header-image">
+        <div class="header-content">
+            <h1>Taiwan Visitor Hotline</h1>
+            <p>Provides assistance and information for visitors traveling in Taiwan</p>
+        </div>
+    </div>
+    
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#visitor">Taiwan Visitor Hotline</a></li>
+                <li><a href="#important">Important Numbers</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>List of Useful Phone Numbers</h2>
+            <p>This list provides essential phone numbers in Taiwan that may be helpful in emergencies or daily situations. Keep these contacts handy to quickly reach the appropriate services when you need assistance.</p>
+        </section>
+        
+        <section id="visitor">
+            <h2><i class="fas fa-info-circle"></i> Taiwan Visitor Hotline</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Tourism Hotline</h4>
+                    <p><i class="fas fa-headset"></i> 0800-011-765 (Toll-free)</p>
+                </div>
+                
+                <div class="info-card">
+                    <h4>Emergency</h4>
+                    <p><i class="fas fa-hospital"></i> 119 (Ambulance/Fire)</p>
+                    <p><i class="fas fa-shield-alt"></i> 110 (Police)</p>
+                </div>
+                
+                <div class="info-card">
+                    <h4>24-hour Tourist Assistance</h4>
+                    <p><i class="fas fa-map-marked-alt"></i> 0800-024-111</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="important">
+            <h2><i class="fas fa-address-book"></i>  Important Numbers</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Foreign Affairs Police</h4>
+                    <p><i class="fas fa-gavel"></i> (02) 2381-7475</p>
+                </div>
+                <div class="info-card">
+                    <h4>Taiwan Taoyuan Airport</h4>
+                    <p><i class="fas fa-plane-departure"></i> (03) 273-5081</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

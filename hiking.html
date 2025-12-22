@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Hiking Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .hiking-trails {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 3rem;
+        }
+
+        .hiking-trails:hover {
+            transform: none;
+        }
+
+        .hiking-trails h2 {
+            color: #feb54f;
+        }
+        
+        .hiking-trails p {
+            color: #F4E8D8;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #2E7D32;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            padding-left: 10px;
+            border-left: 4px solid #FF9800;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .easy {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .medium {
+            background-color: #FF9800;
+            color: white;
+        }
+
+        .medium .trail-name {
+            color: #FF9800;
+        }
+        
+        .hard {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .hard .trail-name {
+            color: #f44336;
+        }
+        
+        .trail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .trail-grid p {
+            color: #333;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 3px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+        
+        .trail-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .trail-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .trail-card.easy::before {
+            background-color: #4CAF50;
+        }
+        
+        .trail-card.medium::before {
+            background-color: #FF9800;
+        }
+        
+        .trail-card.hard::before {
+            background-color: #f44336;
+        }
+        
+        .trail-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .trail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .trail-name {
+            font-weight: 700;
+            color: #2E7D32;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .trail-location {
+            color: #737373;
+            font-size: 1rem;
+        }
+
+        .trail-location i {
+            margin-right: 5px;
+        }
+        
+        .trail-features {
+            margin: 15px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .feature i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .easy .feature i {
+            color: #2E7D32;
+        }
+
+        .medium .feature i {
+            color: #feb54f;
+        }
+
+        .hard .feature i {
+            color: #f44336;
+        }
+        
+        .permit-notice {
+            background-color: #fff1f0;
+            border-left: 4px solid #f44336;
+            color: #333;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95rem;
+        }
+        
+        .highlight-box {
+            background: #F4E8D8;
+            border-left: 5px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            color: #333;
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        
+        .difficulty-section {
+            margin-bottom: 3rem;
+        }
+        
+        .sorting-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .sort-btn {
+            padding: 12px 24px;
+            margin: 0 8px 10px;
+            border: none;
+            border-radius: 30px;
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .sort-btn i {
+            margin-right: 8px;
+        }
+        
+        .sort-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .sort-btn.active {
+            background-color: #8B1E1E;
+            color: white;
+        }
+        
+        .sort-btn.all.active {
+            background-color: #0056b3;
+        }
+        
+        .sort-btn.easy.active {
+            background-color: #4CAF50;
+        }
+        
+        .sort-btn.medium.active {
+            background-color: #FF9800;
+        }
+        
+        .sort-btn.hard.active {
+            background-color: #f44336;
+        }
+        
+        .trail-card.hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .trail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .sort-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+                margin: 0 5px 8px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .trail-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/hiking.jpg" alt="Hiking" class="header-image">
+        <div class="header-content">
+            <h1>Hiking in Taiwan</h1>
+            <p>See the beauty of Taiwan from the mountain peaks</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#hiking-spots">Hiking Spots</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Taiwan Hiking Guide</h2>
+            <p>Taiwan offers an incredible diversity of hiking experiences, from leisurely urban trails to challenging alpine ascents. With over 200 peaks exceeding 3,000 meters, the island is a true paradise for outdoor enthusiasts.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Trail Tip:</strong> Always check weather conditions before heading out, carry sufficient water, and inform someone of your hiking plans. For high mountain hikes, permits are often required and should be applied for in advance.</p>
+            </div>
+        </section>
+
+        <section class="hiking-trails" id="hiking-spots">
+            <h2><i class="fas fa-hiking"></i>Hiking Trails</h2>
+            
+            <div class="sorting-container">
+                <button class="sort-btn all active" data-filter="all">
+                    All Trails
+                </button>
+                <button class="sort-btn easy" data-filter="easy">
+                    Easy Trails
+                </button>
+                <button class="sort-btn medium" data-filter="medium">
+                    Medium Trails
+                </button>
+                <button class="sort-btn hard" data-filter="hard">
+                    Hard Trails
+                </button>
+            </div>
+            
+            <div class="trail-grid" id="all-trails">
+                <div class="trail-card easy" data-difficulty="easy">
+                    <div class="trail-header">
+                        <div>
+                            <div class="trail-name">Elephant Mountain (象山)</div>
+                            <div class="trail-location"><i class="fas fa-map-marker-alt"></i>Taipei</div>
+                        </div>
+                        <span class="difficulty-badge easy">Easy</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/elephantmountain.jpg" alt="Elephant Mountain">
+                    </div>
+
+                    <div class="trail-features">
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>Duration: 1-2 hours round trip</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-mountain"></i>
+                            <span>Elevation: ~183 meters</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-camera"></i>
+                            <span>Best for: City views and photography</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>A short but steep climb offering the most iconic postcard view of Taipei 101 and the city. The trail consists mainly of stone steps and takes about 15-20 minutes to reach the main viewpoint.</p>
+                </div>
+                
+                <div class="trail-card easy" data-difficulty="easy">
+                    <div class="trail-header">
+                        <div>
+                            <div class="trail-name">Yangmingshan National Park (陽明山國家公園)</div>
+                            <div class="trail-location"><i class="fas fa-map-marker-alt"></i>Taipei</div>
+                        </div>
+                        <span class="difficulty-badge easy">Easy</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/yanmingshan.jpg" alt="Yangmingshan">
+                    </div>
+                    <div class="trail-features">
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>Duration: 2-4 hours depending on trail</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-mountain"></i>
+                            <span>Elevation: Varies by trail</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-volcano"></i>
+                            <span>Features: Volcanic landscapes, hot springs</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Offers many well-paved, gentle trails like the Qixing Mountain trail (to the main peak) with fantastic volcanic scenery and hot springs. The park features colorful flowers in spring and comfortable temperatures year-round.</p>
+                </div>
+
+                <div class="trail-card medium" data-difficulty="medium">
+                    <div class="trail-header">
+                        <div>
+                            <div class="trail-name">Taroko Gorge Trails (太魯閣峽谷)</div>
+                            <div class="trail-location"><i class="fas fa-map-marker-alt"></i>Hualien</div>
+                        </div>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/taorokonationalpark.jpg" alt="Taroko Gorge">
+                    </div>
+
+                    <div class="trail-features">
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>Duration: 2-5 hours depending on trail</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>Features: Marble gorge, rivers, tunnels</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-hard-hat"></i>
+                            <span>Note: Helmets required in some areas</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Trails like the Shakadang Trail and Baiyang Trail offer relatively flat walks with breathtaking views of marble cliffs and turquoise rivers. The gorge features some of Taiwan's most dramatic landscapes.</p>
+                </div>
+                
+                <div class="trail-card medium" data-difficulty="medium">
+                    <div class="trail-header">
+                        <div>
+                            <div class="trail-name">Alishan National Scenic Area (阿里山國家風景區)</div>
+                            <div class="trail-location"><i class="fas fa-map-marker-alt"></i>Chiayi County</div>
+                        </div>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/alishanforestrail.jpg" alt="Alishan Mountain">
+                    </div>
+
+                    <div class="trail-features">
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>Duration: Half-day to full day</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tree"></i>
+                            <span>Features: Ancient forests, sunrise views</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-train"></i>
+                            <span>Access: Forest railway available</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Famous for its sea of clouds, ancient cypress forests, and sunrise views over the mountains, accessible via forest railways and trails. The area is particularly magical at sunrise when the clouds form an ocean-like vista.</p>
+                </div>
+
+                <div class="trail-card hard" data-difficulty="hard">
+                    <div class="trail-header">
+                        <div>
+                            <div class="trail-name">Yushan Main Peak (玉山主峰)</div>
+                            <div class="trail-location"><i class="fas fa-map-marker-alt"></i>Yushan National Park</div>
+                        </div>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/yushannational.jpg" alt="Yu Mountain">
+                    </div>
+
+                    <div class="trail-features">
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>Duration: 2 days typically</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-mountain"></i>
+                            <span>Elevation: 3,952 meters</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-campground"></i>
+                            <span>Accommodation: Mountain lodge available</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>The highest peak in Northeast Asia at 3,952 meters. Requires a permit and good physical fitness, but the "roof of Taiwan" view is unparalleled. The hike typically takes 2 days with an overnight stay at Paiyun Lodge.</p>
+                    <div class="permit-notice">
+                        <strong>Permit Required:</strong> Apply well in advance through Yushan National Park website
+                    </div>
+                </div>
+                
+                <div class="trail-card hard" data-difficulty="hard">
+                    <div class="trail-header">
+                        <div>
+                            <div class="trail-name">Xue Mountain (Snow Mountain) (雪山)</div>
+                            <div class="trail-location"><i class="fas fa-map-marker-alt"></i>Shei-Pa National Park</div>
+                        </div>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/xuemountain.jpg" alt="Xue Mountain">
+                    </div>
+
+                    <div class="trail-features">
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>Duration: 2-3 days typically</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-mountain"></i>
+                            <span>Elevation: 3,886 meters</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-eye"></i>
+                            <span>Highlights: Holy Ridge, cirque landscape</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Taiwan's second-highest peak, famous for the stunning "Holy Ridge" and the cirque known as Snow Mountain's Main Peak. The trail features diverse landscapes including forests, alpine lakes, and dramatic ridgelines.</p>
+                    
+                    <div class="permit-notice">
+                        <strong>Permit Required:</strong> Apply through Shei-Pa National Park administration
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p><strong>High Mountain Preparation:</strong> For hard hikes, proper acclimatization is essential to avoid altitude sickness. Bring warm clothing regardless of season, as temperatures can drop below freezing at high elevations. Always hike with a partner and carry emergency supplies.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortButtons = document.querySelectorAll('.sort-btn');
+            const trailCards = document.querySelectorAll('.trail-card');
+            
+            sortButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    sortButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    trailCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.classList.remove('hidden');
+                        } else {
+                            const difficulty = card.getAttribute('data-difficulty');
+                            if (difficulty === filter) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        }
+                    });
+                    
+                    document.querySelector('.hiking-trails').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            });
+            
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

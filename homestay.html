@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Stays in Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(1, 0, 6, 0.2);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        .image-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+        
+        .content-image {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 3px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .hotel-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 1.5rem 0;
+        }
+        
+        .feature {
+            background: linear-gradient(#ffffff, #fff8de69);
+            padding: 15px;
+            border-radius: 3px;
+            border-left: 4px solid #8B1E1E;
+        }
+        
+        .feature h4 {
+            color: #8B1E1E;
+            margin-bottom: 5px;
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+        
+        .location-tag {
+            display: inline-block;
+            background-color: #8B1E1E;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        
+        .booking-btn {
+            display: inline-block;
+            background-color: #8B1E1E;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .booking-btn:hover {
+            background-color: #6d1616;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hotel-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .image-box {
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/homestay.webp" alt="Unique Stays in Taiwan" class="header-image">
+        <div class="header-content">
+            <h1>Unique Stays in Taiwan</h1>
+            <p>Experience memorable stays beyond standard hotels at leisure farms and themed resorts, perfect for families and culture seekers</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#miaoli-flower">Miaoli Flower Home</a></li>
+                <li><a href="#taiyi-farm">Taiyi Ecological Farm</a></li>
+                <li><a href="#fuwan-villa">Fuwan Villa</a></li>
+                <li><a href="#old-england">Old England Manor</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Unique Stays in Taiwan</h2>
+            <p>For a truly memorable experience beyond standard hotels, consider a stay at a leisure farm or themed resort. These are particularly popular for families or those seeking a deeper connection with Taiwan's nature and culture.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Note:</strong> Each unique stay offers distinctive amenities, locations, and experiences. Whether you're seeking a floral paradise, ecological immersion, culinary creativity, or historic European charm, these stays deliver unforgettable memories and deeper connections with Taiwan.</p>
+            </div>
+        </section>
+
+        <section id="miaoli-flower">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Miaoli</span>
+            <h2>Miaoli Flower Home Leisure Farm</h2>
+
+            <div class="image-box">
+                <img src="picture/flowerhome1.jpg" alt="Miaoli Flower Home" class="content-image">
+                <img src="picture/flowerhome2.jpg" alt="Miaoli Flower Home" class="content-image">
+                <img src="picture/flowerhome3.webp" alt="Miaoli Flower Home" class="content-image">
+            </div>
+
+            <p>A charming flower farm stay with only 18 exclusive rooms. It offers a resort-like feel with amenities like in-room bath bombs, aromatherapy foot soaks, and DIY activities such as making tea tree essential oil moisturizer.</p>
+
+            <p>The intimate setting provides a peaceful retreat surrounded by beautiful floral landscapes. Guests can enjoy personalized attention and participate in hands-on activities that connect them with local botanical products.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-seedling"></i> Exclusive</h4>
+                    <p>Only 18 exclusive rooms available</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-spa"></i> Amenities</h4>
+                    <p>In-room bath bombs and aromatherapy foot soaks</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-hands"></i> Activities</h4>
+                    <p>DIY activities like making tea tree moisturizer</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-leaf"></i> Setting</h4>
+                    <p>Resort-like feel in a floral paradise</p>
+                </div>
+            </div>
+            
+            <a href="" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+
+        <section id="taiyi-farm">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Nantou</span>
+            <h2>Taiyi Ecological Leisure Farm</h2>
+
+            <div class="image-box">
+                <img src="picture/taiyi1.jpg" alt="Taiyi Farm" class="content-image">
+                <img src="picture/taiyi2.jpg" alt="Taiyi Farm" class="content-image">
+                <img src="picture/taiyi3.jpg" alt="Taiyi Farm" class="content-image">
+            </div>
+
+            <p>Offers a unique choice between a modern resort and vintage single floating cabins over a pond. The farm also features environmentally friendly systems and beautiful gardens to explore.</p>
+            <p>This ecological haven allows guests to choose their preferred style of accommodation while being surrounded by sustainable practices and natural beauty. The floating cabins provide a particularly unique experience connected directly to the water environment.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-water"></i> Accommodation</h4>
+                    <p>Choice between modern resort or floating cabins</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-recycle"></i> Eco-Friendly</h4>
+                    <p>Environmentally friendly systems throughout</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-tree"></i> Nature</h4>
+                    <p>Beautiful gardens to explore</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-campground"></i> Unique</h4>
+                    <p>Vintage single floating cabins over a pond</p>
+                </div>
+            </div>
+            
+            <a href="#" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+
+        <section id="fuwan-villa">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Near Kaohsiung</span>
+            <h2>Fuwan Villa</h2>
+            
+            <div class="image-box">
+                <img src="picture/fuwan1.jpeg" alt="Fuwan Villa" class="content-image">
+                <img src="picture/fuwan2.jpg" alt="Fuwan Villa" class="content-image">
+                <img src="picture/fuwan3.jpg" alt="Fuwan Villa" class="content-image">
+            </div>
+
+            <p>A modern paradise known for its award-winning chocolate and seafood. You can learn about chocolate making and even create your own sakura prawn chocolates in their workshop.</p>
+            <p>Combining culinary excellence with comfortable accommodations, Fuwan Villa offers a unique experience where guests can indulge in gourmet creations while learning the art of chocolate making. The seafood offerings provide a delicious taste of local flavors.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-award"></i> Gourmet</h4>
+                    <p>Award-winning chocolate and seafood</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-graduation-cap"></i> Learning</h4>
+                    <p>Learn about chocolate making in workshops</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-cookie-bite"></i> Creativity</h4>
+                    <p>Create your own sakura prawn chocolates</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-utensils"></i> Culinary</h4>
+                    <p>Combines gourmet food with comfortable stay</p>
+                </div>
+            </div>
+            
+            <a href="https://www.agoda.com/en-in/fuwan-villa/hotel/pingtung-tw.html?cid=1844104&ds=W%2ButOqjX0kbMbCGq" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+
+        <section id="old-england">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Cingjing, Nantou</span>
+            <h2>Old England Manor</h2>
+            
+            <div class="image-box">
+                <img src="picture/england1.jpg" alt="Old England Manor" class="content-image">
+                <img src="picture/england2.webp" alt="Old England Manor" class="content-image">
+                <img src="picture/england3.webp" alt="Old England Manor" class="content-image">
+            </div>
+            
+            <p>This manor is designed to resemble a building from 18th or 19th century England, complete with antique decorations flown in from England. It offers a high level of privacy and unique facilities like the Shakespeare Hall, which transforms into an English bar at night.</p>
+            <p>Transport yourself to historical England without leaving Taiwan. The authentic decorations and architectural details create an immersive experience, while the Shakespeare Hall adds a unique social element that changes from day to evening.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-landmark"></i> Architecture</h4>
+                    <p>Resembles 18th/19th century England building</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-history"></i> Authenticity</h4>
+                    <p>Antique decorations flown in from England</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-theater-masks"></i> Facilities</h4>
+                    <p>Shakespeare Hall transforms into English bar at night</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-user-secret"></i> Privacy</h4>
+                    <p>High level of privacy for guests</p>
+                </div>
+            </div>
+            
+            <a href="https://www.agoda.com/en-za/the-old-england-hotel/hotel/nantou-tw.html?cid=1844104&ds=bIZWf0QcSlzabjv2" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+    </div>
+</body>
+</html>

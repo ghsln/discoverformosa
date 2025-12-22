@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hsinchu - Taiwan Travel Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        p {
+            color: #F4E8D8;
+            text-align: justify;
+        }
+        .city-hero {
+            position: relative;
+            height: 700px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .slideshow {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slideshow .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(70%);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow .slide.active {
+            opacity: 1;
+        }
+
+        .city-hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            color: white;
+            z-index: 2;
+        }
+
+        .city-hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .slide-btn {
+            position: absolute;
+            top: 50%;
+            height: 50px;
+            width: 50px;
+            transform: translateY(-50%);
+            background: rgba(188, 188, 188, 0.4);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 5px 16px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 3;
+            transition: background 0.3s ease;
+        }
+
+        .slide-btn:hover {
+            background: rgba(0,0,0,0.7);
+        }
+
+        .prev { left: 20px; }
+        .next { right: 20px; }
+
+        /* === SECTION TITLES === */
+        h2 {
+           margin: 50px 0 25px;
+            font-size: 30px;
+            font-weight: 700;
+            color: #feb54f;
+            border-bottom: 2px solid #feb54f;
+            padding-bottom: 8px;
+        }
+
+        .intro-text {
+            width: 100%;
+            max-width: 1200px; 
+            margin: 40px auto;
+            font-size: 18px;
+            line-height: 1.75;
+            color: #444;
+        }
+
+        /* === ATTRACTION CARDS GRID === */
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* === INDIVIDUAL ATTRACTION CARD === */
+        .attraction-card {
+            background: rgba(255, 255, 255, 0.877);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .attraction-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .attraction-card.hidden {
+            display: none;
+        }
+
+        .card-image {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-number {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-content {
+            padding: 16px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .card-description {
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .rating-value {
+            font-weight: bold;
+            margin-right: 5px;
+            font-size: 0.9rem;
+        }
+
+        .review-count {
+            color: #777;
+            font-size: 0.85rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #777;
+            padding-top: 12px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* === ICON BUTTONS (MAP, HEART, SHARE) === */
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .icon-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .icon-btn.saved {
+            background: #ff4757;
+            color: white;
+        }
+
+        /* === SEARCH AND SORT CONTROLS === */
+        .controls {
+            display: flex;
+            color: #F4E8D8;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-radius: 30px;
+        }
+
+        .sort-options select {
+            padding: 6px 12px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+            margin-left: 7px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 12px 8px 36px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* === INFO BOX === */
+        .info-box {
+            background: rgba(255, 255, 255, 0.877);
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .info-box p {
+            color: #333;
+        }
+
+        /* === KLOOK STYLE CARDS (HOTELS & RESTAURANTS) === */
+        .klook-grid {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: nowrap;
+        }
+
+        .klook-card {
+            min-width: 360px; 
+            max-width: 360px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.877);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .klook-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .klook-image {
+            height: 150px; 
+            overflow: hidden;
+        }
+
+        .klook-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .klook-content {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .klook-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #777;
+            padding-top: 12px;
+            margin-top: auto;
+        }
+
+        .scroll-container {
+            position: relative;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .scroll-wrapper {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            padding: 10px 0;
+            scrollbar-width: none;
+        }
+
+        .scroll-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(139, 30, 30, 0.9);
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-arrow:hover {
+            background: rgba(139, 30, 30, 1);
+        }
+
+        .scroll-arrow.left {
+            left: -60px;
+        }
+
+        .scroll-arrow.right {
+            right: -60px;
+        }
+
+        .scroll-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1300px) {
+            .scroll-arrow.left { left: 5px; }
+            .scroll-arrow.right { right: 5px; }
+            .scroll-wrapper { padding: 10px 40px; }
+        }
+
+        .klook-facilities {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin: 10px 0 14px;
+        }
+
+        .klook-facilities span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .facility-icon {
+            width: 22px;
+            height: 22px;
+        }
+
+        .klook-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #222;
+            line-height: 1.4;
+        }
+
+        .klook-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .klook-stars {
+            color: #feb54f;
+            margin-right: 6px;
+            font-size: 0.9rem;
+        }
+
+        .klook-review-count {
+            color: #777;
+            font-size: 0.85rem;
+        }
+
+        .klook-price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.1rem;
+        }
+
+        .klook-btn {
+            background: #8B1E1E;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .klook-btn:hover {
+            background: #691515;
+        }
+
+        /* === VIEW MORE BUTTON === */
+        .view-more {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .view-more-btn {
+            background: F4E8D8;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .view-more-btn:hover {
+            border-color: #8B1E1E;
+            color: #8B1E1E;
+        }
+
+        /* === TOAST NOTIFICATION === */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* === MOBILE RESPONSIVE === */
+        @media (max-width: 768px) {
+            /* Hide ONLY slideshow arrows on mobile */
+            .slide-btn {
+                display: none;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            /* 2 CARDS PER ROW ON MOBILE */
+            .attractions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .attraction-card {
+                max-width: 100%;
+            }
+            
+            .card-image {
+                height: 140px;
+            }
+            
+            .card-content {
+                padding: 10px;
+            }
+            
+            .card-title {
+                font-size: 0.9rem;
+                line-height: 1.3;
+            }
+            
+            .card-description {
+                font-size: 0.75rem;
+                line-height: 1.3;
+            }
+            
+            .card-rating {
+                font-size: 0.75rem;
+                margin-bottom: 8px;
+            }
+            
+            .stars {
+                font-size: 0.8rem;
+            }
+            
+            .rating-value {
+                font-size: 0.75rem;
+            }
+            
+            .review-count {
+                font-size: 0.7rem;
+            }
+            
+            .card-number {
+                width: 24px;
+                height: 24px;
+                font-size: 0.75rem;
+                top: 8px;
+                left: 8px;
+            }
+            
+            .price {
+                font-size: 0.85rem;
+            }
+            
+            .icon-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 0.75rem;
+            }
+            
+            .action-buttons {
+                gap: 4px;
+            }
+            
+            /* SMALLER HOTEL/RESTAURANT CARDS ON MOBILE */
+            .klook-card {
+                min-width: 280px;
+                max-width: 280px;
+            }
+            
+            .klook-image {
+                height: 120px;
+            }
+            
+            .klook-content {
+                padding: 12px;
+            }
+            
+            .klook-title {
+                font-size: 0.95rem;
+                line-height: 1.3;
+            }
+            
+            .klook-stars {
+                font-size: 0.85rem;
+            }
+            
+            .klook-review-count {
+                font-size: 0.75rem;
+            }
+            
+            .klook-price {
+                font-size: 0.95rem;
+            }
+            
+            .klook-btn {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+            }
+            
+            .klook-facilities {
+                font-size: 12px;
+                gap: 8px;
+                margin: 8px 0 10px;
+            }
+            
+            .facility-icon {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .city-hero {
+                height: 250px;
+            }
+            
+            .city-hero h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="header">
+    <img src="Places/Hsinchu/HsinchuBanner.jpg" alt="Hsinchu" class="header-image">
+    <div class="header-content">
+        <h1>Hsinchu County</h1>
+        <p>A scenic county of hills, historic towns, and traditional Hakka culture.</p>
+    </div>
+</div>
+
+<nav>
+    <div class="nav-container">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#attraction">Attractions</a></li>
+            <li><a href="#getting-there">Getting There</a></li>
+            <li><a href="#map">Attractions Map</a></li>
+            <li><a href="#hotel">Hotels</a></li>
+            <li><a href="#resto">Restaurants</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- HERO SECTION WITH SLIDESHOW -->
+    <div class="city-hero">
+        <div class="slideshow" id="overview">
+            <img src="Places/Hsinchu/Hsinchu1.jpg" class="slide active" alt="Hsinchu">
+            <img src="Places/Hsinchu/Hsinchu2.jpg" class="slide" alt="Hsinchu">
+            <img src="Places/Hsinchu/Hsinchu3.jpg" class="slide" alt="Hsinchu">
+            
+            <div class="city-hero-overlay">
+                <h1>Hsinchu</h1>
+                <p>A technology-driven city balanced by historic temples and coastal scenery.</p>
+            </div>
+
+            <button class="slide-btn prev">❮</button>
+            <button class="slide-btn next">❯</button>
+        </div>
+    </div>
+
+    <div class="intro-text">
+        <p>Hsinchu (新竹, Xīnzhú) is a high-tech city in northern Taiwan, famous for its Hsinchu Science and Industrial Park. Despite its modern technology focus, the city retains traditional charm through historic temples, old streets, and local cuisine, such as rice noodles and pork balls. Known as “The Windy City” for its frequent breezes, Hsinchu combines innovation, culture, and culinary delights, offering visitors a unique blend of heritage and modernity.</p>
+    </div>
+
+
+    <!-- ATTRACTIONS SECTION -->
+    <h2 id="attraction">Top Attractions in Hsinchu</h2>
+    <div class="controls">
+        <div class="sort-options">
+            <label for="sort">Sort by:</label>
+            <select id="sort">
+                <option value="recommended">Recommended</option>
+                <option value="rating">Rating</option>
+                <option value="reviews">Most Reviewed</option>
+            </select>
+        </div>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search attractions...">
+        </div>
+    </div>
+
+    <!-- ATTRACTIONS WILL APPEAR HERE -->
+    <div class="attractions-grid" id="attractionsContainer">
+        <!-- JavaScript will add cards here -->
+    </div>
+
+    <!-- VIEW MORE BUTTON -->
+    <div class="view-more">
+        <button class="view-more-btn">
+            <i class="fas fa-chevron-down"></i> Show More Attractions
+        </button>
+    </div>
+
+
+    <!-- GETTING AROUND INFO -->
+    <h2 id="getting-there">Getting There & Around</h2>
+    <div class="info-box">
+        <p><strong>Train:</strong> TRA connects to Hsinchu Station and neighboring regions.</p>
+<p><strong>Bus System:</strong> Local buses and long‑distance routes operate throughout.</p>
+<p><strong>YouBike:</strong> Bike share available around key urban zones.</p>
+
+
+    </div>
+    
+    <!-- TAIPEI ATTRACTIONS MAP -->
+    <h2 id="map">Hsinchu Attractions Map</h2>
+    <div class="info-box">
+        <div style="text-align: center; margin-bottom: 15px;">
+            <h3 style="color: #003B8E; margin-bottom: 10px;">Explore Hsinchu Attractions</h3>
+            <p style="color: #333;">Find all major attractions on the interactive map</p>
+        </div>
+        
+        <!-- Google Maps Embed -->
+        <div style="width: 100%; height: 500px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <iframe 
+                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.7342479460854!2d120.965808!3d24.804551899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346835c01a745827%3A0xf2c2c3f7f49ad88b!2sHsinchu%20Governor%20City%20God%20Temple!5e0!3m2!1sen!2stw!4v1766080521410!5m2!1sen!2stw" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- HOTELS SECTION -->
+<h2 id="hotel">Hotels in Hsinchu</h2>
+<div class="controls">
+    <div class="sort-options">
+        <label for="hotelSort">Sort by:</label>
+        <select id="hotelSort">
+            <option value="rating">Highest Rating</option>
+            <option value="priceLow">Price: Low to High</option>
+            <option value="priceHigh">Price: High to Low</option>
+        </select>
+    </div>
+</div>
+
+<div class="scroll-container">
+    <button class="scroll-arrow left" id="hotelScrollLeft">‹</button>
+    <div class="scroll-wrapper">
+        <div class="klook-grid" id="hotelContainer"></div>
+    </div>
+    <button class="scroll-arrow right" id="hotelScrollRight">›</button>
+</div>
+
+    <!-- RESTAURANTS SECTION -->
+<h2 id="resto">Restaurants in Hsinchu</h2>
+
+<div class="scroll-container">
+    <!-- LEFT ARROW -->
+    <button class="scroll-arrow left" id="restoScrollLeft">‹</button>
+
+    <!-- SCROLL AREA -->
+    <div class="scroll-wrapper">
+        <div class="klook-grid" id="restoContainer">
+<!-- RESTAURANT CARD 1 -->
+<div class="klook-card">
+    <div class="klook-image">
+        <img src="https://www.agoda.com/wp-content/uploads/2024/02/Hsinchu-Traditional-Taiwanese-food-rice-noodles-with-meat-sliced-in-soy-and-garlic-sauce.jpg" alt="Hsinchu Rice Noodles">
+    </div>
+    <div class="klook-content">
+        <div class="klook-title">Hsinchu Rice Noodles: City Signature Dish</div>
+        <div class="klook-rating">
+            <div class="klook-stars">★★★★★</div>
+            <span class="klook-review-count">19,600 reviews</span>
+        </div>
+        <div class="klook-footer">
+            <div class="klook-price">NT$70-140</div>
+            <a href="https://maps.google.com/?q=Hsinchu+Rice+Noodles" target="_blank" class="klook-btn">View on Google Maps ></a>
+        </div>
+    </div>
+</div>
+
+<!-- RESTAURANT CARD 2 -->
+<div class="klook-card">
+    <div class="klook-image">
+        <img src="https://www.wheregoesrose.com/wp-content/uploads/2020/10/vermicelli-noodles-taiwan-food-1024x971.jpg" alt="Chenghuang Temple Food">
+    </div>
+    <div class="klook-content">
+        <div class="klook-title">Chenghuang Temple Area: Famous Local Eats</div>
+        <div class="klook-rating">
+            <div class="klook-stars">★★★★★</div>
+            <span class="klook-review-count">26,300 reviews</span>
+        </div>
+        <div class="klook-footer">
+            <div class="klook-price">NT$50-150</div>
+            <a href="https://maps.google.com/?q=Hsinchu+Chenghuang+Temple" target="_blank" class="klook-btn">View on Google Maps ></a>
+        </div>
+    </div>
+</div>
+
+<!-- RESTAURANT CARD 3 -->
+<div class="klook-card">
+    <div class="klook-image">
+        <img src="https://images.happycow.net/venues/1024/93/80/hcmp93808_385988.jpeg" alt="Hsinchu Set Meal">
+    </div>
+    <div class="klook-content">
+        <div class="klook-title">Hsinchu Set Meal: Student-Friendly Prices</div>
+        <div class="klook-rating">
+            <div class="klook-stars">★★★★☆</div>
+            <span class="klook-review-count">4,260 reviews</span>
+        </div>
+        <div class="klook-footer">
+            <div class="klook-price">NT$120-200</div>
+            <a href="https://maps.google.com/?q=Hsinchu+Set+Meal" target="_blank" class="klook-btn">View on Google Maps ></a>
+        </div>
+    </div>
+</div>
+
+<!-- RESTAURANT CARD 4 -->
+<div class="klook-card">
+    <div class="klook-image">
+        <img src="data:image/webp;base64,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" alt="Hsinchu Dessert Cafe">
+    </div>
+    <div class="klook-content">
+        <div class="klook-title">Hsinchu Dessert Café: Cakes & Drinks</div>
+        <div class="klook-rating">
+            <div class="klook-stars">★★★★☆</div>
+            <span class="klook-review-count">3,540 reviews</span>
+        </div>
+        <div class="klook-footer">
+            <div class="klook-price">NT$80–150</div>
+            <a href="https://maps.google.com/?q=Hsinchu+Dessert+Cafe" target="_blank" class="klook-btn">View on Google Maps ></a>
+        </div>
+    </div>
+</div>
+ 
+<button class="scroll-arrow right" id="restoScrollRight">›</button>
+</div>
+
+    </div>
+
+</div>
+    </div>
+    <button class="scroll-arrow right" id="restoScrollRight">›</button>
+</div>
+
+</div> <!-- end container -->
+
+<!--TOAST NOTIFICATION (HIDDEN BY DEFAULT) -->
+<div class="toast" id="toast"></div>
+
+<script>
+
+    // Global saved items array
+    let savedItems = JSON.parse(localStorage.getItem('savedAttractions')) || [];
+    let showingAll = false;
+    const INITIAL_DISPLAY_COUNT = 6;
+
+    function handleSave(attractionId, attractionName) {
+        const index = savedItems.indexOf(attractionId);
+        
+        if (index === -1) {
+          //heart turned red
+            savedItems.push(attractionId);
+            showToast(`Saved ${attractionName} to your list`);
+        } else {
+        // heart turned normal
+            savedItems.splice(index, 1);
+            showToast(`Removed ${attractionName} from your list`);
+        }
+        
+        // Save to browser storage
+        localStorage.setItem('savedAttractions', JSON.stringify(savedItems));
+        
+        // Update the display to show red hearts for saved items
+        if (window.renderAttractions) {
+            window.renderAttractions();
+        }
+    }
+
+    function handleShare(attractionName, mapLink) {
+        if (navigator.share) {
+            navigator.share({
+                title: attractionName,
+                text: `Check out ${attractionName} in Taipei!`,
+                url: mapLink
+            });
+        } else {
+            navigator.clipboard.writeText(`${attractionName} - ${mapLink}`).then(() => {
+                showToast('Link copied to clipboard!');
+            });
+        }
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      // slideshow time
+        const slides = document.querySelectorAll('.slideshow .slide');
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            currentSlide = n;
+        }
+
+        function nextSlide() {
+            let next = currentSlide + 1;
+            if (next >= totalSlides) next = 0;
+            showSlide(next);
+        }
+
+        function prevSlide() {
+            let prev = currentSlide - 1;
+            if (prev < 0) prev = totalSlides - 1;
+            showSlide(prev);
+        }
+
+        // SLOWER SLIDESHOW - 6 SECONDS INSTEAD OF 4
+        function startSlideshow() {
+            slideInterval = setInterval(nextSlide, 6000);
+        }
+
+        function stopSlideshow() {
+            clearInterval(slideInterval);
+        }
+
+        // Event listeners
+        document.querySelector('.next').addEventListener('click', function() {
+            stopSlideshow();
+            nextSlide();
+            startSlideshow();
+        });
+
+        document.querySelector('.prev').addEventListener('click', function() {
+            stopSlideshow();
+            prevSlide();
+            startSlideshow();
+        });
+
+        document.querySelector('.slideshow').addEventListener('mouseenter', stopSlideshow);
+        document.querySelector('.slideshow').addEventListener('mouseleave', startSlideshow);
+
+        // START SLIDESHOW IMMEDIATELY
+        showSlide(0);
+        startSlideshow();
+        //attractions
+        const attractions = [
+        {
+    id: 1,
+    name: "Hsinchu City God Temple",
+    description: "Historic temple dedicated to the City God, surrounded by bustling food stalls.",
+    rating: 4.5,
+    reviews: 8234,
+    price: "Free",
+    image: "https://eng.taiwan.net.tw/att/1/big_scenic_spots/pic_447_14.jpg",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Hsinchu+City+God+Temple"
+},
+{
+    id: 2,
+    name: "Hsinchu Zoo",
+    description: "Taiwan's oldest zoo featuring diverse animals and family-friendly exhibits.",
+    rating: 4.4,
+    reviews: 6345,
+    price: "NT$50",
+    image: "https://tse2.mm.bing.net/th/id/OIP.-jjl1voHcmTjhoG7CPlROgHaE8?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Hsinchu+Zoo"
+},
+{
+    id: 3,
+    name: "Hsinchu Moat Park",
+    description: "Scenic park built around the historic moat with walking paths and gardens.",
+    rating: 4.3,
+    reviews: 5234,
+    price: "Free",
+    image: "https://thumbs.dreamstime.com/b/scenery-hsinchu-park-hsinchu-city-taiwan-scenery-hsinchu-park-hsinchu-city-taiwan-199194566.jpg",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Hsinchu+Moat+Park"
+},
+{
+    id: 4,
+    name: "Nanliao Fishing Port",
+    description: "Coastal port with seafood restaurants, cycling paths, and ocean views.",
+    rating: 4.4,
+    reviews: 7123,
+    price: "Free",
+    image: "https://taiwaneverything.cc/wp-content/uploads/2020/12/57.png",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Nanliao+Fishing+Port+Hsinchu"
+},
+{
+    id: 5,
+    name: "Green Grass Lake",
+    description: "Peaceful lake surrounded by greenery, ideal for walking and picnics.",
+    rating: 4.2,
+    reviews: 4321,
+    price: "Free",
+    image: "data:image/webp;base64,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",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Green+Grass+Lake+Hsinchu"
+},
+{
+    id: 6,
+    name: "Hsinchu Railway Station",
+    description: "Japanese-era station with classic architecture and cultural significance.",
+    rating: 4.3,
+    reviews: 5123,
+    price: "Free",
+    image: "https://tse2.mm.bing.net/th/id/OIP.dVjkbbNn64xVSXAGm0K5KwHaE8?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Hsinchu+Railway+Station"
+},
+{
+    id: 7,
+    name: "Eighteen Peaks Mountain",
+    description: "Popular hiking area with trails, city views, and natural scenery.",
+    rating: 4.5,
+    reviews: 6234,
+    price: "Free",
+    image: "https://eng.taiwan.net.tw/att/1/big_scenic_spots/pic_10867_2.jpg",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Eighteen+Peaks+Mountain+Hsinchu"
+},
+{
+    id: 8,
+    name: "Hsinchu Science Park Exhibition Hall",
+    description: "Interactive museum showcasing Taiwan's tech industry and innovations.",
+    rating: 4.4,
+    reviews: 3890,
+    price: "NT$100",
+    image: "https://th.bing.com/th/id/R.a8ceb1c15ea993d80a732fccae73a44a?rik=D184TCYf8rzwyg&pid=ImgRaw&r=0",
+    stars: "★★★★☆",
+    mapLink: "https://maps.google.com/?q=Hsinchu+Science+Park+Exhibition+Hall"
+}
+
+        ];
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+            
+            let starsHTML = '';
+            for (let i = 0; i < fullStars; i++) starsHTML += '<i class="fas fa-star"></i>';
+            if (halfStar) starsHTML += '<i class="fas fa-star-half-alt"></i>';
+            for (let i = 0; i < emptyStars; i++) starsHTML += '<i class="far fa-star"></i>';
+            return starsHTML;
+        }
+
+        // Make renderAttractions globally accessible
+        window.renderAttractions = function(attractionsToRender = attractions) {
+            const container = document.getElementById('attractionsContainer');
+            container.innerHTML = '';
+            
+            attractionsToRender.forEach((attraction, index) => {
+                const isSaved = savedItems.includes(attraction.id);
+                const card = document.createElement('div');
+                card.className = 'attraction-card';
+                
+                // Hide cards after the 6th one if not showing all
+                if (!showingAll && index >= INITIAL_DISPLAY_COUNT) {
+                    card.classList.add('hidden');
+                }
+                
+                card.innerHTML = `
+                    <div class="card-image">
+                        <img src="${attraction.image}" alt="${attraction.name}">
+                        <div class="card-number">${attraction.id}</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">${attraction.name}</div>
+                        <p class="card-description">${attraction.description}</p>
+                        <div class="card-rating">
+                            <div class="stars">${generateStars(attraction.rating)}</div>
+                            <span class="rating-value">${attraction.rating}</span>
+                            <span class="review-count">${attraction.reviews.toLocaleString()}</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="price">${attraction.price}</div>
+                            <div class="action-buttons">
+                                <button class="icon-btn" title="View on Map" onclick="window.open('${attraction.mapLink}', '_blank')">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </button>
+                                <button class="icon-btn ${isSaved ? 'saved' : ''}" title="${isSaved ? 'Remove from Saved' : 'Save for Later'}" onclick="handleSave(${attraction.id}, '${attraction.name}')">
+                                    <i class="${isSaved ? 'fas' : 'far'} fa-heart"></i>
+                                </button>
+                                <button class="icon-btn" title="Share" onclick="handleShare('${attraction.name}', '${attraction.mapLink}')">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            // Update button visibility and text
+            const viewMoreBtn = document.querySelector('.view-more');
+            const btn = document.querySelector('.view-more-btn');
+            
+            if (attractionsToRender.length > INITIAL_DISPLAY_COUNT) {
+                viewMoreBtn.style.display = 'block';
+                btn.innerHTML = showingAll 
+                    ? '<i class="fas fa-chevron-up"></i> Show Less Attractions'
+                    : '<i class="fas fa-chevron-down"></i> Show More Attractions';
+            } else {
+                viewMoreBtn.style.display = 'none';
+            }
+        }
+
+        function sortAttractions(sortBy) {
+            const sortedAttractions = [...attractions];
+            
+            switch(sortBy) {
+                case 'rating': sortedAttractions.sort((a, b) => b.rating - a.rating); break;
+                case 'reviews': sortedAttractions.sort((a, b) => b.reviews - a.reviews); break;
+                default: break;
+            }
+            
+            sortedAttractions.forEach((attraction, index) => {
+                attraction.id = index + 1;
+            });
+            
+            return sortedAttractions;
+        }
+
+        // 1. Define your hotel data in a list
+const hotelData = [
+{
+  "name": "Hotel Royal Hsinchu - Science park access",
+  "price": 4800,
+  "rating": 4.8,
+  "reviews": 763,
+  "image": "https://th.bing.com/th/id/OIP.GH8zhp1ru5d5VMAyKeof7gHaE8?w=280&h=187&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1",
+  "stars": "★★★★☆",
+  "link": "https://www.klook.com/en-HK/destination/c27456-hsinchu/3-hotel/",
+  "facilities": [
+    { "icon": "icons/gym.svg", "name": "Gym" },
+    { "icon": "icons/spa.svg", "name": "Spa" },
+    { "icon": "icons/wifi.svg", "name": "Wi-Fi" }
+  ]
+},
+{
+  "name": "Howard Plaza Hotel Hsinchu - City center stay",
+  "price": 4200,
+  "rating": 4.8,
+  "reviews": 1000,
+  "image": "https://th.bing.com/th/id/OIP.v9GrUlKnISYgvla9Zf79iQHaE8?w=291&h=194&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1",
+  "stars": "★★★★☆",
+  "link": "https://www.klook.com/en-HK/destination/c27456-hsinchu/3-hotel/",
+  "facilities": [
+    { "icon": "icons/gym.svg", "name": "Gym" },
+    { "icon": "icons/wifi.svg", "name": "Wi-Fi" }
+  ]
+},
+{
+  "name": "Lakeshore Hotel Hsinchu - Family-friendly facilities",
+  "price": 3900,
+  "rating": 4.9,
+  "reviews": 1000,
+  "image": "https://th.bing.com/th/id/OIP.9BuPlfRD2lpETp7BdfuUbQHaFj?w=232&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1",
+  "stars": "★★★★☆",
+  "link": "https://www.klook.com/en-US/hotels/city/27456-hsinchu-hotels/",
+  "facilities": [
+    { "icon": "icons/wifi.svg", "name": "Wi-Fi" }
+  ]
+},
+{
+  "name": "Fleur Lis Hotel Hsinchu - East district convenience",
+  "price": 3600,
+  "rating": 4.7,
+  "reviews": 422,
+  "image": "data:image/webp;base64,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",
+  "stars": "★★★★☆",
+  "link": "https://www.klook.com/en-PH/destination/c27456-hsinchu/3-hotel/",
+  "facilities": [
+    { "icon": "icons/gym.svg", "name": "Gym" },
+    { "icon": "icons/wifi.svg", "name": "Wi-Fi" }
+  ]
+}
+
+]
+
+
+// 2. Create the function that draws the cards on the screen
+function renderHotels(data) {
+    const container = document.getElementById('hotelContainer');
+    
+    container.innerHTML = data.map(hotel => {
+        const facilitiesHTML = hotel.facilities.map(f => `
+            <span><img src="${f.icon}" alt="${f.name}" class="facility-icon"> ${f.name}</span>
+        `).join('');
+
+        return `
+            <div class="klook-card">
+                <div class="klook-image"><img src="${hotel.image}" alt="${hotel.name}"></div>
+                <div class="klook-content">
+                    <div class="klook-title">${hotel.name}</div>
+                    <div class="klook-rating">
+                        <div class="klook-stars">${hotel.stars}</div>
+                        <span class="klook-review-count">${hotel.reviews.toLocaleString()} reviews</span>
+                    </div>
+                    
+                    <div class="klook-facilities">
+                        ${facilitiesHTML}
+                    </div>
+
+                    <div class="klook-footer">
+                        <div class="klook-price">NT$${hotel.price.toLocaleString()}</div>
+                        
+                        <a href="${hotel.link}" target="_blank" class="klook-btn">
+                            View on Klook >
+                        </a>
+
+                    </div>
+                </div>
+            </div>`;
+    }).join('');
+}
+// 3. Listen for when the user changes the "Sort by" dropdown
+document.getElementById('hotelSort').addEventListener('change', function() {
+    const criteria = this.value;
+    let sorted = [...hotelData];
+
+    if (criteria === 'priceLow') {
+        sorted.sort((a, b) => a.price - b.price);
+    } else if (criteria === 'priceHigh') {
+        sorted.sort((a, b) => b.price - a.price);
+    } else if (criteria === 'rating') {
+        sorted.sort((a, b) => b.rating - a.rating);
+    }
+
+    renderHotels(sorted); // Redraw the hotels in the new order
+});
+
+// 4. Run once on page load to show the hotels initially
+renderHotels(hotelData);
+
+// ========== SCROLL ARROWS FUNCTIONALITY ==========
+function setupScrollArrows(containerId, leftBtnId, rightBtnId) {
+    const container = document.querySelector(`#${containerId}`).closest('.scroll-wrapper');
+    const leftBtn = document.getElementById(leftBtnId);
+    const rightBtn = document.getElementById(rightBtnId);
+    
+    function updateArrows() {
+        const isAtStart = container.scrollLeft <= 0;
+        const isAtEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
+        
+        leftBtn.disabled = isAtStart;
+        rightBtn.disabled = isAtEnd;
+    }
+    
+    leftBtn.addEventListener('click', () => {
+        container.scrollBy({ left: -400, behavior: 'smooth' });
+        setTimeout(updateArrows, 300);
+    });
+    
+    rightBtn.addEventListener('click', () => {
+        container.scrollBy({ left: 400, behavior: 'smooth' });
+        setTimeout(updateArrows, 300);
+    });
+    
+    container.addEventListener('scroll', updateArrows);
+    updateArrows();
+}
+
+// Initialize scroll arrows for hotels and restaurants
+setupScrollArrows('hotelContainer', 'hotelScrollLeft', 'hotelScrollRight');
+setupScrollArrows('restoContainer', 'restoScrollLeft', 'restoScrollRight');
+
+        function sortHotels(sortBy) {
+    const cards = Array.from(document.querySelectorAll('#hotelContainer .klook-card'));
+
+    cards.sort((a, b) => {
+        const priceA = parseInt(a.querySelector('.klook-price').innerText.replace(/\D/g, ''));
+        const priceB = parseInt(b.querySelector('.klook-price').innerText.replace(/\D/g, ''));
+        const ratingA = a.querySelector('.klook-stars').innerText.length;
+        const ratingB = b.querySelector('.klook-stars').innerText.length;
+
+        if (sortBy === 'priceLow') return priceA - priceB;
+        if (sortBy === 'priceHigh') return priceB - priceA;
+        if (sortBy === 'rating') return ratingB - ratingA;
+    });
+
+    const container = document.getElementById('hotelContainer');
+    cards.forEach(card => container.appendChild(card));
+}
+
+
+        // Initialize
+        window.renderAttractions();
+        
+        document.getElementById('sort').addEventListener('change', function(e) {
+            const sortedAttractions = sortAttractions(e.target.value);
+            showingAll = false; // Reset to show only 6
+            window.renderAttractions(sortedAttractions);
+        });
+        
+        document.querySelector('.search-box input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredAttractions = attractions.filter(attraction => 
+                attraction.name.toLowerCase().includes(searchTerm) || 
+                attraction.description.toLowerCase().includes(searchTerm)
+            );
+            showingAll = false; // Reset to show only 6
+            window.renderAttractions(filteredAttractions);
+        });
+        
+        document.querySelector('.view-more-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showingAll = !showingAll;
+            window.renderAttractions();
+        
+            if (!showingAll) {
+                document.getElementById('attraction').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+    });
+    
+</script>
+</body>
+</html>
