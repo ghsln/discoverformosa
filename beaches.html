@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Beach Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#0056b3, #003B8E);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #1E5E8B;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .cards-scroll-container {
+            position: relative;
+            margin: 2rem 0 0;
+        }
+        
+        .scroll-cards {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0.5rem;
+            scroll-behavior: smooth;
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        
+        .scroll-cards::-webkit-scrollbar {
+            display: none; 
+        }
+        
+        .scroll-card {
+            flex: 0 0 350px;
+            background: linear-gradient(145deg, rgba(225, 240, 255, 0.9), rgba(227, 245, 255, 0.9));
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid #e3f2fd;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .scroll-card:hover {
+            transform: translateY(-10px);
+            border-color: #90caf9;
+        }
+        
+        .scroll-card h3 {
+            color: #1E5E8B;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'DM Serif Text', serif;
+        }
+        
+        .scroll-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            text-align: justify;
+        }
+        
+        .scroll-card-icon img {
+            height: 100%;
+            width: 300px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .scroll-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #90caf9;
+            color: #1565c0;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-nav-btn:hover {
+            background: #2196f3;
+            color: white;
+            border-color: #2196f3;
+        }
+        
+        .scroll-nav-btn.prev {
+            left: -25px;
+        }
+        
+        .scroll-nav-btn.next {
+            right: -25px;
+        }
+
+        .beach-spots-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .beach-spot-card {
+            background: linear-gradient(145deg, rgba(177, 219, 255, 0.9), rgba(245, 250, 255, 0.9));
+            border-radius: 15px;
+            padding: 1.8rem;
+            border: 2px solid #e3f2fd;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .beach-spot-card:hover {
+            transform: translateY(-10px);
+            border-color: #90caf9;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .beach-spot-card h3 {
+            color: #1E5E8B;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+            font-family: 'DM Serif Text', serif;
+            text-align: center;
+        }
+        
+        .location-tag {
+            display: inline-block;
+            background: #2196f3;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            align-self: center;
+        }
+        
+        .beach-spot-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .beach-spot-card p {
+            font-size: 1rem;
+            margin-bottom: 0;
+            text-align: justify;
+            flex-grow: 1;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 420px;
+            border: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .beach-spots-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            .scroll-card {
+                flex: 0 0 300px;
+            }
+            
+            .scroll-nav-btn {
+                display: none;
+            }
+            
+            .beach-spots-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .beach-spot-card {
+                padding: 1.5rem;
+            }
+            
+            .beach-spot-image {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links li {
+                padding: 0.8rem 1rem;
+            }
+            
+            .beach-spot-card {
+                padding: 1.2rem;
+            }
+            
+            .beach-spot-image {
+                height: 150px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/beachesexplore.jpg" alt="Taiwan Beach" class="header-image">
+        <div class="header-content">
+            <h1>Beaches of Taiwan</h1>
+            <p>Discover Taiwan's beautiful and diverse coastlines with golden sands, clear waters, and vibrant marine life</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#beaches">Most-visited Beaches</a></li>
+                <li><a href="#map">Beach Locations Map</a></li>
+                <li><a href="#spots">Beach Spots</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="section" id="overview">
+            <h2>Beaches in Taiwan</h2>
+            <p>While not as famous as other Southeast Asian destinations, Taiwan has beautiful and diverse coastlines. From golden sand beaches perfect for swimming and water sports to coral island paradises ideal for snorkeling, Taiwan offers a variety of beach experiences for every type of traveler.</p>
+        </div>
+
+        <div class="section" id="beaches">
+            <h2>Most-visited Beaches in Taiwan</h2>
+            
+            <div class="cards-scroll-container">
+                <button class="scroll-nav-btn prev" onclick="scrollCards(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="scroll-cards" id="beachCards">
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/fulongbeach.jpg" alt="Fulong Beach">
+                        </div>
+                        <h3>Fulong Beach</h3>
+                        <span class="location-tag">New Taipei City</span>
+                        <p>Famous for its golden sand and the annual Ho-Hai-Yan Rock Festival. The sandbar creates a calm swimming area perfect for families and swimmers of all levels. Located in New Taipei City, it's easily accessible from Taipei.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/baishawan.jpg" alt="Baishawan Beach">
+                        </div>
+                        <h3>Baishawan</h3>
+                        <span class="location-tag">New Taipei City</span>
+                        <p>A beautiful white sand bay with clear water, popular for swimming and water sports. Located in New Taipei City, Baishawan offers stunning views and excellent facilities for beachgoers looking for a relaxing day by the sea.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/kenting.jpg" alt="Kenting National Park">
+                        </div>
+                        <h3>Kenting National Park</h3>
+                        <span class="location-tag">Pingtung</span>
+                        <p>Taiwan's beach capital with Nanwan (South Bay) and Baisha (White Sand Bay) as top spots for sunbathing, swimming, and partying with a vibrant nightlife scene. This tropical paradise in Pingtung offers year-round beach enjoyment.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/xiaoliuqiu.jpg" alt="Xiaoliuqiu Island">
+                        </div>
+                        <h3>Xiaoliuqiu</h3>
+                        <span class="location-tag">Pingtung</span>
+                        <p>A coral island paradise perfect for snorkeling and swimming with sea turtles. Located off the coast of Pingtung, this small island offers crystal clear waters and abundant marine life, making it a favorite for underwater enthusiasts.</p>
+                    </div>
+                </div>
+                
+                <button class="scroll-nav-btn next" onclick="scrollCards(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="section" id="map">
+            <h2>Beach Locations Map</h2>
+            <p>Explore the best beach destinations across Taiwan. From the north coast's golden sands to the tropical beaches of the south, Taiwan offers diverse coastal experiences for every beach lover.</p>
+            
+            <div class="map-box">
+                <iframe 
+                    src="https://www.google.com/maps?q=Beaches+in+Taiwan&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="section" id="spots">
+            <h2>Beach Spots & Activities</h2>
+            
+            <div class="beach-spots-grid">
+                <div class="beach-spot-card">
+                    <img src="picture/sunbathing.jpg" class="beach-spot-image">
+                    <h3>Sunbathing & Relaxing</h3>
+                    
+                    <p>Just chill on the sand, read a book, nap, or enjoy the sunshine and sea breeze at beaches like 白沙灣/Baishawan or 福隆/Fulong.</p>
+                </div>
+                
+                <div class="beach-spot-card">
+                    <img src="picture/wading.jpg" class="beach-spot-image">
+                    <h3>Swimming & Wading</h3>
+                    <p>On calmer beaches (especially in the northeast like Fulong), you can swim or paddle in the water, keep in mind currents can be strong at many Taiwan beaches, so check local conditions.</p>
+                </div>
+                
+                <div class="beach-spot-card">
+                    <img src="picture/sandcastle.jpg" class="beach-spot-image">
+                    <h3>Building Sandcastle</h3>
+                    <p>Great for families and kids! Play beach volleyball, frisbee, or just build sandcastles on the wide sandy stretches.</p>
+                </div>
+                
+                <div class="beach-spot-card">
+                    <img src="picture/shell.jpeg" class="beach-spot-image">
+                    <h3>Shell Collecting & Rock Standing</h3>
+                    <p>Many beaches have shells and interesting stones for collecting or creative stacking. Qixingtan's pebble shore is famous for this.</p>
+                </div>
+               
+        </div>
+    </div>
+
+    <script>
+        function scrollCards(direction) {
+            const container = document.getElementById('beachCards');
+            const scrollAmount = 350; 
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

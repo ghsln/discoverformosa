@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry Blossoms in Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .cards-scroll-container {
+            position: relative;
+            margin: 2rem 0 0;
+        }
+        
+        .scroll-cards {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0.5rem;
+            scroll-behavior: smooth;
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        
+        .scroll-cards::-webkit-scrollbar {
+            display: none; 
+        }
+        
+        .scroll-card {
+            flex: 0 0 350px;
+            background: linear-gradient(145deg, rgba(255, 225, 225, 0.9), rgba(255, 227, 236, 0.9));
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid #ffebee;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .scroll-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffb6c1;
+        }
+        
+        .scroll-card h3 {
+            color: #8B1E1E;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'DM Serif Text', serif;
+        }
+        
+        .scroll-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            text-align: justify;
+        }
+        
+        .scroll-card-icon img {
+            height: 100%;
+            width: 300px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .scroll-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #ffb6c1;
+            color: #d81b60;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-nav-btn:hover {
+            background: #ff4081;
+            color: white;
+            border-color: #ff4081;
+        }
+        
+        .scroll-nav-btn.prev {
+            left: -25px;
+        }
+        
+        .scroll-nav-btn.next {
+            right: -25px;
+        }
+
+        .viewing-spots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .viewing-spot-card {
+            background: linear-gradient(145deg, rgba(255, 240, 245, 0.9), rgba(255, 245, 248, 0.9));
+            border-radius: 15px;
+            padding: 1.8rem;
+            border: 2px solid #ffebee;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .viewing-spot-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffb6c1;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .viewing-spot-card h3 {
+            color: #8B1E1E;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+            font-family: 'DM Serif Text', serif;
+            text-align: center;
+        }
+        
+        .season-tag {
+            display: inline-block;
+            background: #ff4081;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            align-self: center;
+        }
+        
+        .viewing-spot-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .viewing-spot-card p {
+            font-size: 1rem;
+            margin-bottom: 0;
+            text-align: justify;
+            flex-grow: 1;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 420px;
+            border: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .viewing-spots-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .sites-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            .scroll-card {
+                flex: 0 0 300px;
+            }
+            
+            .scroll-nav-btn {
+                display: none;
+            }
+            
+            .viewing-spots-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .viewing-spot-card {
+                padding: 1.5rem;
+            }
+            
+            .viewing-spot-image {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links li {
+                padding: 0.8rem 1rem;
+            }
+            
+            .viewing-spot-card {
+                padding: 1.2rem;
+            }
+            
+            .viewing-spot-image {
+                height: 150px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/cherryexplore.jpg" alt="Cherry Blossoms" class="header-image">
+        <div class="header-content">
+            <h1>Cherry Blossoms in Taiwan</h1>
+            <p>Bloom in early spring and are celebrated as a symbol of renewal and seasonal beauty</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#trees">Type of Trees</a></li>
+                <li><a href="#map">Map for Viewing Sites</a></li>
+                <li><a href="#see">Where to See</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="section" id="overview">
+            <h2>Cherry Blossoms in Taiwan</h2>
+            <p>Cherry blossoms in Taiwan bloom mainly from January to March, turning mountain areas and parks into popular seasonal attractions, especially in places like Yangmingshan, Alishan, Wuling Farm, and Sun Moon Lake. Influenced by Japan during the colonial period, cherry blossom viewing (hanami) has become a beloved spring activity, symbolizing renewal, beauty, and the arrival of warmer weather.</p>
+        </div>
+
+        <div class="section" id="trees">
+            <h2>Different Types of Cherry Trees</h2>
+            
+            <div class="cards-scroll-container">
+                <button class="scroll-nav-btn prev" onclick="scrollCards(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="scroll-cards" id="treeCards">
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/yoshino.jpg">
+                        </div>
+                        <h3>Yoshino Cherry</h3>
+                        <hr style="opacity:70%; margin-bottom:8px;">
+                        <p>The most famous variety with delicate pale pink blossoms that create stunning pink clouds when in full bloom. Yoshino cherries are often planted along streets and in parks, creating picturesque avenues of pink.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/formosan.jpeg">
+                        </div>
+                        <h3>Formosan Cherry</h3>
+                        <hr style="opacity:70%; margin-bottom:8px;">
+                        <p>Native to Taiwan, this variety features deep pink to red blossoms and is particularly hardy. It's commonly found in mountainous areas and blooms slightly earlier than other varieties, often starting in late January.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/doubleflowered.jpg">
+                        </div>
+                        <h3>Double-Flowered Cherry</h3>
+                        <hr style="opacity:70%; margin-bottom:8px;">
+                        <p>Known for their lush, multi-layered deep pink blossoms that create a particularly dramatic display. These trees bloom a bit later in the season and retain their flowers longer than single-petal varieties.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/mountaincherry.webp">
+                        </div>
+                        <h3>Mountain Cherry</h3>
+                        <hr style="opacity:70%; margin-bottom:8px;">
+                        <p>Thrives in higher altitudes with vibrant pink blossoms that contrast beautifully against the green mountain backdrop. These are especially spectacular in Taiwan's national parks and scenic areas.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/weeping.webp">
+                        </div>
+                        <h3>Weeping Cherry</h3>
+                        <hr style="opacity:70%; margin-bottom:8px;">
+                        <p>Characterized by drooping branches covered in pink blossoms, creating a waterfall effect of flowers. These are less common but create stunning focal points in gardens and parks.</p>
+                    </div>
+                </div>
+                
+                <button class="scroll-nav-btn next" onclick="scrollCards(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="section" id="map">
+            <h2>Map for Viewing Sites</h2>
+            <p>Explore the best cherry blossom viewing locations across Taiwan. The bloom typically starts in the southern regions and moves northward, with higher altitude locations blooming later in the season.</p>
+            
+            <div class="map-box">
+                <iframe 
+                    src="https://www.google.com/maps?q=Cherry+Blossom+Viewing+Spots+Taiwan&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="section" id="see">
+            <h2>Best Viewing Spots & Season</h2>
+            
+            <div class="viewing-spots-grid">
+                <div class="viewing-spot-card">
+                    <img src="picture/yangmingshancherry.jpg" alt="Yangmingshan National Park" class="viewing-spot-image">
+                    <h3>Yangmingshan National Park, Taipei</h3>
+                    <span class="season-tag">February - April</span>
+                    <p>One of the most famous spots, with cherry trees lining the roads and covering the hillsides. The park becomes a sea of pink during peak bloom, attracting thousands of visitors for hanami (flower viewing) parties and photography sessions.</p>
+                </div>
+                
+                <div class="viewing-spot-card">
+                    <img src="picture/alishanspring.jpg" alt="Alishan National Scenic Area" class="viewing-spot-image">
+                    <h3>Alishan National Scenic Area</h3>
+                    <span class="season-tag">March - April</span>
+                    <p>A magical experience with cherry blossoms set against a backdrop of misty mountains and ancient forests. The combination of cherry blossoms with the famous Alishan sunrise and forest railway creates an unforgettable scenic experience.</p>
+                </div>
+                
+                <div class="viewing-spot-card">
+                    <img src="picture/wulingspring.jpg" alt="Wuling Farm" class="viewing-spot-image">
+                    <h3>Wuling Farm (武陵農場), Taichung</h3>
+                    <span class="season-tag">February</span>
+                    <p>Known for its stunning, dense forests of cherry trees, it's one of the most picturesque and popular spots. The farm features various cherry varieties that bloom in succession, creating an extended viewing season within the area.</p>
+                </div>
+            </div>
+            
+            <p><strong>Season Overview:</strong> Generally from late January through April, moving from the south to the north and from low to high altitudes. The cherry blossom front moves up the island, allowing for extended viewing opportunities across different regions.</p>
+        </div>
+    </div>
+
+    <script>
+        function scrollCards(direction) {
+            const container = document.getElementById('treeCards');
+            const scrollAmount = 350; 
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

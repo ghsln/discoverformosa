@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Airports in Taiwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 0.8rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.4rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        li {
+            margin: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        i {
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+        
+        .airport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .airport-card {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid #e0e0e0;
+            border-top: 4px solid #8B1E1E;
+        }
+        
+        .airport-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .airport-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .airport-name {
+            font-weight: 700;
+            color: #8B1E1E;
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+        
+        .airport-code {
+            display: inline-block;
+            background-color: #8B1E1E;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .airport-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .features-list {
+            margin: 20px 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .feature-item i {
+            color: #8B1E1E;
+            margin-right: 12px;
+            margin-top: 3px;
+            min-width: 20px;
+        }
+        
+        .contact-box {
+            background: #F4E8D8;
+            border-left: 5px solid #feb54f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-box h4 {
+            color: #8B1E1E;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-box h4 i {
+            margin-right: 10px;
+        }
+        
+        .website-link {
+            display: inline-block;
+            background-color: #8B1E1E;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .website-link:hover {
+            background-color: #501111;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        .overview-section {
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .airport-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .airport-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .airport-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/taiwanairport.jpg" alt="Airport" class="header-image">
+        <div class="header-content">
+            <h1>International Airports in Taiwan</h1>
+            <p>Information about International Airports in Taiwan</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#taoyuan-airport">Taoyuan Airport (TPE)</a></li>
+                <li><a href="#songshan-airport">Songshan Airport (TSA)</a></li>
+                <li><a href="#kaohsiung-airport">Kaohsiung Airport (KHH)</a></li>
+                <li><a href="#taichung-airport">Taichung Airport (RMQ)</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview" class="section overview-section">
+            <h2>International Airports in Taiwan</h2>
+            <p>Taiwan has several major airports that serve international and domestic flights. The two busiest airports are Taiwan Taoyuan International Airport (TPE) in the north and Kaohsiung International Airport (KHH) in the south. Taipei Songshan Airport (TSA) and Taichung International Airport (RMQ) also provide international connections, especially for regional travel.</p>
+        </section>
+
+        <div class="airport-grid">
+            <div class="airport-card" id="taoyuan-airport">
+                <div class="airport-header">
+                    <div>
+                        <div class="airport-name">Taiwan Taoyuan International Airport <span class="airport-code">TPE</span></div>
+                    </div>
+                </div>
+                
+                <img src="picture/taoyuanairport.jpg" alt="Taoyuan Airport" class="airport-image">
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-plane-departure"></i>
+                        <span>Main gateway for international long-haul flights</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-subway"></i>
+                        <span>Direct MRT connection to Taipei and Taoyuan</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-route"></i>
+                        <span>Largest number of airlines and routes in Taiwan</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-building"></i>
+                        <span>Two terminals (T1 & T2), Terminal 3 under development</span>
+                    </div>
+                </div>
+
+                <hr style="opacity:40%; margin-bottom: 8px;">
+
+                <p>Taoyuan International Airport is the largest and busiest airport in Taiwan. Located in Taoyuan City, it mainly serves the northern region including Taipei. The airport currently has two terminals (T1 and T2), with a third terminal under construction. It is connected to Taipei and nearby cities via the Taoyuan Airport MRT and is about 40 minutes from Taipei by road.</p>
+                
+                <div class="contact-box">
+                    <h4><i class="fas fa-phone"></i> Contact Information</h4>
+                    <div class="feature-item">
+                        <span><strong>Immigration (Terminal 1):</strong> +886-3-3065081</span>
+                    </div>
+                    <div class="feature-item">
+                        <span><strong>Immigration (Terminal 2):</strong> +886-3-3065086</span>
+                    </div>
+                </div>
+                
+                <h3>Official Website</h3>
+                <a href="http://www.taoyuan-airport.com" target="_blank" class="website-link">Visit Official Website</a>
+            </div>
+
+            <div class="airport-card" id="songshan-airport">
+                <div class="airport-header">
+                    <div>
+                        <div class="airport-name">Taipei Songshan Airport <span class="airport-code">TSA</span></div>
+                    </div>
+                </div>
+                
+                <img src="picture/songshanairport.jpeg" alt="Songshan Airport" class="airport-image">
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Located in central Taipei</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-plane"></i>
+                        <span>Handles domestic flights and short-haul international routes</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Ideal for quick travel to/from Taipei</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-train"></i>
+                        <span>Easy access through Taipei MRT (Brown Line)</span>
+                    </div>
+                </div>
+                <hr style="opacity:40%; margin-bottom: 8px;">
+
+                <p>Taipei Songshan Airport is a centrally located "city airport" inside Taipei. It is convenient for travelers heading directly into the city. TSA serves both domestic routes (such as Penghu, Kinmen, and Taitung) and short-haul international destinations, mainly Japan and China.</p>
+                
+                <div class="contact-box">
+                    <h4><i class="fas fa-phone"></i> Contact Information</h4>
+                    <div class="feature-item">
+                        <span><strong>International Terminal:</strong> +886-2-8770-3430</span>
+                    </div>
+                </div>
+                
+                <h3>Official Website</h3>
+                <a href="https://www.tsa.gov.tw/?culture=2" target="_blank" class="website-link">Visit Official Website</a>
+            </div>
+
+            <div class="airport-card" id="kaohsiung-airport">
+                <div class="airport-header">
+                    <div>
+                        <div class="airport-name">Kaohsiung International Airport <span class="airport-code">KHH</span></div>
+                    </div>
+                </div>
+                
+                <img src="picture/kaohsiungairport.jpg" alt="Kaohsiung Airport" class="airport-image">
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Main airport for southern Taiwan (Kaohsiung, Pingtung, Kenting)</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-subway"></i>
+                        <span>MRT station directly connected to the airport</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-building"></i>
+                        <span>Two terminals (domestic & international)</span>
+                    </div>
+                </div>
+
+                <hr style="opacity:40%; margin-bottom: 8px;">
+                
+                <p>Kaohsiung International Airport serves southern Taiwan and is located in Siaogang District. It has separate terminals for domestic and international flights. The airport is very accessible thanks to the Kaohsiung MRT (Red Line), which has a station directly connected to the airport.</p>            
+                
+                <div class="contact-box">
+                    <h4><i class="fas fa-phone"></i> Contact Information</h4>
+                    <div class="feature-item">
+                        <span><strong>International Terminal:</strong> +886-7-8057631</span>
+                    </div>
+                </div>
+                
+                <h3>Official Website</h3>
+                <a href="https://www.kia.gov.tw/" target="_blank" class="website-link">Visit Official Website</a>
+            </div>
+
+            <div class="airport-card" id="taichung-airport">
+                <div class="airport-header">
+                    <div>
+                        <div class="airport-name">Taichung International Airport <span class="airport-code">RMQ</span></div>
+                    </div>
+                </div>
+                
+                <img src="picture/taichungairport.jpg" alt="Taichung Airport" class="airport-image">
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Convenient for travel to central Taiwan</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-plane"></i>
+                        <span>Handles international and domestic flights</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-user-check"></i>
+                        <span>Less busy and ideal for smooth arrivals</span>
+                    </div>
+                </div>
+                <hr style="opacity:40%; margin-bottom: 8px;">
+
+                <p>Taichung International Airport is located in the central-western part of Taiwan. It handles both domestic and international flights and is about 20 km from downtown Taichung. It is less crowded compared to Taoyuan Airport, making it a comfortable option for travelers visiting central Taiwan.</p>
+                                
+                <div class="contact-box">
+                    <h4><i class="fas fa-phone"></i> Contact Information</h4>
+                    <div class="feature-item">
+                        <span><strong>International Terminal:</strong> +886-7-8057631</span>
+                    </div>
+                </div>
+                
+                <h3>Official Website</h3>
+                <a href="https://www.kia.gov.tw/" target="_blank" class="website-link">Visit Official Website</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

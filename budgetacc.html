@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Accommodations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(1, 0, 6, 0.2);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        .image-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+        
+        .content-image {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 3px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .hotel-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 1.5rem 0;
+        }
+        
+        .feature {
+            background: linear-gradient(#ffffff, #fff8de69);
+            padding: 15px;
+            border-radius: 3px;
+            border-left: 4px solid #8B1E1E;
+        }
+        
+        .feature h4 {
+            color: #8B1E1E;
+            margin-bottom: 5px;
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+        
+        .location-tag {
+            display: inline-block;
+            background-color: #8B1E1E;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        
+        .booking-btn {
+            display: inline-block;
+            background-color: #8B1E1E;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .booking-btn:hover {
+            background-color: #6d1616;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hotel-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .image-box {
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/budget.jpg" alt="Budget Hostel" class="header-image">
+        <div class="header-content">
+            <h1>Budget Accommodations in Taiwan</h1>
+            <p>Discover affordable yet comfortable stays without compromising on quality and experience</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#star-hostel">Star Hostel</a></li>
+                <li><a href="#hotel-euphemia">Hotel Euphemia</a></li>
+                <li><a href="#fullon-poshtel">Fullon Poshtel</a></li>
+                <li><a href="#meander-hostel">Meander Hostel</a></li>
+                <li><a href="#journey-hostel">Journey Hostel</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Budget Accommodations in Taiwan</h2>
+            <p>Taiwan offers excellent budget accommodation options that provide comfort, convenience, and unique experiences without breaking the bank. From world-class hostels to stylish budget hotels, these properties prove that affordability doesn't mean sacrificing quality or memorable stays.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Note:</strong> Each accommodation featured below offers excellent value, combining affordability with unique features, prime locations, and quality amenities. Whether you're a solo traveler, backpacker, or budget-conscious tourist, Taiwan's budget accommodations deliver comfortable and memorable stays.</p>
+            </div>
+        </section>
+
+        <section id="star-hostel">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Taipei</span>
+            <h2>Star Hostel Taipei Main Station</h2>
+
+            <div class="image-box">
+                <img src="picture/starhostel.jpg" alt="Star Hostel" class="content-image">
+                <img src="picture/starhostel2.jpg" alt="Star Hostel" class="content-image">
+                <img src="picture/starhostel3.jpg" alt="Star Hostel" class="content-image">
+            </div>
+
+            <p>Often cited as one of the best hostels in the world, Star Hostel offers far more than a typical budget stay. Its prime location just a short walk from Taipei Main Station provides unparalleled access to trains, the MRT, and buses to every corner of the island.</p>
+
+            <p>The hostel is renowned for its spacious, light-filled common area with large wooden tables, a shared kitchen, and a self-service laundry facility. With a free simple breakfast, friendly and helpful staff, and both dormitory and private room options, it provides a social, clean, and incredibly convenient base for exploring Taipei.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-map-marker-alt"></i> Location</h4>
+                    <p>Prime location near Taipei Main Station</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-utensils"></i> Amenities</h4>
+                    <p>Free simple breakfast and self-service laundry</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-users"></i> Social Atmosphere</h4>
+                    <p>Spacious, light-filled common areas</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-bed"></i> Room Options</h4>
+                    <p>Both dormitory and private rooms available</p>
+                </div>
+            </div>
+            
+            <a href="https://www.klook.com/en-US/hotels/detail/271049-star-hostel-taipei-main-station/" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+
+        <section id="hotel-euphemia">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Taichung</span>
+            <h2>Hotel Euphemia</h2>
+
+            <div class="image-box">
+                <img src="picture/euphemia.jpg" alt="Euphemia" class="content-image">
+                <img src="picture/euphemia2.jpeg" alt="Euphemia" class="content-image">
+                <img src="picture/euphemia3.jpeg" alt="Euphemia" class="content-image">
+            </div>
+
+            <p>Perfect for foodies, Hotel Euphemia is strategically located less than a kilometer from the famous Fengjia Night Market, one of Taiwan's largest and most vibrant.</p>
+
+            <p>This modern hotel strikes a great balance between affordability and style, featuring an on-site bar and a fitness center.
+            The rooms are clean, comfortable, and equipped with air conditioning and free WiFi.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-utensils"></i> Foodie Paradise</h4>
+                    <p>Walking distance to Fengjia Night Market</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-dumbbell"></i> Facilities</h4>
+                    <p>On-site bar and fitness center</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-wifi"></i> Connectivity</h4>
+                    <p>Free WiFi in all rooms</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-snowflake"></i> Comfort</h4>
+                    <p>Air-conditioned, clean and comfortable rooms</p>
+                </div>
+            </div>
+            
+            <a href="https://www.klook.com/en-US/hotels/detail/1319762-hotel-euphemia/" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+
+        <section id="fullon-poshtel">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Kaohsiung</span>
+            <h2>Fullon Poshtel - Kaohsiung</h2>
+
+            <div class="image-box">
+                <img src="picture/fullonposhtel.jpg" alt="Fullon Poshtel" class="content-image">
+                <img src="picture/fullonposhtel2.jpg" alt="Fullon Poshtel" class="content-image">
+                <img src="picture/fullonposhtel3.jpg" alt="Fullon Poshtel" class="content-image">
+            </div>
+
+            <p>Breaking the mold of a standard hostel, Fullon Poshtel in Kaohsiung's Qianjin District offers a "poshtel" experience. It blends the social and affordable aspects of a hostel with the amenities of a higher-end hotel.</p>
+
+            <p>Guests can enjoy a fitness centre, a restaurant, and a shared lounge, which are rare finds in budget accommodations.
+            With its modern design and convenient facilities like a concierge and tour desk, it serves as a perfect, stylish hub for exploring Kaohsiung's art centers, Pier-2 Art District, and Ruifeng Night Market.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-crown"></i> Poshtel Concept</h4>
+                    <p>Hostel affordability with hotel amenities</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-dumbbell"></i> Premium Facilities</h4>
+                    <p>Fitness center and restaurant on-site</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-map"></i> Exploration Base</h4>
+                    <p>Perfect for exploring Kaohsiung's attractions</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-concierge-bell"></i> Services</h4>
+                    <p>Concierge and tour desk available</p>
+                </div>
+            </div>
+            
+            <a href="https://www.klook.com/hotels/detail/1262782-fullon-poshtel--kaohsiung/" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+
+        <section id="meander-hostel">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Taipei</span>
+            <h2>Meander Taipei Hostel</h2>
+
+            <div class="image-box">
+                <img src="picture/meandertaipei.jpg" alt="Meander Taipei" class="content-image">
+                <img src="picture/meandertaipei2.jpg" alt="Meander Taipei" class="content-image">
+                <img src="picture/meandertaipei3.jpg" alt="Meander Taipei" class="content-image">
+            </div>
+
+            <p>Situated in the heart of the bustling Ximending pedestrian shopping district, Meander Hostel is the go-to choice for travelers who want to be in the middle of the action. Ximending is packed with shops, street food stalls, theaters, and cafes.</p>
+
+            <p>The hostel itself is modern, secure, and features a vibrant common area that makes it easy to meet other travelers.
+            They offer both dorms and private rooms, along with helpful services like luggage storage and a shared kitchen. It's the perfect spot for young travelers looking for an energetic and central Taipei experience.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-map-marker-alt"></i> Prime Location</h4>
+                    <p>Heart of Ximending shopping district</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-users"></i> Social Vibe</h4>
+                    <p>Vibrant common area for meeting travelers</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-suitcase"></i> Services</h4>
+                    <p>Luggage storage and shared kitchen</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-bed"></i> Room Options</h4>
+                    <p>Both dorms and private rooms available</p>
+                </div>
+            </div>
+            
+            <a href="https://www.klook.com/en-US/hotels/detail/233515-meander-taipei-hostel--ximending/" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+
+        <section id="journey-hostel">
+            <span class="location-tag"><i class="fas fa-map-marker-alt"></i> Hualien</span>
+            <h2>Journey Hostel Hualien</h2>
+
+            <div class="image-box">
+                <img src="picture/journeyhostel.jpg" alt="Journey Hostel" class="content-image">
+                <img src="picture/journeyhostel2.webp" alt="Journey Hostel" class="content-image">
+                <img src="picture/journeyhostel3.webp" alt="Journey Hostel" class="content-image">
+            </div>
+
+            <p>For adventurers using Hualien as a gateway to the breathtaking Taroko Gorge, Journey Hostel is a top-tier choice. More like a boutique guesthouse than a simple hostel, it boasts a clean, minimalist design and a warm, welcoming atmosphere.</p>
+
+            <p>The staff are exceptionally knowledgeable and can assist with arranging scooter rentals and permits for visiting Taroko National Park.
+            With comfortable common areas perfect for relaxing after a day of hiking and both dorm and private rooms available, it provides a peaceful and social home base for exploring Taiwan's stunning east coast.</p>
+            
+            <div class="hotel-features">
+                <div class="feature">
+                    <h4><i class="fas fa-mountain"></i> Adventure Gateway</h4>
+                    <p>Perfect base for exploring Taroko Gorge</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-map"></i> Adventure Support</h4>
+                    <p>Help with scooter rentals and park permits</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-home"></i> Boutique Feel</h4>
+                    <p>Clean, minimalist design like a guesthouse</p>
+                </div>
+                <div class="feature">
+                    <h4><i class="fas fa-couch"></i> Relaxation</h4>
+                    <p>Comfortable common areas for post-hiking</p>
+                </div>
+            </div>
+            
+            <a href="https://www.klook.com/en-SG/hotels/detail/354803-journey-hostel--bar/" target="_blank" class="booking-btn">Book Your Stay</a>
+        </section>
+    </div>
+</body>
+</html>
