@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Temple Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .landmark {
+            background: none;
+            border: none;
+            transition: none;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .landmark h2 {
+            color: #e0e0e0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .maps-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            background-color: rgba(139, 30, 30, 0.9);
+            color: white;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .maps-btn:hover {
+            background-color: #501111;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .site-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.15) 0%, rgba(129, 176, 223, 0.25) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid rgba(139, 30, 30, 0.8);
+        }
+
+        .site-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        }
+
+        .site-card p {
+            font-size: 15px;
+            text-align: justify;
+            color: #f0f0f0;
+        }
+
+        .site-card hr {
+            opacity: 30%;
+            margin: 6px 0;
+            border: none;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .site-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(129, 176, 223, 0.3) 100%);
+        }
+        
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .site-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .site-location {
+            color: #f0f0f0;
+            font-size: 1rem;
+        }
+
+        .site-location i {
+            margin-right: 5px;
+        }
+        
+        .site-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .site-details {
+            margin: 15px 0;
+        }
+        
+        .detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #f0f0f0;
+        }
+        
+        .detail i {
+            margin-right: 10px;
+            width: 20px;
+            color: #ffcc00;
+        }
+
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+        
+        .arch-elements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 2rem;
+        }
+        
+        .arch-element {
+            background: linear-gradient(139deg, #ffa6a6, #ffda55);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            border-left: 4px solid #FF9800;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .arch-element:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+        }
+        
+        .arch-element h3 {
+            color: #f0f0f0;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            position: relative;
+        }
+        
+        .arch-element p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            color: #f0f0f0;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .arch-element-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .arch-element::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .sites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .arch-elements-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .arch-element {
+                min-height: 220px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sites-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/templesexplore.jpg" alt="Taiwan Temples" class="header-image">
+        <div class="header-content">
+            <h1>Taiwan's Temple Heritage</h1>
+            <p>Discover the vibrant centers of faith, art, and community life in Taiwan's temples</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#temples">Recommended Temples</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="section" id="overview">
+            <h2>Taiwan's Temple</h2>
+            <p>Taiwan's temples are vibrant centers of faith, art, and community life, blending Buddhism, Taoism, and folk deities. Taiwanese temples are often elaborate, multi-story structures adorned with intricate wood carvings, stone sculptures, and colorful porcelain cut-glass mosaics. They are not just places of worship but also social hubs. You'll often see people praying, making offerings, and seeking guidance from the gods using bwa bwei (moon blocks) and drawing lots.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Note:</strong> Taiwanese temples serve as community centers where people gather not only for religious purposes but also for cultural events, festivals, and social activities. They represent a unique fusion of spiritual beliefs and traditional craftsmanship.</p>
+            </div>
+        </div>
+
+        <div class="section" id="architecture">
+            <h2>Architectural Elements of Temples in Taiwan</h2>
+            
+            <div class="arch-elements-grid">
+                <div class="arch-element">
+                    <img src="picture/entrancehall.jpg" alt="Entrance Gate & Screen Wall" class="arch-element-img">
+                    <h3>Entrance Gate & Screen Wall (牌樓 & 照牆)</h3>
+                    <p>The temple complex often opens with a decorated gate followed by a screen wall that blocks direct view inside and is meant to ward off evil spirits.</p>
+                </div>
+                <div class="arch-element">
+                    <img src="picture/courtyard.jpg" alt="Temple Courtyard" class="arch-element-img">
+                    <h3>Courtyards (庭院)</h3>
+                    <p>Temples are usually arranged around one or more courtyards, creating a central axis leading deeper into the sacred space.</p>
+                </div>
+                <div class="arch-element">
+                    <img src="picture/fronthall.jpg" alt="Front Hall" class="arch-element-img">
+                    <h3>Front Hall / Sanchuan Dian (三川殿 / 前殿)</h3>
+                    <p>This is the first major hall you enter after the courtyard. It often contains the initial altars and the main entry points to the inner temple.</p>
+                </div>
+                <div class="arch-element">
+                    <img src="picture/mainhall.jpg" alt="Main Hall" class="arch-element-img">
+                    <h3>Main Hall (正殿 / 大殿)</h3>
+                    <p>The central and most sacred part of the temple where the principal deity's statue is enshrined. It's usually richly decorated and the tallest structure in the complex.</p>
+                </div>
+                <div class="arch-element">
+                    <img src="picture/rearhall.jpg" alt="Rear Hall" class="arch-element-img">
+                    <h3>Rear Hall (後殿)</h3>
+                    <p>Behind the main hall, this smaller space may house guest gods, ancestors, or additional deities.</p>
+                </div>
+                <div class="arch-element">
+                    <img src="picture/sidewing" alt="Side Wings" class="arch-element-img">
+                    <h3>Side Wings / Hulong (護龍)</h3>
+                    <p>These are buildings or covered walkways running alongside the main halls, often used for storage, offices, or community functions.</p>
+                </div>
+                <div class="arch-element">
+                    <img src="picture/curve.jpg" alt="Roof & Curved Eaves" class="arch-element-img">
+                    <h3>Roof & Curved Eaves</h3>
+                    <p>Taiwanese temples typically have beautiful curved roofs with swallowtail ridges and adorned with figures (dragons, phoenixes) that symbolize protection and blessings.</p>
+                </div>
+                <div class="arch-element">
+                    <img src="picture/beams.webp" alt="Decorative Beams" class="arch-element-img">
+                    <h3>Decorative Beams & Brackets (dougong & carvings)</h3>
+                    <p>Elaborate wooden or concrete supports, panels, and carvings are placed throughout the temple, reflecting mythological stories and craftsmanship.</p>
+                </div>
+                <div class="arch-element">
+                    <img src="picture/cassion.jpg" alt="Ceiling Caisson" class="arch-element-img">
+                    <h3>Ceiling & Caisson (藻井)</h3>
+                    <p>Inside the main hall, temples often have a carved and recessed ceiling feature (caisson) that adds height and focus to the sacred space.</p>
+                </div>
+                <div class="arch-element">
+                    <img src="picture/belltowers.jpg" alt="Bell & Drum Towers" class="arch-element-img">
+                    <h3>Bell & Drum Towers</h3>
+                    <p>Larger temple complexes sometimes include a bell tower and drum tower on either side of the courtyard, used for rituals and marking ceremonial time.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="landmark">
+            <h2>Recommended Temples</h2>
+            
+            <div class="sites-grid" id="temples">
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Longshan Temple (艋舺龍山寺)</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Taipei</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/longshantemple.jpg" alt="Longshan Temple">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-praying-hands"></i>
+                            <span>Deity: Guanyin (Goddess of Mercy)</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Opening Hours: 6:00 AM - 10:00 PM</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-star"></i>
+                            <span>Best Time to Visit: Evening</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>A premier example of Taiwanese classical architecture, dedicated to Guanyin (the Goddess of Mercy). It's a bustling and deeply spiritual place, especially at night when the lanterns are lit. The temple showcases exquisite craftsmanship with detailed carvings and artwork throughout.</p>
+                    
+                    <a href="https://maps.app.goo.gl/qjkfHuVwAxW3QyQC9" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Zhinan Temple (指南宮)</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Taipei</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/zhinantemple.jpg" alt="Zhinan Temple">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-praying-hands"></i>
+                            <span>Type: Taoist Temple</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Opening Hours: 6:00 AM - 8:00 PM</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-mountain"></i>
+                            <span>Location: Maokong Mountain</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>A grandiose Taoist temple complex on the slopes of Maokong, known for its stunning views and intricate details. The temple is dedicated to Lü Dongbin, one of the Eight Immortals in Taoist tradition. The complex includes multiple halls and offers panoramic views of Taipei.</p>
+                    
+                    <a href="https://maps.app.goo.gl/unv7U5MoEyzYMWGR6" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Lukang Tianhou Temple (鹿港天后宮)</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Changhua</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/lukangtemple.jpg" alt="Lukang Tianhou Temple">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-praying-hands"></i>
+                            <span>Deity: Mazu (Sea Goddess)</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-history"></i>
+                            <span>Established: 1590</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-star"></i>
+                            <span>Status: National Heritage Site</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>One of the oldest Mazu temples in Taiwan, it's a national heritage site of immense historical and artistic significance. The temple architecture features intricate wood carvings, stone sculptures, and ornate decorations that showcase traditional Taiwanese craftsmanship.</p>
+                    
+                    <a href="https://maps.app.goo.gl/K1k48gaTma2c2yKj7" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+                <div class="site-card">
+                    <div class="site-header">
+                        <div>
+                            <div class="site-name">Fo Guang Shan Monastery (佛光山)</div>
+                            <div class="site-location"><i class="fas fa-map-marker-alt"></i>Kaohsiung</div>
+                        </div>
+                    </div>
+                    <div class="site-image">
+                        <img src="picture/foguangshan.jpg" alt="Fo Guang Shan Monastery">
+                    </div>
+                    <hr>
+                    <div class="site-details">
+                        <div class="detail">
+                            <i class="fas fa-praying-hands"></i>
+                            <span>Type: Buddhist Monastery</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>Size: Over 30 hectares</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-monument"></i>
+                            <span>Feature: 40m Buddha Statue</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>One of the largest Buddhist monasteries in Taiwan, famous for its enormous Buddha statue and serene, expansive grounds. Founded by Venerable Master Hsing Yun, it serves as the headquarters of the Fo Guang Shan Buddhist order and promotes Humanistic Buddhism.</p>
+                    
+                    <a href="https://maps.app.goo.gl/rRoXfd1kHspPLU529" target="_blank" class="maps-btn">View on Maps</a>
+                </div>
+            </div>     
+        </div>
+    </div>
+</body>
+</html>

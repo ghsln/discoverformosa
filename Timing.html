@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Seasons & Weather Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(1, 0, 6, 0.2);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: #8B1E1E;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .nav-container ul {
+            margin-left: 0;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-image {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 1.5rem auto;
+            display: block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .content-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .season-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+        
+        .season-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #8B1E1E;
+        }
+        
+        .season-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .season-card h4 {
+            color: #8B1E1E;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .season-card .season-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .season-card.spring {
+            border-left-color: #4CAF50;
+        }
+        
+        .season-card.summer {
+            border-left-color: #FF5722;
+        }
+        
+        .season-card.autumn {
+            border-left-color: #FF9800;
+        }
+        
+        .season-card.winter {
+            border-left-color: #2196F3;
+        }
+        
+        .highlight-box {
+            background-color: #fff2df;
+            border-left: 4px solid #feb54f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background-color: #fff1f0;
+            border-left: 4px solid #f44336;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .festival-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+        
+        .festival-card {
+            background: linear-gradient(135deg, #198de6 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .festival-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .festival-card .festival-time {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .season-grid, .festival-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="cover/seasons.webp" alt="Taiwan Seasons" class="header-image">
+        <div class="header-content">
+            <h1>Taiwan's 4 Seasons</h1>
+            <p>Your complete guide to weather, climate, and the best times to visit Taiwan</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#best-months">Best Months</a></li>
+                <li><a href="#seasons">Seasons</a></li>
+                <li><a href="#festivals">Festivals</a></li>
+                <li><a href="#typhoon">Typhoon Info</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Taiwan's Climate</h2>
+            <img src="cover/weather.jpg" alt="Taiwan Weather" class="content-image">
+            <p>Taiwan experiences four distinct seasons, each offering unique experiences for travelers. The island's subtropical climate means warm summers, mild winters, and pleasant spring and autumn seasons. Understanding the weather patterns will help you plan the perfect trip and pack appropriately for your adventure.</p>
+        </section>
+
+        <section id="best-months">
+            <h2>Best Months to Visit Taiwan</h2>
+            <p>Choosing the right time to visit Taiwan can make a significant difference in your travel experience. Here are the most recommended periods:</p>
+            
+            <div class="season-grid">
+                <div class="season-card autumn">
+                    <h4>October to December</h4>
+                    <div class="season-label">★ Most Recommended ★</div>
+                    <p>Cool, dry, and comfortable weather makes autumn the ideal time to visit Taiwan. Perfect for outdoor activities, hiking, and exploring cities without the heat and humidity.</p>
+                    <ul>
+                        <li>Clear skies and low humidity</li>
+                        <li>Comfortable temperatures (20-28°C)</li>
+                        <li>Minimal rainfall</li>
+                        <li>Great visibility for mountain views</li>
+                    </ul>
+                </div>
+
+                <div class="season-card spring">
+                    <h4>March to May</h4>
+                    <div class="season-label">Spring Season</div>
+                    <p>Warm spring weather with flowers blooming throughout the island. A beautiful time to visit gardens, natural attractions, and enjoy outdoor activities.</p>
+                    <ul>
+                        <li>Flowers blooming everywhere</li>
+                        <li>Pleasant temperatures (18-28°C)</li>
+                        <li>Occasional rain showers</li>
+                        <li>Cherry blossoms in mountain areas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>Pro Tip:</strong> Book accommodations well in advance during October-November as this is peak tourist season due to the excellent weather conditions.</p>
+            </div>
+        </section>
+
+        <section id="seasons">
+            <h2>Weather by Season</h2>
+            <p>Each season in Taiwan has its own characteristics, advantages, and challenges. Here's what to expect throughout the year:</p>
+            
+            <div class="season-grid">
+                <div class="season-card spring">
+                    <h4>Spring (March-May)</h4>
+                    <div class="season-label">Mild & Beautiful</div>
+                    <p>Mild weather with occasional rain showers. Perfect for exploring outdoor attractions and enjoying the blooming flowers.</p>
+                    <ul>
+                        <li><strong>Temperature:</strong> 18-28°C</li>
+                        <li><strong>Rainfall:</strong> Moderate, occasional showers</li>
+                        <li><strong>Humidity:</strong> Comfortable</li>
+                        <li><strong>Best for:</strong> Flower viewing, hiking, city tours</li>
+                    </ul>
+                </div>
+
+                <div class="season-card summer">
+                    <h4>Summer (June-September)</h4>
+                    <div class="season-label">Hot & Humid</div>
+                    <p>Hot and humid with frequent showers. Late June to September can be challenging with high temperatures and significant rainfall. This is also typhoon season.</p>
+                    <ul>
+                        <li><strong>Temperature:</strong> 28-35°C</li>
+                        <li><strong>Rainfall:</strong> Heavy, frequent afternoon showers</li>
+                        <li><strong>Humidity:</strong> Very high</li>
+                        <li><strong>Best for:</strong> Beach activities, water sports</li>
+                        <li><strong>Warning:</strong> Typhoon season (July–October)</li>
+                    </ul>
+                </div>
+
+                <div class="season-card autumn">
+                    <h4>Autumn (October-November)</h4>
+                    <div class="season-label">Ideal Weather</div>
+                    <p>Clear skies and low humidity make autumn ideal for travel. The best season to explore Taiwan's mountains, beaches, and cities.</p>
+                    <ul>
+                        <li><strong>Temperature:</strong> 20-28°C</li>
+                        <li><strong>Rainfall:</strong> Minimal</li>
+                        <li><strong>Humidity:</strong> Low and comfortable</li>
+                        <li><strong>Best for:</strong> Everything! Hiking, cycling, sightseeing</li>
+                    </ul>
+                </div>
+
+                <div class="season-card winter">
+                    <h4>Winter (December-February)</h4>
+                    <div class="season-label">Cool to Mild</div>
+                    <p>Cold in the north (10–15°C), mild in the south (15–20°C). Good time to visit hot springs and enjoy winter scenery.</p>
+                    <ul>
+                        <li><strong>North Temperature:</strong> 10–15°C</li>
+                        <li><strong>South Temperature:</strong> 15–20°C</li>
+                        <li><strong>Rainfall:</strong> Light in the north</li>
+                        <li><strong>Best for:</strong> Hot springs, winter festivals</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="festivals">
+            <h2>Festivals and Events</h2>
+            <p>Taiwan's festivals are vibrant celebrations that offer deep insights into local culture. Plan your visit around these events for a unique and memorable experience.</p>
+            
+            <div class="festival-grid">
+                <div class="festival-card">
+                    <h4> Lunar New Year</h4>
+                    
+                    <div class="festival-time">January–February</div>
+                    <p>Taiwan's biggest holiday with cultural events everywhere. Note that many shops may close, but temples and cultural activities are in full swing.</p>
+                    <ul>
+                        <li>Temple fairs and parades</li>
+                        <li>Fireworks displays</li>
+                        <li>Traditional performances</li>
+                        <li>Many shops may be closed</li>
+                    </ul>
+                </div>
+
+                <div class="festival-card">
+                    <h4> Lantern Festival</h4>
+                    <div class="festival-time">February–March</div>
+                    <p>Beautiful lantern displays in many cities throughout Taiwan. A spectacular visual experience not to be missed.</p>
+                    <ul>
+                        <li>Giant lantern installations</li>
+                        <li>Sky lantern releases</li>
+                        <li>Cultural performances</li>
+                        <li>Traditional games and activities</li>
+                    </ul>
+                </div>
+
+                <div class="festival-card">
+                    <h4> Dragon Boat Festival</h4>
+                    <div class="festival-time">June</div>
+                    <p>Exciting dragon boat races and traditional food (zongzi - rice dumplings). A thrilling cultural spectacle.</p>
+                    <ul>
+                        <li>Dragon boat racing competitions</li>
+                        <li>Traditional zongzi (rice dumplings)</li>
+                        <li>Riverside festivities</li>
+                        <li>Cultural demonstrations</li>
+                    </ul>
+                </div>
+
+                <div class="festival-card">
+                    <h4> Mid-Autumn Festival</h4>
+                    <div class="festival-time">September</div>
+                    <p>Mooncakes and BBQ gatherings everywhere. A festive time when families and friends come together.</p>
+                    <ul>
+                        <li>Mooncake tastings</li>
+                        <li>Outdoor BBQ parties</li>
+                        <li>Pomelo fruit eating</li>
+                        <li>Moon viewing activities</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="typhoon">
+            <h2>Typhoon Season Information</h2>
+            <img src="cover/typhoonseason.avif" alt="Typhoon Season" class="content-image">
+            <p>Typhoons are tropical storms that can affect Taiwan, particularly during the summer and early autumn months. Being prepared and informed is essential for travelers during this period.</p>
+            
+            <div class="warning-box">
+                <p><strong>⚠️ Typhoon Season: July to October</strong></p>
+                <p>Typhoons usually occur between July and October, with peak activity in August and September. Travelers should monitor weather news during this period and be prepared for potential disruptions.</p>
+            </div>
+
+            <h3>What to Expect During Typhoon Season</h3>
+            <ul>
+                <li><strong>Flight Cancellations:</strong> International and domestic flights may be delayed or cancelled</li>
+                <li><strong>Transportation Disruptions:</strong> Trains, buses, and ferries may suspend services</li>
+                <li><strong>Heavy Rainfall:</strong> Intense rain and strong winds lasting 1-3 days</li>
+                <li><strong>Business Closures:</strong> Shops, restaurants, and attractions may close temporarily</li>
+            </ul>
+
+            <h3>Safety Tips</h3>
+            <ul>
+                <li>Monitor weather forecasts from the Central Weather Bureau</li>
+                <li>Follow local news and government announcements</li>
+                <li>Stay indoors during typhoon warnings</li>
+                <li>Stock up on water, food, and essential supplies</li>
+                <li>Keep your phone charged and have a power bank ready</li>
+                <li>Contact your hotel or accommodation for safety procedures</li>
+                <li>Have travel insurance that covers weather-related disruptions</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Important:</strong> Most typhoons pass within 1-2 days. Taiwan has excellent infrastructure and preparedness systems in place. Local authorities are very experienced in handling typhoons and will keep residents and visitors safe.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Packing Tips by Season</h2>
+            <p>Pack smart based on when you're visiting Taiwan:</p>
+            
+            <h3>Spring (March–May)</h3>
+            <ul>
+                <li>Light layers (t-shirts, light sweaters)</li>
+                <li>Rain jacket or umbrella</li>
+                <li>Comfortable walking shoes</li>
+                <li>Sunscreen and sunglasses</li>
+            </ul>
+
+            <h3>Summer (June–September)</h3>
+            <ul>
+                <li>Light, breathable clothing</li>
+                <li>Strong sunscreen (SPF 50+)</li>
+                <li>Hat and sunglasses</li>
+                <li>Rain gear (waterproof jacket, umbrella)</li>
+                <li>Mosquito repellent</li>
+            </ul>
+
+            <h3>Autumn (October–November)</h3>
+            <ul>
+                <li>Light to medium layers</li>
+                <li>Long sleeve shirts for cooler evenings</li>
+                <li>Comfortable walking shoes</li>
+                <li>Light jacket</li>
+            </ul>
+
+            <h3>Winter (December–February)</h3>
+            <ul>
+                <li>Warm jacket or coat (especially for northern Taiwan)</li>
+                <li>Long pants and warm layers</li>
+                <li>Scarf and light gloves for mountain areas</li>
+                <li>Comfortable closed-toe shoes</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Final Travel Tip:</strong> For the best overall experience, plan your visit during October to December or March to May. Avoid summer months (June–September) if you're sensitive to heat and humidity. Always check weather forecasts a week before your trip and pack accordingly!</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

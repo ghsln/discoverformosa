@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwanese Tea Culture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #4A235A;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .cards-scroll-container {
+            position: relative;
+            margin: 2rem 0 0;
+        }
+        
+        .scroll-cards {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0.5rem;
+            scroll-behavior: smooth;
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        
+        .scroll-cards::-webkit-scrollbar {
+            display: none; 
+        }
+        
+        .scroll-card {
+            flex: 0 0 350px;
+            background: linear-gradient(145deg, rgba(232, 245, 233, 0.9), rgba(240, 248, 233, 0.9));
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid #E8F5E9;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .scroll-card:hover {
+            transform: translateY(-10px);
+            border-color: #C8E6C9;
+        }
+        
+        .scroll-card h3 {
+            color: #4A235A;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'DM Serif Text', serif;
+        }
+        
+        .scroll-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            text-align: justify;
+        }
+        
+        .scroll-card-icon img {
+            height: 100%;
+            width: 300px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .scroll-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #C8E6C9;
+            color: #388E3C;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-nav-btn:hover {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+        
+        .scroll-nav-btn.prev {
+            left: -25px;
+        }
+        
+        .scroll-nav-btn.next {
+            right: -25px;
+        }
+
+        .viewing-spots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .viewing-spot-card {
+            background: linear-gradient(145deg, rgba(240, 248, 233, 0.9), rgba(232, 245, 233, 0.9));
+            border-radius: 15px;
+            padding: 1.8rem;
+            border: 2px solid #E8F5E9;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .viewing-spot-card:hover {
+            transform: translateY(-10px);
+            border-color: #C8E6C9;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .viewing-spot-card h3 {
+            color: #4A235A;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+            font-family: 'DM Serif Text', serif;
+            text-align: center;
+        }
+        
+        .type-tag {
+            display: inline-block;
+            background: #388E3C;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            align-self: center;
+        }
+        
+        .viewing-spot-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .viewing-spot-card p {
+            font-size: 1rem;
+            margin-bottom: 0;
+            text-align: justify;
+            flex-grow: 1;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 420px;
+            border: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .viewing-spots-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .sites-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            .scroll-card {
+                flex: 0 0 300px;
+            }
+            
+            .scroll-nav-btn {
+                display: none;
+            }
+            
+            .viewing-spots-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .viewing-spot-card {
+                padding: 1.5rem;
+            }
+            
+            .viewing-spot-image {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links li {
+                padding: 0.8rem 1rem;
+            }
+            
+            .viewing-spot-card {
+                padding: 1.2rem;
+            }
+            
+            .viewing-spot-image {
+                height: 150px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/tea.jpg" alt="Taiwanese Tea Culture" class="header-image">
+        <div class="header-content">
+            <h1>Taiwanese Tea Culture</h1>
+            <p>A rich tradition blending Chinese heritage with local innovation, rooted in history and vibrant in daily life</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#traditions">Core Traditions</a></li>
+                <li><a href="#teas">Unique Teas</a></li>
+                <li><a href="#integration">Cultural Integration</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="section" id="overview">
+            <h2>Taiwanese Tea Culture</h2>
+            <p>Taiwan’s tea culture is rich, deeply rooted in history, and a vibrant part of daily life and social rituals. It blends traditional Chinese tea heritage with local Taiwanese innovation and practices, giving it a unique character you’ll notice whether you’re in a tea house, a mountain village, or just sitting down with friends.</p>
+        </div>
+
+        <div class="section" id="traditions">
+            <h2>Core Traditions & Philosophy</h2>
+            
+            <div class="cards-scroll-container">
+                <button class="scroll-nav-btn prev" onclick="scrollCards(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="scroll-cards" id="traditionCards">
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/gongfu_tea.jpg">
+                        </div>
+                        <h3>Gongfu Tea (工夫茶)</h3>
+                        <hr style="opacity:70%; margin-bottom:8px;">
+                        <p>This ceremonial-style brewing method is one of the most distinctive aspects of Taiwanese tea culture. It emphasizes skillful preparation, multiple infusions of the same leaves, and savoring subtle aromas and flavors. Tea is brewed carefully in small pots, with attentiveness and patience being part of the experience.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/tea_social.jpeg">
+                        </div>
+                        <h3>Tea as Social Practice</h3>
+                        <hr style="opacity:70%; margin-bottom:8px;">
+                        <p>Drinking tea isn’t just about quenching thirst, it’s a social activity. Teahouses (茶藝館/茶坊) are venues for conversation, relaxation, hospitality, and community gatherings. Serving tea to guests is a sign of respect and warmth.</p>
+                    </div>
+                    
+                    <div class="scroll-card">
+                        <div class="scroll-card-icon">
+                            <img src="picture/tea_hospitality.jpg">
+                        </div>
+                        <h3>Tea & Hospitality</h3>
+                        <hr style="opacity:70%; margin-bottom:8px;">
+                        <p>Offering tea to guests at home or in business settings is a form of courtesy and bonding. It reflects the deep integration of tea into social etiquette and relationship building in Taiwanese culture.</p>
+                    </div>
+                </div>
+                
+                <button class="scroll-nav-btn next" onclick="scrollCards(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="section" id="teas">
+            <h2>Teas Unique to Taiwan</h2>
+            <p>Taiwan produces many famous teas, many of which have global recognition for quality, especially oolongs.</p>
+            
+            <div class="viewing-spots-grid">
+                <div class="viewing-spot-card">
+                    <img src="picture/highmountainoolong.webp" alt="High-Mountain Oolong" class="viewing-spot-image">
+                    <h3>High-Mountain (高山) Oolong</h3>
+                    <span class="type-tag">Oolong Tea</span>
+                    <p>Grown at elevations above 1,000 m (e.g., Alishan, Lishan), these teas are sweet, fragrant, and smooth. They represent some of Taiwan's most prized tea productions.</p>
+                </div>
+                
+                <div class="viewing-spot-card">
+                    <img src="picture/dongding.avif" alt="Dong Ding Oolong" class="viewing-spot-image">
+                    <h3>Dong Ding (凍頂烏龍)</h3>
+                    <span class="type-tag">Oolong Tea</span>
+                    <p>A classic Taiwanese oolong with rich aroma, originally from the Dong Ding mountain area. Known for its balanced flavor and traditional roasting techniques.</p>
+                </div>
+                
+                <div class="viewing-spot-card">
+                    <img src="picture/orientalbeauty.webp" alt="Oriental Beauty Tea" class="viewing-spot-image">
+                    <h3>Oriental Beauty (東方美人)</h3>
+                    <span class="type-tag">Oolong Tea</span>
+                    <p>A distinctive oolong with natural sweet, honey-like notes caused by leaf-hopper activity on the plants. Highly valued for its unique flavor profile.</p>
+                </div>
+            </div>
+            
+            <p><strong>Other Notable Teas:</strong> Taiwan also produces excellent black teas (e.g., Sun Moon Lake Ruby #18), green teas, and some white teas. Baozhong (包種) tea, a lightly oxidized, floral oolong from the north, is another signature Taiwanese variety.</p>
+        </div>
+
+        <div class="section" id="integration">
+            <h2>Cultural Integration & Contemporary Influences</h2>
+            
+            <div class="viewing-spots-grid">
+                <div class="viewing-spot-card">
+                    <img src="picture/teahouse.jpg" alt="Traditional Tea House" class="viewing-spot-image">
+                    <h3>Tea Houses & Daily Life</h3>
+                    <p>Tea shops and teahouses are common in cities and towns, serving everything from traditional brews to modern variations. Many Taiwanese enjoy tea socially or as a daily habit.</p>
+                </div>
+                
+                <div class="viewing-spot-card">
+                    <img src="picture/teafestival.webp" alt="Tea Festival" class="viewing-spot-image">
+                    <h3>Art & Community Events</h3>
+                    <p>Tea festivals, competitions, and harvest celebrations (especially in high-mountain regions) are part of local life and tourism, celebrating tea culture and community.</p>
+                </div>
+                
+                <div class="viewing-spot-card">
+                    <img src="picture/bubbletea.jpg" alt="Bubble Tea" class="viewing-spot-image">
+                    <h3>Modern Tea Culture</h3>
+                    <p>Alongside traditional brewing practices, modern tea drinks like bubble tea (珍珠奶茶), which originated in Taiwan in the 1980s, have become major global cultural exports, a modern twist on Taiwanese tea culture.</p>
+                </div>
+            </div>
+            
+            <p><strong>Living Tradition:</strong> Taiwanese tea culture is both traditional and living, rooted in centuries-old practices like gongfu tea, yet adaptable and present in everyday social life. Whether in a serene mountain tea farm, a bustling teahouse, or over a shared pot with friends, tea in Taiwan is about community, refinement, and appreciation of flavor and moment.</p>
+        </div>
+    </div>
+
+    <script>
+        function scrollCards(direction) {
+            const container = document.getElementById('traditionCards');
+            const scrollAmount = 350; 
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
