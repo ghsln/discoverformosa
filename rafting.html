@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Rafting Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Funnel Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            background: linear-gradient(#003B8E, #0056b3);
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        
+        .header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+            background-color: #003B8E;
+            opacity: 60%;
+        }
+        
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+        }
+        
+        .header-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            background-color: rgba(139, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            top: 0;
+            position: sticky;
+            z-index: 100;
+            padding: 0 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .nav-links li {
+            padding: 1rem 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #ffcc00;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 8px 25px rgba(1, 0, 6, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .rafting-spots {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 3rem;
+        }
+
+        .rafting-spots:hover {
+            transform: none;
+        }
+
+        .rafting-spots h2 {
+            color: #feb54f;
+        }
+        
+        .rafting-spots p {
+            color: #F4E8D8;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #8B1E1E;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF9800;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        h2 i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #2E7D32;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            padding-left: 10px;
+            border-left: 4px solid #FF9800;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .intensity-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .whitewater {
+            background-color: #0056b3;
+            color: white;
+        }
+        
+        .moderate {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .moderate .spot-name {
+            color: #4CAF50;
+        }
+        
+        .gentle {
+            background-color: #FF9800;
+            color: white;
+        }
+
+        .gentle .spot-name {
+            color: #FF9800;
+        }
+        
+        .spot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2rem 0;
+        }
+
+        .spot-grid p {
+            color: #333;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 3px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+        
+        .spot-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 5px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .spot-card.whitewater::before {
+            background-color: #0056b3;
+        }
+        
+        .spot-card.moderate::before {
+            background-color: #4CAF50;
+        }
+        
+        .spot-card.gentle::before {
+            background-color: #FF9800;
+        }
+        
+        .spot-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .spot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .spot-name {
+            font-weight: 700;
+            color: #0056b3;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .spot-location {
+            color: #737373;
+            font-size: 1rem;
+        }
+
+        .spot-location i {
+            margin-right: 5px;
+        }
+        
+        .spot-features {
+            margin: 15px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .feature i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .whitewater .feature i {
+            color: #0056b3;
+        }
+
+        .moderate .feature i {
+            color: #4CAF50;
+        }
+
+        .gentle .feature i {
+            color: #FF9800;
+        }
+       
+        .highlight-box {
+            background: #F4E8D8;
+            border-left: 5px solid #feb54f;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-box p {
+            color: #333;
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+
+        .tip-box {
+            background: #e8f4fd;
+            border-left: 5px solid #0056b3;
+            padding: 1.8rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .tip-box i {
+            font-size: 1.8rem;
+            color: #0056b3;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tip-box h3 {
+            color: #0056b3;
+            margin: 0.5rem 0 1rem;
+            padding-left: 0;
+            border-left: none;
+            font-size: 1.4rem;
+        }
+
+        .tip-box p {
+            margin-bottom: 0;
+            color: #333;
+        }
+        
+        .intensity-section {
+            margin-bottom: 3rem;
+        }
+        
+        .sorting-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .sort-btn {
+            padding: 12px 24px;
+            margin: 0 8px 10px;
+            border: none;
+            border-radius: 30px;
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .sort-btn i {
+            margin-right: 8px;
+        }
+        
+        .sort-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .sort-btn.active {
+            background-color: #8B1E1E;
+            color: white;
+        }
+        
+        .sort-btn.all.active {
+            background-color: #0056b3;
+        }
+        
+        .sort-btn.whitewater.active {
+            background-color: #0056b3;
+        }
+        
+        .sort-btn.moderate.active {
+            background-color: #4CAF50;
+        }
+        
+        .sort-btn.gentle.active {
+            background-color: #FF9800;
+        }
+        
+        .spot-card.hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .spot-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .sort-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+                margin: 0 5px 8px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .spot-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="picture/rafting.jpg" alt="Rafting" class="header-image">
+        <div class="header-content">
+            <h1>Rafting in Taiwan</h1>
+            <p>Experience the thrill of Taiwan's rivers and whitewater adventures</p>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#rafting-spots">Rafting Spots</a></li>
+                <li><a href="#tips">Tips</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Taiwan Rafting Guide</h2>
+            <p>Taiwan offers diverse river experiences, from thrilling whitewater rapids to gentle scenic floats. With rivers flowing through dramatic gorges and lush valleys, the island is an excellent destination for water adventure enthusiasts.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Safety Tip:</strong> Always follow guide instructions, wear provided safety gear, and check weather conditions before your trip. For whitewater rafting, some physical fitness is required, and booking with reputable operators is essential.</p>
+            </div>
+        </section>
+
+        <section class="rafting-spots" id="rafting-spots">
+            <h2><i class="fas fa-water"></i>Top Rafting Spots</h2>
+            
+            <div class="sorting-container">
+                <button class="sort-btn all active" data-filter="all">
+                    All Spots
+                </button>
+                <button class="sort-btn whitewater" data-filter="whitewater">
+                    Whitewater Rafting
+                </button>
+                <button class="sort-btn moderate" data-filter="moderate">
+                    Moderate Rafting
+                </button>
+                <button class="sort-btn gentle" data-filter="gentle">
+                    Gentle Floating
+                </button>
+            </div>
+            
+            <div class="spot-grid" id="all-spots">
+                <div class="spot-card whitewater" data-intensity="whitewater">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Xiuguluan River (秀姑巒溪)</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Hualien</div>
+                        </div>
+                        <span class="intensity-badge whitewater">Whitewater</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/xiuguluan.jpeg" alt="Xiuguluan River">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>Best for: Whitewater Rafting</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-ruler"></i>
+                            <span>Route: 24 km from Ruisui to Changhong Bridge</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>Duration: 3-4 hours on the water</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>The most famous whitewater rafting destination in Taiwan, long river section with exciting rapids through gorges and scenic valleys.</p>
+                </div>
+                
+                <div class="spot-card moderate" data-intensity="moderate">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Wutai/Lower Hayou (Hayu Creek)</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Pingtung</div>
+                        </div>
+                        <span class="intensity-badge moderate">Moderate</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/hayucreek.webp" alt="Wutai River">
+                    </div>
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>Experience: More Relaxed</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-ruler"></i>
+                            <span>Route: 5 km scenic stretch</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>Duration: About 2 hours</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>A gentler rafting/float experience down a scenic 5 km stretch of river, good for beginners or those who want a mix of adventure and relaxing scenery.</p>
+                </div>
+
+                <div class="spot-card gentle" data-intensity="gentle">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Baling Bridge Route</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>Taoyuan</div>
+                        </div>
+                        <span class="intensity-badge gentle">Gentle</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/packrafting.jpg" alt="Pack Rafting">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>Type: Pack rafting / inflatable kayak</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-calendar"></i>
+                            <span>Suitable: Year-round and for beginners</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <span>Great for: Calmer river sections</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>A fun pack rafting or inflatable kayak style adventure on calmer river sections near Taoyuan, suitable year-round and for beginners.</p>
+                </div>
+                
+                <div class="spot-card gentle" data-intensity="gentle">
+                    <div class="spot-header">
+                        <div>
+                            <div class="spot-name">Beishi Creek (北勢溪)</div>
+                            <div class="spot-location"><i class="fas fa-map-marker-alt"></i>New Taipei</div>
+                        </div>
+                        <span class="intensity-badge gentle">Gentle</span>
+                    </div>
+                    <div class="content-image">
+                        <img src="picture/beishi.webp" alt="Beishi Creek">
+                    </div>
+
+                    <div class="spot-features">
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>Experience: Entry-level pack rafting / floating</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>Features: Mild rapids and scenic areas</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <span>Ideal for: Families or first-timers</span>
+                        </div>
+                    </div>
+                    <hr style="opacity:40%; margin-bottom: 8px;">
+                    <p>Great entry-level pack rafting / floating with mild rapids and scenic areas, ideal for families or first-timers. These activities are not the same as whitewater rafting, they're more like guided river floating with paddles and generally safer and easier.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tips">
+            <h2>Tips for Rafting in Taiwan</h2>
+            <p>Make the most of your rafting adventure with these essential tips:</p>
+            
+            <div class="tip-box">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Best Season</h3>
+                <p>Late spring through early fall (higher water flow and more exciting rapids), though some operators run trips year-round depending on weather.</p>
+            </div>
+            
+            <div class="tip-box">
+                <i class="fas fa-suitcase"></i>
+                <h3>What to Bring</h3>
+                <p>Sunscreen, quick-dry clothes, water shoes/sandals, change of clothes, and waterproof bag.</p>
+            </div>
+
+            <div class="tip-box">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Safety</h3>
+                <p>Tours include helmets, life jackets, and professional guides. Always follow guide instructions and check health restrictions before booking.</p>
+            </div>
+
+            <div class="tip-box">
+                <i class="fas fa-bookmark"></i>
+                <h3>Booking</h3>
+                <p>Many tours are available through outdoor adventure companies and travel platforms, booking in advance is wise in peak season.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortButtons = document.querySelectorAll('.sort-btn');
+            const spotCards = document.querySelectorAll('.spot-card');
+            
+            sortButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    sortButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    spotCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.classList.remove('hidden');
+                        } else {
+                            const intensity = card.getAttribute('data-intensity');
+                            if (intensity === filter) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        }
+                    });
+                    
+                    document.querySelector('.rafting-spots').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            });
+            
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const scrollPosition = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
